@@ -26,7 +26,7 @@
         >
         <button
                 class="btn"
-                @click="createPost">
+                @click="createAccount">
             создать
         </button>
 
