@@ -21,9 +21,9 @@
             return {
                 // accountColumns: ['Name', 'Account', 'Mail', 'Password'],
                 accounts: [
-                    {id: 1, name: 'Geralt', account: 'GeraltAcc', mail: 'Geralt@mail', password: 'pass'},
-                    {id: 2, name: 'JOJO', account: 'JOJOAcc', mail: 'JOJO@mail', password: 'pass'},
-                    {id: 3, name: 'Torendo', account: 'TorendoAcc', mail: 'Torendo@mail', password: 'pass'},
+                    {id: 1, name: 'Geralt', account: 'GeraltAcc', mail: 'Geralt@mail', password: 'pass', link: "Google", owner: "root"},
+                    {id: 2, name: 'JOJO', account: 'JOJOAcc', mail: 'JOJO@mail', password: 'pass', link: "Google", owner: "root"},
+                    {id: 3, name: 'Torendo', account: 'TorendoAcc', mail: 'Torendo@mail', password: 'pass', link: "Google", owner: "root"},
                 ]
             }
         },
