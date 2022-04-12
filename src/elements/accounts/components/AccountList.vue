@@ -62,6 +62,7 @@
         border: 2px solid #42b983;
         border-radius: 3px;
         background-color: #fff;
+        width: 100%;
     }
 
     th {
@@ -80,8 +81,7 @@
 
     th,
     td {
-        min-width: 300px;
-        padding: 10px 20px;
+        min-width: 300px;        padding: 10px 20px;
     }
 
     .columnTitle {

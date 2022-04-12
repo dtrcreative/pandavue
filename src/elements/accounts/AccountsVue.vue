@@ -1,9 +1,7 @@
 <template>
     <div class="post">
-        <p>testText</p>
-        <account-search></account-search>
-
         <account-form @create="createAccount"/>
+        <account-search></account-search>
         <account-list :accountColumns = "accountColumns"  :accounts="accounts"/>
     </div>
 </template>

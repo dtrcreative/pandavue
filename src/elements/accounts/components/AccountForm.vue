@@ -56,11 +56,13 @@
                 </td>
             </tr>
             <tr>
-                <button
-                        class="btn"
-                        @click="createAccount">
-                    создать
-                </button>
+                <td colspan="3">
+                    <button
+                            class="btn"
+                            @click="createAccount">
+                        <strong>Создать</strong>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -102,17 +104,21 @@
     .input {
         width: 100%;
         border: 1px solid teal;
-        padding: 10px 15px;
-        margin-top: 15px;
+        padding: 5px 5px;
+        margin-top: 5px;
+        border-radius: 3px;
     }
 
     .btn {
-        margin-top: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         /*align-self: flex-end; !* Выравнивание кнопки по правому краю *!*/
-        padding: 10px 15px;
-        background: none;
+        padding: 5px 5px;
+        /*background: none;*/
         color: teal;
-        border: 1px solid teal;
+        border: 2px solid teal;
+        border-radius: 3px;
+        width: 100%;
     }
 
     /* растягивание */
