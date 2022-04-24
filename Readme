@@ -5,4 +5,144 @@ https://v3.ru.vuejs.org/ru/examples/grid-component.html - table example
 
 cource:
 https://www.youtube.com/watch?v=XzLuMtDelGk
-48.58
+
+
+virtual dom - изменения накапливаются в нём, затем пачкой ставятся на оригинальное дерево
+модель - данные компонента (счётчик,переменная,count)
+
+https://v3.ru.vuejs.org/
+
+npm install -g @vue/cli
+
+vue create .->
+munual select*
+(*)Babel
+(*)Router
+(*)Vuex
+
+version vue3
+historyMode: Y
+
+In package JSON
+
+presets: N
+
+Package.json
+
+serve - запускает приложение в режиме разработки
+build - нужен для продакшн сборки
+
+компонент - обычный js обьект
+
+{{}} - интерполяция. Добавляется в template
+
+<strong> - выделение
+
+v-on:click="addLike"> - старый вариант отработки метода
+@click="addDisLike"> - новое
+
+инструмент разработчика - Vue.js devtools (betta version to vue3)
+https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
+
+hk - form
+
+
+
+v-bind:value="title" - связываение элемента title из data с элементом imput на форме.
+@input="inputTitle" - отслеживание изменений в поле метод inputTitle в methods
+
+            inputTitle(event){
+                this.title = event.target.value;
+            }
+			Сохранение внесённых в поле данных в переменную title
+			!!!!это вариант через метод
+
+v-bind:value="title"
+@input="title = $event.target.value"
+оптимизированный вариант "напрямую"
+
+по стандарту при нажатии на "создать" браузер обновляет страницу и данные пропадут
+чтобы этого избежать нужно
+
+            createPost(event) {
+                event.stopPropagation()
+                event.preventDefault()
+
+либо повесить на форму:
+<form @submit.prevent>
+** отключает действия браузера по умолчанию
+
+@ - ссылка на папку src
+
+в скриптах импортируется компонент
+import PostForm from "@/components/PostForm";
+
+затем регистрируется в export default:
+        components: {
+            PostList, PostForm
+        },
+
+инициализация ожидаемых входящих данных для компонента для PostList
+    export default {
+        props: {
+            posts: {
+                type: Array,
+                required: true
+            }
+        }
+    }
+передача данных компоненту
+<post-list v-bind:posts = "posts"/>
+или коротная запись
+<post-list :posts = "posts"/>
+
+Пропсы в дочернем компоненте изменять нельзя!
+данные изменяются только в родителе
+
+модель данных в PostForm
+        data(){
+            return{
+                post:{
+                    title: '',
+                    body: ''
+                }
+            }
+        }
+и соответственно привязываем двухстороннее связываение к полям обьекта post
+                v-bind:value="post.title"
+                @input="post.title = $event.target.value"
+
+или связывание через v-model
+ 		v-model="post.title"
+
+возвращение данных из ребёнка в родитель.
+напрямую - невозможно
+		генерируем событие на которое может подписаться родитель
+		this.$emit('Название события', аргументы...)
+
+example
+
+          createPost() {
+              this.post.id = Date.now();
+              this.$emit('create', this.post)
+              this.post = {
+                  title: '',
+                  body: ''
+              }
+          }
+метод в котором присваиваем новому посту id по дате
+генерируем событие которое будет перехватывать родитель
+очищаем поля на форме
+
+для родителя:
+        <post-form/>
+        <post-list
+                :posts="posts"
+                @create="createPost"
+        />
+подписываемся на событие (@create) из this.$emit('create', this.post)
+и обозначаем что выполнится метод createPost
+
+justify-content: space-between; отсутствие прилипания элементов
+
+папка UI для однотипных элементов типа кнопка
