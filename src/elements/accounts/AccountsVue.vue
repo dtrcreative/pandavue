@@ -2,7 +2,10 @@
     <div class="post">
         <account-form @create="createAccount"/>
         <account-search></account-search>
-        <account-list :accountColumns = "accountColumns"  :accounts="accounts"/>
+        <account-list
+                :accounts="accounts"
+                @remove="removeAccount"
+        />
     </div>
 </template>
 
@@ -28,6 +31,9 @@
         methods: {
             createAccount(account) {
                 this.accounts.push(account);
+            },
+            removeAccount(account){
+                this.accounts = this.accounts.filter(acc => acc.id !== account.id)
             }
         }
 

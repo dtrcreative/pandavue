@@ -146,3 +146,23 @@ example
 justify-content: space-between; отсутствие прилипания элементов
 
 папка UI для однотипных элементов типа кнопка
+
+<slot></slot> - помещение данных в элемент. дефолтный. могут быть именованные
+
+
+        <my-button
+                class="btn"
+                style="align-self: flex-end"
+                @click="createPost">
+            создать
+        </my-button>
+
+любые свойства прописаные как показано выше style="align-self: flex-end" - прописываются для коренного элемента компонента
+
+58.20
+
+
+v-model: value="post.title" - именная реализация input 
+modelValue -> value
+
+58.44 ОЧ ВАЖНО

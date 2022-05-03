@@ -1,9 +1,12 @@
 <template>
     <tr class="rowData">
-        <td><p>{{account.name}}</p></td>
-        <td><p>{{account.account}}</p></td>
-        <td><p>{{account.mail}}</p></td>
-        <td><p>{{account.password}}</p></td>
+        <acc-cell>{{account.name}}</acc-cell>
+        <acc-cell>{{account.account}}</acc-cell>
+        <acc-cell>{{account.mail}}</acc-cell>
+        <acc-cell>{{account.password}}</acc-cell>
+        <acc-button
+            @click="$emit('remove', account)"
+        >Remove</acc-button>
     </tr>
 </template>
 

@@ -9,10 +9,11 @@
             </tr>
             </thead>
             <tbody>
-            <account-item
+            <account-row
                     v-for="account in accounts"
                     :key="account.id"
                     :account="account"
+                    @remove="$emit('remove', account)"
                 />
             </tbody>
         </table>
@@ -21,9 +22,9 @@
 </template>
 
 <script>
-    import AccountItem from "@/elements/accounts/components/AccountItem";
+    import AccountRow from "@/elements/accounts/components/AccountRow";
     export default {
-        components: {AccountItem},
+        components: {AccountRow},
         data() {
             return {
                 columNames: [
