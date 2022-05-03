@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="accounts.length > 0">
         <table>
             <thead>
             <tr>
@@ -18,7 +18,7 @@
             </tbody>
         </table>
     </div>
-
+    <h2 v-else style="text-align: center">Нет Данных</h2>
 </template>
 
 <script>
