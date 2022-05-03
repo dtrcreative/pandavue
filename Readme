@@ -166,3 +166,33 @@ v-model: value="post.title" - именная реализация input
 modelValue -> value
 
 58.44 ОЧ ВАЖНО
+
+-----------
+//PostItem
+ <my-button
+    @click="emit('remove', post)"
+  >удалить</my-button>
+создаём событие по нажатию прокидывая наверх конкретный жлемент post
+
+//PostList
+@remove="$emit('remove', post)"
+слушаем событие и передаём его выше
+
+//App
+    removePost(post){
+        this.posts = this.posts.filter(p => p.id !== post.id )
+    }
+
+filter - возвращает новый массив в который сохраняем все элементы кроме элемента с id удаляемого элемента
+
+v-if v-else
+отрисовка того или иного элемента
+
+v-show="условие" - отрисовываются все элементы,но показывается только удовлетворяющий условию
+
+<div class="dialog" v-if="show" @click.stop="hideDialog">
+        <div @click.stop class="dialog__content">
+            <slot></slot>
+        </div>
+</div>
+@click.stop - предотвращает закрытие при нажатии на элементы компонента

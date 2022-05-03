@@ -1,7 +1,18 @@
 <template>
     <div class="post">
-        <account-form @create="createAccount"/>
+
+        <acc-button
+                 @click="showDialog"
+        >
+            создать
+        </acc-button>
+
+        <acc-dialog v-model:show="dialogVisible">
+            <account-form @create="createAccount"/>
+        </acc-dialog>
+
         <account-search></account-search>
+
         <account-list
                 :accounts="accounts"
                 @remove="removeAccount"
@@ -22,18 +33,47 @@
             return {
                 // accountColumns: ['Name', 'Account', 'Mail', 'Password'],
                 accounts: [
-                    {id: 1, name: 'Geralt', account: 'GeraltAcc', mail: 'Geralt@mail', password: 'pass', link: "Google", owner: "root"},
-                    {id: 2, name: 'JOJO', account: 'JOJOAcc', mail: 'JOJO@mail', password: 'pass', link: "Google", owner: "root"},
-                    {id: 3, name: 'Torendo', account: 'TorendoAcc', mail: 'Torendo@mail', password: 'pass', link: "Google", owner: "root"},
-                ]
+                    {
+                        id: 1,
+                        name: 'Geralt',
+                        account: 'GeraltAcc',
+                        mail: 'Geralt@mail',
+                        password: 'pass',
+                        link: "Google",
+                        owner: "root"
+                    },
+                    {
+                        id: 2,
+                        name: 'JOJO',
+                        account: 'JOJOAcc',
+                        mail: 'JOJO@mail',
+                        password: 'pass',
+                        link: "Google",
+                        owner: "root"
+                    },
+                    {
+                        id: 3,
+                        name: 'Torendo',
+                        account: 'TorendoAcc',
+                        mail: 'Torendo@mail',
+                        password: 'pass',
+                        link: "Google",
+                        owner: "root"
+                    },
+                ],
+                dialogVisible: false
             }
         },
         methods: {
             createAccount(account) {
                 this.accounts.push(account);
+                this.dialogVisible = false;//закрытие диалогового окна при создании
             },
-            removeAccount(account){
+            removeAccount(account) {
                 this.accounts = this.accounts.filter(acc => acc.id !== account.id)
+            },
+            showDialog(){
+                this.dialogVisible = true;
             }
         }
 
