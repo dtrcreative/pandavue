@@ -5,21 +5,21 @@
             <tr>
                 <td>
                     <acc-input
-                            v-model="account.name"
+                            v-model.trim="account.name"
                             type="text"
                             placeholder="Название:"
                     />
                 </td>
                 <td>
                     <acc-input
-                            v-model="account.mail"
+                            v-model.trim="account.mail"
                             type="text"
                             placeholder="Почта:"
                     />
                 </td>
                 <td>
                     <acc-input
-                            v-model="account.password"
+                            v-model.trim="account.password"
                             type="text"
                             placeholder="Пароль:"
                     />
@@ -28,21 +28,21 @@
             <tr>
                 <td>
                     <acc-input
-                            v-model="account.account"
+                            v-model.trim="account.account"
                             type="text"
                             placeholder="Аккаунт:"
                     />
                 </td>
                 <td>
                     <acc-input
-                            v-model="account.link"
+                            v-model.trim="account.link"
                             type="text"
                             placeholder="Ссылка:"
                     />
                 </td>
                 <td>
                     <acc-input
-                            v-model="account.owner"
+                            v-model.trim="account.owner"
                             type="text"
                             placeholder="Владелец:"
                     />
@@ -55,6 +55,12 @@
                             @click="createAccount"
                     >
                         <strong>Создать</strong>
+                    </acc-button>
+                    <acc-button
+                            style="align-self: flex-end"
+                            @click="close"
+                    >
+                        <strong>Закрыть</strong>
                     </acc-button>
                 </td>
             </tr>
@@ -89,6 +95,9 @@
                     link: "",
                     owner: ""
                 }
+            },
+            close() {
+                this.$emit('hide')
             }
         }
     }

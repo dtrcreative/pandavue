@@ -1,27 +1,24 @@
 <template>
-
-    <div>
-        <input
-                class="input"
-                type="text"
-                placeholder="Поиск:"
-        >
-    </div>
-    
+  <input
+      class="input"
+      type="text"
+      placeholder="Поиск:"
+  >
 </template>
 
 <script>
-    export default {
-        name: "AccountSearch"
-    }
+export default {
+  name: "AccountSearch"
+}
 </script>
 
 <style scoped>
-    .input {
-        width: 100%;
-        border: 1px solid teal;
-        padding: 5px 5px;
-        margin-top: 5px;
-        border-radius: 3px;
-    }
+.input {
+  border-radius: 3px;
+  padding: 10px 15px;
+  background: none;
+  color: teal;
+  border: 1px solid teal;
+}
+
 </style>

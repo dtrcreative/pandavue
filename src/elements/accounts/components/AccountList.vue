@@ -9,6 +9,7 @@
             </tr>
             </thead>
             <tbody>
+
             <account-row
                     v-for="account in accounts"
                     :key="account.id"
@@ -31,7 +32,8 @@
                     {id: 1, body: 'Name'},
                     {id: 2, body: 'Account'},
                     {id: 3, body: 'Mail'},
-                    {id: 4, body: 'Password'}
+                    {id: 4, body: 'Password'},
+                    {id: 5, body: 'Remove'}
                 ]
             }
         },
@@ -46,27 +48,22 @@
 
 <style scoped>
 
-    body {
-        font-family: Helvetica Neue, Arial, sans-serif;
-        font-size: 14px;
-        color: #444;
-    }
-
     table {
-        border: 2px solid #42b983;
-        border-radius: 3px;
         background-color: #fff;
-        width: 100%;
 
-        padding: 15px;
-        border: 2px solid teal;
-        margin-top: 15px;
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 14px;
+      color: #444;
+
+        padding: 5px;
+        margin-top: 5px;
     }
 
     .columnTitle {
-        padding: 15px;
+      border-radius: 3px;
+        padding: 5px;
         border: 2px solid teal;
-        margin-top: 15px;
+        margin-top: 5px;
     }
 
 </style>
