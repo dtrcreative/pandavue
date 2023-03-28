@@ -1,32 +1,38 @@
 <template>
-  <select class="form" v-model="sort">
+  <select :value="modelValue" @change="changeOption">
+    <option disabled value="">Select on list</option>
     <option
-        v-for="item in items"
-        v-bind:key="item.id"
-        v-bind:value="item"
-        v-text="item.title"
-    ></option>
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+    >
+      {{ option.name }}
+    </option>
   </select>
 </template>
 
 <script>
 export default {
-  name: "AccOwnerList",
-
-  data() {
-    return {
-      items: [{
-        id: 1,
-        title: 'Item 1',
-        sort: 1,
-      }, {
-        id: 2,
-        title: 'Item 2',
-        sort: 2,
-      }, ],
-      sort: null,
+  name: 'acc-owners-list',
+  props: {
+    modelValue: {
+      type: String
+    },
+    options: {
+      type: Array,
+      default: () => []
+    },
+    data(){
+      return{
+        data: this.modelValue
+      }
     }
   },
+  methods: {
+    changeOption(event) {
+      this.$emit('update:modelValue', event.target.value)
+    }
+  }
 }
 </script>
 

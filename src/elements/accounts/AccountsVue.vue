@@ -1,11 +1,7 @@
 <template>
   <div class="post">
 
-    <acc-button
-        @click="showDialog"
-    >
-      Create
-    </acc-button>
+    <acc-button @click="showDialog">Create</acc-button>
 
     <account-search></account-search>
 
@@ -50,8 +46,7 @@ export default {
     }
   },
   methods: {
-    createAccount(account) {
-
+    async createAccount(account) {
       this.accounts.push(account);
       this.dialogVisible = false;//закрытие диалогового окна при создании
     },

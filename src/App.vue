@@ -6,7 +6,9 @@
         <td>
           <accounts-vue></accounts-vue>
         </td>
-
+        <td>
+          <auth-vue></auth-vue>
+        </td>
       </tr>
     </tbody>
   </talbe>
@@ -15,10 +17,12 @@
 
 <script>
 import AccountsVue from "@/elements/accounts/AccountsVue";
+import AuthVue from "@/elements/auth/AuthVue";
 
 export default {
   components: {
-    AccountsVue
+    AccountsVue,
+    AuthVue
   }
 }
 
@@ -38,6 +42,5 @@ td {
 
 .app {
   padding: 5px;
-
 }
 </style>
