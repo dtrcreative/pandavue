@@ -1,11 +1,11 @@
 <template>
-    
+
 </template>
 
 <script>
-    export default {
-        name: "PandaTable"
-    }
+export default {
+  name: "MainPage"
+}
 </script>
 
 <style scoped>

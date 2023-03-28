@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: "auth-button"
+        name: "panda-button"
     }
 </script>
 
@@ -19,6 +19,5 @@
         background: none;
         color: teal;
         border: 1px solid teal;
-      margin-top: 5px;
     }
 </style>

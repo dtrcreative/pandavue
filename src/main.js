@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import components from '@/elements/accounts/components/UI'
+import components from '@/elements/components/UI'
 
 const app = createApp(App)
 

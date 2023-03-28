@@ -4,21 +4,21 @@
             <tbody>
             <tr>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.name"
                             type="text"
                             placeholder="Название:"
                     />
                 </td>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.mail"
                             type="text"
                             placeholder="Почта:"
                     />
                 </td>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.password"
                             type="text"
                             placeholder="Пароль:"
@@ -27,21 +27,21 @@
             </tr>
             <tr>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.account"
                             type="text"
                             placeholder="Аккаунт:"
                     />
                 </td>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.link"
                             type="text"
                             placeholder="Ссылка:"
                     />
                 </td>
                 <td>
-                    <acc-input
+                    <p-input
                             v-model.trim="account.owner"
                             type="text"
                             placeholder="Владелец:"
@@ -50,18 +50,18 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <acc-button
+                    <p-button
                             style="align-self: flex-end"
                             @click="createAccount"
                     >
                         <strong>Создать</strong>
-                    </acc-button>
-                    <acc-button
+                    </p-button>
+                    <p-button
                             style="align-self: flex-end"
                             @click="close"
                     >
                         <strong>Закрыть</strong>
-                    </acc-button>
+                    </p-button>
                 </td>
             </tr>
             </tbody>
@@ -70,8 +70,11 @@
 </template>
 
 <script>
+    import PInput from "@/elements/components/UI/PInput";
+    import PButton from "@/elements/components/UI/PButton";
     export default {
-        data() {
+      components: {PButton, PInput},
+      data() {
             return {
                 account: {
                     name: '',

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import AccountRow from "@/elements/accounts/components/AccountRow";
+    import AccountRow from "@/elements/components/accounts/AccountRow";
     export default {
         components: {AccountRow},
         data() {

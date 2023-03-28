@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "acc-cell"
+        name: "panda-cell"
     }
 </script>
 

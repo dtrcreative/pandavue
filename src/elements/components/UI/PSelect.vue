@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'acc-owners-list',
+  name: "panda-select",
   props: {
     modelValue: {
       type: String

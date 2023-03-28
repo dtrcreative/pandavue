@@ -2,21 +2,21 @@
   <form @submit.prevent>
     <h1>LogIn</h1>
     <div class="post">
-      <auth-input
+      <acc-input
           v-model.trim="authUser.userName"
           type="text"
           placeholder="UserName:"
-      ></auth-input>
+      ></acc-input>
     </div>
     <div class="post">
-      <auth-input
+      <acc-input
           v-model.trim="authUser.password"
           type="text"
           placeholder="Password:"
-      ></auth-input>
+      ></acc-input>
     </div>
     <div class="post">
-      <auth-button @click="login">LogIn</auth-button>
+      <acc-button @click="login">LogIn</acc-button>
     </div>
   </form>
 
@@ -25,14 +25,14 @@
 <script>
 
 
-import authButton from "@/elements/auth/components/UI/authButton";
-import authInput from "@/elements/auth/components/UI/authInput";
+import PButton from "@/elements/components/UI/PButton";
+import PInput from "@/elements/components/UI/PInput";
 
 export default {
   name: "AuthVue",
 
   components: {
-    authInput, authButton,
+    accInput: PInput, accButton: PButton,
   },
 
   data(){

@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import AccountsVue from "@/elements/accounts/AccountsVue";
-import AuthVue from "@/elements/auth/AuthVue";
+import AccountsVue from "@/elements/components/AccountsVue";
+import AuthVue from "@/elements/components/AuthVue";
 
 export default {
   components: {

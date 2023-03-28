@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: "acc-dialog",
+        name: "panda-dialog",
         props: {
             show: {
                 type: Boolean,

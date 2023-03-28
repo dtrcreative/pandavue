@@ -1,18 +1,21 @@
 <template>
     <tr class="rowData">
-        <acc-cell>{{account.name}}</acc-cell>
-        <acc-cell>{{account.account}}</acc-cell>
-        <acc-cell>{{account.mail.mail}}</acc-cell>
-        <acc-cell>{{account.password}}</acc-cell>
-        <acc-button
+        <panda-cell>{{account.name}}</panda-cell>
+        <panda-cell>{{account.account}}</panda-cell>
+        <panda-cell>{{account.mail.mail}}</panda-cell>
+        <panda-cell>{{account.password}}</panda-cell>
+        <panda-button
             @click="$emit('remove', account)"
-        >Remove</acc-button>
+        >Remove</panda-button>
     </tr>
 </template>
 
 <script>
+    import PandaCell from "@/elements/components/UI/PCell";
+    import PandaButton from "@/elements/components/UI/PButton";
     export default {
-        props:{
+      components: {PandaButton, PandaCell},
+      props:{
             account: {
                 type: Object,
                 required: true,

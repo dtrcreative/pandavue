@@ -1,18 +1,21 @@
 <template>
   <div class="post">
 
-    <acc-button @click="showDialog">Create</acc-button>
+    <p-button @click="showDialog">Create</p-button>
 
     <account-search></account-search>
 
-    <AccOwnerList></AccOwnerList>
+    <p-select
+        v-model="selectedSort"
+        :options="sortOptions">
+      >
+    </p-select>
 
-    <acc-button @click="fetchPosts">Request</acc-button>
+    <p-button @click="fetchPosts">Request</p-button>
 
-    <acc-dialog v-model:show="dialogVisible">
+    <p-dialog v-model:show="dialogVisible">
       <account-form @create="createAccount" @hide="hideDialog"/>
-    </acc-dialog>
-
+    </p-dialog>
 
     <account-list
         :accounts="accounts"
@@ -24,25 +27,35 @@
 </template>
 
 <script>
-import AccountForm from "@/elements/accounts/components/AccountForm";
-import AccountList from "@/elements/accounts/components/AccountList";
-import AccountSearch from "@/elements/accounts/components/AccountSearch";
 import axios from 'axios'
-import AccButton from "@/elements/accounts/components/UI/AccButton";
-import AccOwnerList from "@/elements/accounts/components/UI/AccOwnerList";
+
+import PButton from "@/elements/components/UI/PButton";
+import PDialog from "@/elements/components/UI/PDialog";
+import PSelect from "@/elements/components/UI/PSelect";
+import AccountSearch from "@/elements/components/accounts/AccountSearch";
+import AccountForm from "@/elements/components/accounts/AccountForm";
+import AccountList from "@/elements/components/accounts/AccountList";
 
 export default {
   components: {
-    AccOwnerList,
-    AccButton,
-    AccountForm, AccountSearch, AccountList
+    AccountSearch,
+    AccountForm,
+    AccountList,
+    PSelect,
+    PDialog,
+    PButton,
   },
   data() {
     return {
       // accountColumns: ['Name', 'Account', 'Mail', 'Password'],
       accounts: [],
       dialogVisible: false,
-      isPostsLoading: false
+      isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'byTitle'},
+        {value: 'body', name: 'byBody'},
+      ]
     }
   },
   methods: {
