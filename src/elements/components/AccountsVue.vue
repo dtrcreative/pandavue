@@ -1,24 +1,23 @@
 <template>
   <div class="post">
 
-    <p-button @click="showDialog">Create</p-button>
-
-    <account-search></account-search>
-
-    <p-select
-        v-model="selectedSort"
-        :options="sortOptions">
-      >
-    </p-select>
-
-    <p-button @click="fetchPosts">Request</p-button>
+    <div class="app__btns">
+      <p-button @click="showDialog">Create</p-button>
+      <account-search></account-search>
+      <p-select
+          v-model="selectedSort"
+          :options="ownersOptions">
+        >
+      </p-select>
+      <p-button @click="getData">Request</p-button>
+    </div>
 
     <p-dialog v-model:show="dialogVisible">
       <account-form @create="createAccount" @hide="hideDialog"/>
     </p-dialog>
 
     <account-list
-        :accounts="accounts"
+        :accounts="sortedAccounts"
         @remove="removeAccount"
         v-if="!isPostsLoading"
     />
@@ -28,7 +27,6 @@
 
 <script>
 import axios from 'axios'
-
 import PButton from "@/elements/components/UI/PButton";
 import PDialog from "@/elements/components/UI/PDialog";
 import PSelect from "@/elements/components/UI/PSelect";
@@ -49,13 +47,10 @@ export default {
     return {
       // accountColumns: ['Name', 'Account', 'Mail', 'Password'],
       accounts: [],
+      ownersOptions: [],
+      selectedSort: '',
       dialogVisible: false,
       isPostsLoading: false,
-      selectedSort: '',
-      sortOptions: [
-        {value: 'title', name: 'byTitle'},
-        {value: 'body', name: 'byBody'},
-      ]
     }
   },
   methods: {
@@ -72,21 +67,32 @@ export default {
     hideDialog() {
       this.dialogVisible = false;
     },
-    async fetchPosts() {
+    async getData() {
       try {
         this.isPostsLoading = true;
-        const response = await axios.get('http://localhost:8081/api/accounts/all');
-        this.accounts = response.data;
+
+        const accountsList = await axios.get('http://localhost:8081/api/accounts/all');
+        this.accounts = accountsList.data;
+
+        const ownersList = await axios.get('http://localhost:8081/api/owners/all');
+        this.ownersOptions = ownersList.data;
+
         this.isPostsLoading = false;
       } catch (e) {
-        alert('Exception')
+        alert('Server Access Exception')
       } finally {
         // this.isPostsLoading = false;
       }
     }
   },
   mounted() {
-    this.fetchPosts();
+    this.getData();
+  },
+  computed: {
+    sortedAccounts() {
+      //сортировка массива при измененнии значения в ячейке pSelect
+       return [...this.accounts].filter((account) => account.owner.name.match(this.selectedSort))
+    }
   }
 }
 
@@ -95,5 +101,10 @@ export default {
 <style scoped>
 .post {
   margin-top: 5px;
+}
+.app__btns {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
