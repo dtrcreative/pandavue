@@ -255,6 +255,44 @@ method:
 
 justify-content: space-between; <!-- кнопка и выпадающий список друг на против друга -->
 
-default: () => [] для пустых массивов рекомендуется использовать стрелочную функцию			
+default: () => [] для пустых массивов рекомендуется использовать стрелочную функцию	
 
-1.28
+============================
+select:
+watch - отрабатывает при изменении модели (выбрал какой-то элемент списка) применяетсяк любой модели
+	  <my-select
+          v-model="selectedSort"
+          :options="sortOptions"
+      />
+	    watch: {
+			selectedSort(newValue){
+        console.log(newValue);
+      }
+
+------глубокое отслеживание обьекта ( реагировать на каждое изменение вложенных обьектов) !!!!!!!!
+      watch: {
+          post: {
+            handler(newVal) {
+              console.log(newVal)
+            },
+            deep: true
+          }
+      }
+============================
+	localeCompare - функция для сравнения строк
+	
+	this.posts.sort((post1, post2) => {
+          return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+        })
+		
+Computed:
+		
+return [...this.posts] - разворачивание нового массива без изменения оригинала
+
+
+return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+--
+******************
+передача данных ребёнок -> родитель - 0:40:00
+сортировка - 1:25:00
+1:30:00

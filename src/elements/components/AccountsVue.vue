@@ -3,12 +3,12 @@
 
     <div class="app__btns">
       <p-button @click="showDialog">Create</p-button>
-      <account-search></account-search>
       <p-select
           v-model="selectedSort"
           :options="ownersOptions">
         >
       </p-select>
+      <account-search></account-search>
       <p-button @click="getData">Request</p-button>
     </div>
 
@@ -16,12 +16,17 @@
       <account-form @create="createAccount" @hide="hideDialog"/>
     </p-dialog>
 
-    <account-list
-        :accounts="sortedAccounts"
-        @remove="removeAccount"
-        v-if="!isPostsLoading"
-    />
-    <div v-else> Loading...</div>
+    <div class="pTable">
+
+      <account-list
+          :accounts="sortedAccounts"
+          @remove="removeAccount"
+          v-if="!isPostsLoading"
+      />
+
+      <div v-else> Loading...</div>
+    </div>
+
   </div>
 </template>
 
@@ -45,7 +50,7 @@ export default {
   },
   data() {
     return {
-      // accountColumns: ['Name', 'Account', 'Mail', 'Password'],
+      accountColumns: ['Name', 'Account', 'Mail', 'Password'],
       accounts: [],
       ownersOptions: [],
       selectedSort: '',
@@ -54,9 +59,29 @@ export default {
     }
   },
   methods: {
-    async createAccount(account) {
-      this.accounts.push(account);
-      this.dialogVisible = false;//закрытие диалогового окна при создании
+    async createAccount() {
+      try {
+        axios.post("http://localhost:8081/api/accounts/", {
+          name: "string",
+          account: "string",
+          mail: "string",
+          owner: "string",
+          password: "string",
+          link: "string",
+          type: "all",
+          description: "string"
+        })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+      } catch (e) {
+        alert('Server Access Exception')
+      } finally {
+        // this.isPostsLoading = false;
+      }
     },
     removeAccount(account) {
       this.accounts = this.accounts.filter(acc => acc.id !== account.id)
@@ -67,11 +92,13 @@ export default {
     hideDialog() {
       this.dialogVisible = false;
     },
+
     async getData() {
       try {
         this.isPostsLoading = true;
 
         const accountsList = await axios.get('http://localhost:8081/api/accounts/all');
+        console.log(accountsList.data)
         this.accounts = accountsList.data;
 
         const ownersList = await axios.get('http://localhost:8081/api/owners/all');
@@ -91,7 +118,7 @@ export default {
   computed: {
     sortedAccounts() {
       //сортировка массива при измененнии значения в ячейке pSelect
-       return [...this.accounts].filter((account) => account.owner.name.match(this.selectedSort))
+      return [...this.accounts].filter((account) => account.owner.match(this.selectedSort))
     }
   }
 }
@@ -99,12 +126,21 @@ export default {
 </script>
 
 <style scoped>
+
+.pTable {
+  padding: 5px;
+}
+
 .post {
   margin-top: 5px;
 }
+
 .app__btns {
-  margin: 15px;
-  display: flex;
+  margin: 10px;
+  display: grid;
+  /*border: 2px solid teal;*/
+  /*border-radius: 4px;*/
+  grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
-
     <button class="btn">
         <slot></slot>
     </button>
-    
 </template>
 
 <script>
@@ -15,7 +13,7 @@
 <style scoped>
     .btn {
       border-radius: 3px;
-        padding: 10px 15px;
+        padding: 10px 10px;
         background: none;
         color: teal;
         border: 1px solid teal;

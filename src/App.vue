@@ -1,28 +1,20 @@
 <template>
 
-  <talbe class="app">
-    <tbody>
-      <tr>
-        <td>
-          <accounts-vue></accounts-vue>
-        </td>
-        <td>
-          <auth-vue></auth-vue>
-        </td>
-      </tr>
-    </tbody>
-  </talbe>
+  <div class="wrapper">
+    <accounts-vue></accounts-vue>
+  </div>
+
 
 </template>
 
 <script>
 import AccountsVue from "@/elements/components/AccountsVue";
-import AuthVue from "@/elements/components/AuthVue";
+// import AuthVue from "@/elements/components/AuthVue";
 
 export default {
   components: {
     AccountsVue,
-    AuthVue
+    // AuthVue
   }
 }
 
@@ -41,6 +33,14 @@ td {
 }
 
 .app {
-  padding: 5px;
+  width: 50%;
+  padding: 20px;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-rows: 50%;
 }
 </style>

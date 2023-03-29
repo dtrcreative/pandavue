@@ -1,5 +1,7 @@
 <template>
-    <td><p><slot></slot></p></td>
+    <div class="cell">
+      <p><slot></slot></p>
+    </div>
 </template>
 
 <script>
@@ -9,5 +11,10 @@
 </script>
 
 <style scoped>
-
+ .cell{
+   padding: 10px 10px;
+   border-radius: 3px;
+   border: 1px solid teal;
+   text-align: center;
+ }
 </style>

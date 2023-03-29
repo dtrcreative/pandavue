@@ -1,69 +1,63 @@
 <template>
-    <div v-if="accounts.length > 0">
-        <table>
-            <thead>
-            <tr>
-                <th class="columnTitle" v-for="column in columNames" :key="column.id">
-                    <p>{{column.body}}</p>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
 
-            <account-row
-                    v-for="account in accounts"
-                    :key="account.id"
-                    :account="account"
-                    @remove="$emit('remove', account)"
-                />
-            </tbody>
-        </table>
+  <div class="wrapper">
+    <div class="columnTitle" v-for="column in columNames" :key="column.id">
+      <p>{{ column.body }}</p>
     </div>
-    <h2 v-else style="text-align: center">Нет Данных</h2>
+  </div>
+
+  <div class="wrapper" v-if="accounts.length > 0">
+    <account-row
+        v-for="account in accounts"
+        :key="account.name"
+        :account="account"
+        @remove="$emit('remove', account)"
+    />
+
+  </div>
+
+  <h2 v-else style="text-align: center">Нет Данных</h2>
 </template>
 
 <script>
-    import AccountRow from "@/elements/components/accounts/AccountRow";
-    export default {
-        components: {AccountRow},
-        data() {
-            return {
-                columNames: [
-                    {id: 1, body: 'Name'},
-                    {id: 2, body: 'Account'},
-                    {id: 3, body: 'Mail'},
-                    {id: 4, body: 'Password'},
-                    {id: 5, body: 'Remove'}
-                ]
-            }
-        },
-        props: {
-            accounts: {
-                type: Array,
-                request: true
-            }
-        }
+import AccountRow from "@/elements/components/accounts/AccountRow";
+
+export default {
+  components: {AccountRow},
+  data() {
+    return {
+      columNames: [
+        {id: 1, body: 'Name'},
+        {id: 2, body: 'Account'},
+        {id: 3, body: 'Mail'},
+        {id: 4, body: 'Password'},
+        {id: 5, body: 'Del'},
+      ]
     }
+  },
+  props: {
+    accounts: {
+      type: Array,
+      request: true
+    }
+  }
+}
 </script>
 
 <style scoped>
 
-    table {
-        background-color: #fff;
+.columnTitle {
+  text-align: center;
+  padding: 5px;
+  border: 2px solid teal;
+  border-radius: 8px;
+  background-color: aliceblue;
+}
 
-      font-family: Helvetica Neue, Arial, sans-serif;
-      font-size: 14px;
-      color: #444;
-
-        padding: 5px;
-        margin-top: 5px;
-    }
-
-    .columnTitle {
-      border-radius: 3px;
-        padding: 5px;
-        border: 2px solid teal;
-        margin-top: 5px;
-    }
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
 
 </style>
