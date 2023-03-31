@@ -32,12 +32,12 @@
 
 <script>
 import axios from 'axios'
-import PButton from "@/elements/components/UI/PButton";
-import PDialog from "@/elements/components/UI/PDialog";
-import PSelect from "@/elements/components/UI/PSelect";
-import AccountSearch from "@/elements/components/accounts/AccountSearch";
-import AccountForm from "@/elements/components/accounts/AccountForm";
-import AccountList from "@/elements/components/accounts/AccountList";
+import PButton from "@/components/UI/PButton";
+import PDialog from "@/components/UI/PDialog";
+import PSelect from "@/components/UI/PSelect";
+import AccountSearch from "@/components/accounts/AccountSearch";
+import AccountForm from "@/components/accounts/AccountForm";
+import AccountList from "@/components/accounts/AccountList";
 
 export default {
   components: {
@@ -59,24 +59,19 @@ export default {
     }
   },
   methods: {
-    async createAccount() {
+    async createAccount(account) {
       try {
-        axios.post("http://localhost:8081/api/accounts/", {
-          name: "string",
-          account: "string",
-          mail: "string",
-          owner: "string",
-          password: "string",
-          link: "string",
-          type: "all",
-          description: "string"
+        axios.post("http://localhost:8081/api/panda/accounts/", {
+          name: account.name,
+          account: account.account,
+          mail: account.mail,
+          owner: account.owner,
+          password: account.password,
+          link: account.link,
+          type: account.type,
+          description: account.description
         })
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
+
       } catch (e) {
         alert('Server Access Exception')
       } finally {
@@ -84,7 +79,14 @@ export default {
       }
     },
     removeAccount(account) {
-      this.accounts = this.accounts.filter(acc => acc.id !== account.id)
+      try {
+        axios.delete("http://localhost:8081/api/panda/accounts/"+account.id)
+        this.accounts = this.accounts.filter(p => p.id !== account.id)
+      } catch (e) {
+        alert('Server Access Exception')
+      } finally {
+        // this.isPostsLoading = false;
+      }
     },
     showDialog() {
       this.dialogVisible = true;
@@ -98,10 +100,9 @@ export default {
         this.isPostsLoading = true;
 
         const accountsList = await axios.get('http://localhost:8081/api/accounts/all');
-        console.log(accountsList.data)
         this.accounts = accountsList.data;
 
-        const ownersList = await axios.get('http://localhost:8081/api/owners/all');
+        const ownersList = await axios.get('http://localhost:8081/api/data/types');
         this.ownersOptions = ownersList.data;
 
         this.isPostsLoading = false;
@@ -118,7 +119,7 @@ export default {
   computed: {
     sortedAccounts() {
       //сортировка массива при измененнии значения в ячейке pSelect
-      return [...this.accounts].filter((account) => account.owner.match(this.selectedSort))
+      return [...this.accounts].filter((account) => account.type.match(this.selectedSort))
     }
   }
 }

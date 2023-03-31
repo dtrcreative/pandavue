@@ -1,28 +1,27 @@
 <template>
-
-  <div class="wrapper">
-    <div class="columnTitle" v-for="column in columNames" :key="column.id">
-      <p>{{ column.body }}</p>
+  <div>
+    <div class="wrapper">
+      <div class="columnTitle" v-for="column in columNames" :key="column.id">
+        <p>{{ column.body }}</p>
+      </div>
     </div>
+    <div class="wrapper" v-if="accounts.length > 0">
+        <account-row
+            v-for="account in accounts"
+            :key="account.name"
+            :account="account"
+            @remove="$emit('remove', account)"
+        />
+    </div>
+    <h2 v-else style="text-align: center">Нет Данных</h2>
   </div>
-
-  <div class="wrapper" v-if="accounts.length > 0">
-    <account-row
-        v-for="account in accounts"
-        :key="account.name"
-        :account="account"
-        @remove="$emit('remove', account)"
-    />
-
-  </div>
-
-  <h2 v-else style="text-align: center">Нет Данных</h2>
 </template>
 
 <script>
-import AccountRow from "@/elements/components/accounts/AccountRow";
+import AccountRow from "@/components/accounts/AccountRow";
 
 export default {
+  emits: ["remove"],
   components: {AccountRow},
   data() {
     return {

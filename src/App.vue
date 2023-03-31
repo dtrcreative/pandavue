@@ -1,20 +1,17 @@
 <template>
 
-  <div class="wrapper">
-    <accounts-vue></accounts-vue>
+  <div>
+    <router-view></router-view>
   </div>
-
 
 </template>
 
 <script>
-import AccountsVue from "@/elements/components/AccountsVue";
-// import AuthVue from "@/elements/components/AuthVue";
 
 export default {
+
   components: {
-    AccountsVue,
-    // AuthVue
+
   }
 }
 
