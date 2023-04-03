@@ -70,6 +70,7 @@ export default {
       } finally {
         // this.isPostsLoading = false;
       }
+      this.$router.push()
     },
     clear(){
       this.authUser = {

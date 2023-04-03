@@ -3,7 +3,7 @@
     <div>
       WelCome to Panda!
     </div>
-    <panda-button @click="$router.push(`/login`)">LogIn</panda-button>
+    <panda-button @click="$router.push(`/panda`)">LogIn</panda-button>
   </div>
 </template>
 

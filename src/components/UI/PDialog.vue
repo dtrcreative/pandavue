@@ -42,4 +42,5 @@
         min-width: 300px;
         padding: 20px;
     }
+
 </style>

@@ -1,25 +1,36 @@
 <template>
   <div class="post">
 
-    <div class="app__btns">
-      <p-button @click="showDialog">Create</p-button>
-      <p-select
-          v-model="selectedSort"
-          :options="ownersOptions">
-        >
-      </p-select>
-      <account-search></account-search>
-      <p-button @click="getData">Request</p-button>
+    <div v-if="dialogVisible">
+      <account-form
+          @create="createAccount"
+          @hide="hideDialog"
+      />
+    </div>
+    <div v-else>
+      <div class="app__btns">
+        <p-button @click="showDialog">Create</p-button>
+        <p-select
+            v-model="selectedSort"
+            :options="ownersOptions">
+        </p-select>
+
+        <panda-input
+            v-model="searchQuery"
+            placeholder="Поиск...."
+        />
+        <p-button @click="getData">Request</p-button>
+      </div>
     </div>
 
-    <p-dialog v-model:show="dialogVisible">
+    <p-dialog>
       <account-form @create="createAccount" @hide="hideDialog"/>
     </p-dialog>
 
     <div class="pTable">
 
       <account-list
-          :accounts="sortedAccounts"
+          :accounts="sortedAndSearchedPosts"
           @remove="removeAccount"
           v-if="!isPostsLoading"
       />
@@ -35,13 +46,13 @@ import axios from 'axios'
 import PButton from "@/components/UI/PButton";
 import PDialog from "@/components/UI/PDialog";
 import PSelect from "@/components/UI/PSelect";
-import AccountSearch from "@/components/accounts/AccountSearch";
 import AccountForm from "@/components/accounts/AccountForm";
 import AccountList from "@/components/accounts/AccountList";
+import PandaInput from "@/components/UI/PInput";
 
 export default {
   components: {
-    AccountSearch,
+    PandaInput,
     AccountForm,
     AccountList,
     PSelect,
@@ -56,12 +67,14 @@ export default {
       selectedSort: '',
       dialogVisible: false,
       isPostsLoading: false,
+      searchQuery: '',
     }
   },
   methods: {
     async createAccount(account) {
+
       try {
-        axios.post("http://localhost:8081/api/panda/accounts/", {
+        const accountId = await axios.post("http://localhost:8081/api/panda/accounts/", {
           name: account.name,
           account: account.account,
           mail: account.mail,
@@ -71,7 +84,8 @@ export default {
           type: account.type,
           description: account.description
         })
-
+        account.id = accountId.data;
+        this.accounts.push(account)
       } catch (e) {
         alert('Server Access Exception')
       } finally {
@@ -99,10 +113,10 @@ export default {
       try {
         this.isPostsLoading = true;
 
-        const accountsList = await axios.get('http://localhost:8081/api/accounts/all');
+        const accountsList = await axios.get('http://localhost:8081/api/panda/accounts/all');
         this.accounts = accountsList.data;
 
-        const ownersList = await axios.get('http://localhost:8081/api/data/types');
+        const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
         this.ownersOptions = ownersList.data;
 
         this.isPostsLoading = false;
@@ -120,6 +134,10 @@ export default {
     sortedAccounts() {
       //сортировка массива при измененнии значения в ячейке pSelect
       return [...this.accounts].filter((account) => account.type.match(this.selectedSort))
+    },
+
+    sortedAndSearchedPosts() {
+      return this.sortedAccounts.filter(account => account.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
     }
   }
 }
