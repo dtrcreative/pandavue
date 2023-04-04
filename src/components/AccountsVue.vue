@@ -3,6 +3,7 @@
 
     <div v-if="dialogVisible">
       <account-form
+          :options="ownersOptions"
           @create="createAccount"
           @hide="hideDialog"
       />
@@ -13,6 +14,7 @@
         <p-select
             v-model="selectedSort"
             :options="ownersOptions">
+          Show all
         </p-select>
 
         <panda-input

@@ -34,19 +34,20 @@
       />
 
       <p-input
+          v-model.trim="account.password"
+          type="text"
+          placeholder="Пароль:"
+      />
+
+      <panda-button @click="generatePassword">
+        generate
+      </panda-button>
+
+      <p-input
           v-model.trim="account.account"
           type="text"
           placeholder="Аккаунт:"
       />
-        <p-input
-            v-model.trim="account.password"
-            type="text"
-            placeholder="Пароль:"
-        />
-
-        <panda-button @click="generatePassword">
-          generate
-        </panda-button>
 
       <p-input
           v-model.trim="account.link"
@@ -54,22 +55,14 @@
           placeholder="Ссылка:"
       />
       <p-input
-          v-model.trim="account.description"
-          type="text"
-          placeholder="Описание:"
-      />
-      <p-input
           v-model.trim="account.owner"
           type="text"
           placeholder="Владелец:"
       />
       <panda-select
-          v-model="selectedSort"
-          :options="ownersOptions">
+          :options="options">
+        Type:
       </panda-select>
-      <panda-button @click="getData">
-        get
-      </panda-button>
     </div>
 
   </form>
@@ -105,9 +98,13 @@ export default {
         type: 'Dmain',
         description: 'Dmain',
       },
-      ownersOptions: [],
-      selectedSort: '',
     }
+  },
+  props: {
+    options: {
+      type: Array,
+      default: () => []
+    },
   },
   methods: {
     createAccount() {
@@ -125,14 +122,6 @@ export default {
         link: '',
         type: '',
         description: '',
-      }
-    },
-    async getData() {
-      try {
-        const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
-        this.ownersOptions = ownersList.data;
-      } catch (e) {
-        alert('Server Access Exception')
       }
     },
     async generatePassword() {
@@ -164,7 +153,7 @@ form{
 }
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .input {
