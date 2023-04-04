@@ -60,6 +60,7 @@
           placeholder="Владелец:"
       />
       <panda-select
+          v-model="selectedSort"
           :options="options">
         Type:
       </panda-select>
@@ -95,9 +96,10 @@ export default {
         owner: 'Ditar',
         password: 'Dmain',
         link: 'Dmain',
-        type: 'Dmain',
+        type: '',
         description: 'Dmain',
       },
+      selectedSort: '',
     }
   },
   props: {

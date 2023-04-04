@@ -76,7 +76,7 @@ export default {
     async createAccount(account) {
       if(this.checkData(account)){
         try {
-          const accountId = await axios.post("http://localhost:8081/api/panda/accounts/", {
+          await axios.post("http://localhost:8081/api/panda/accounts/", {
             name: account.name,
             account: account.account,
             mail: account.mail,
@@ -86,7 +86,6 @@ export default {
             type: account.type,
             description: account.description
           })
-          account.id = accountId.data;
           this.accounts.push(account)
         } catch (e) {
           alert('Server Access Exception')
@@ -95,8 +94,8 @@ export default {
     },
     removeAccount(account) {
       try {
-        axios.delete("http://localhost:8081/api/panda/accounts/"+account.id)
-        this.accounts = this.accounts.filter(p => p.id !== account.id)
+        axios.delete("http://localhost:8081/api/panda/accounts/"+account.name)
+        this.accounts = this.accounts.filter(p => p.name !== account.name)
       } catch (e) {
         alert('Server Access Exception')
       }
