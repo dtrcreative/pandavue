@@ -72,24 +72,23 @@ export default {
   },
   methods: {
     async createAccount(account) {
-
-      try {
-        const accountId = await axios.post("http://localhost:8081/api/panda/accounts/", {
-          name: account.name,
-          account: account.account,
-          mail: account.mail,
-          owner: account.owner,
-          password: account.password,
-          link: account.link,
-          type: account.type,
-          description: account.description
-        })
-        account.id = accountId.data;
-        this.accounts.push(account)
-      } catch (e) {
-        alert('Server Access Exception')
-      } finally {
-        // this.isPostsLoading = false;
+      if(this.checkData(account)){
+        try {
+          const accountId = await axios.post("http://localhost:8081/api/panda/accounts/", {
+            name: account.name,
+            account: account.account,
+            mail: account.mail,
+            owner: account.owner,
+            password: account.password,
+            link: account.link,
+            type: account.type,
+            description: account.description
+          })
+          account.id = accountId.data;
+          this.accounts.push(account)
+        } catch (e) {
+          alert('Server Access Exception')
+        }
       }
     },
     removeAccount(account) {
@@ -98,8 +97,6 @@ export default {
         this.accounts = this.accounts.filter(p => p.id !== account.id)
       } catch (e) {
         alert('Server Access Exception')
-      } finally {
-        // this.isPostsLoading = false;
       }
     },
     showDialog() {
@@ -108,7 +105,17 @@ export default {
     hideDialog() {
       this.dialogVisible = false;
     },
-
+    checkData(inputAccount){
+      if(this.accounts.filter((account) => account.name.match(inputAccount.name)).length>0){
+        alert("NameExist")
+        return false;
+      }
+      if(this.accounts.filter((account) => account.password.match(inputAccount.password)).length>0){
+        alert("PassExist")
+        return false;
+      }
+      return true;
+    },
     async getData() {
       try {
         this.isPostsLoading = true;
