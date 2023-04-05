@@ -1,4 +1,5 @@
 <template class="row">
+  <input type="checkbox" id="checkbox" v-model="checked">
   <div class="cell">{{ account.name }}</div>
   <div class="cell">{{ account.account }}</div>
   <div class="cell">{{ account.mail }}</div>

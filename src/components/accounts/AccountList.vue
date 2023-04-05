@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
+      <input type="checkbox" id="checkbox" v-model="checked">
       <div class="columnTitle" v-for="column in columNames" :key="column.id">
         <p>{{ column.body }}</p>
       </div>
@@ -31,7 +32,8 @@ export default {
         {id: 3, body: 'Mail'},
         {id: 4, body: 'Password'},
         {id: 5, body: 'Del'},
-      ]
+      ],
+      checked: true
     }
   },
   props: {
@@ -55,7 +57,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 4fr 4fr 4fr 4fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 
