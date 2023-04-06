@@ -2,11 +2,21 @@
   <div class="post">
 
     <div v-if="dialogVisible">
-      <account-form
-          :options="ownersOptions"
-          @create="createAccount"
-          @hide="hideDialog"
-      />
+      <div v-if="isCreate">
+        <account-create-form
+            :options="ownersOptions"
+            @create="createAccount"
+            @hide="hideDialog"
+        />
+      </div>
+      <div v-else>
+        <account-update-form
+            :options="ownersOptions"
+            :selected-account="updatedAccount"
+            @update="updateAccount"
+            @hide="hideDialog"
+        />
+      </div>
     </div>
     <div v-else>
       <div class="app__btns">
@@ -26,7 +36,8 @@
     </div>
 
     <p-dialog>
-      <account-form @create="createAccount" @hide="hideDialog"/>
+      <account-create-form @create="createAccount" @hide="hideDialog"/>
+      <account-update-form @create="createAccount" @hide="hideDialog"/>
     </p-dialog>
 
     <div class="pTable">
@@ -34,6 +45,7 @@
       <account-list
           :accounts="sortedAndSearchedPosts"
           @remove="removeAccount"
+          @update="updateDialog"
           v-if="!isPostsLoading"
       />
 
@@ -48,18 +60,20 @@ import axios from 'axios'
 import PButton from "@/components/UI/PButton";
 import PDialog from "@/components/UI/PDialog";
 import PSelect from "@/components/UI/PSelect";
-import AccountForm from "@/components/accounts/AccountForm";
+import AccountCreateForm from "@/components/accounts/AccountCreateForm";
+import AccountUpdateForm from "@/components/accounts/AccountUpdateForm";
 import AccountList from "@/components/accounts/AccountList";
 import PandaInput from "@/components/UI/PInput";
 
 export default {
   components: {
     PandaInput,
-    AccountForm,
+    AccountCreateForm,
     AccountList,
     PSelect,
     PDialog,
     PButton,
+    AccountUpdateForm
   },
   data() {
     return {
@@ -70,11 +84,13 @@ export default {
       dialogVisible: false,
       isPostsLoading: false,
       searchQuery: '',
+      isCreate: true,
+      updatedAccount: ''
     }
   },
   methods: {
     async createAccount(account) {
-      if(this.checkData(account)){
+      if (this.checkData(account)) {
         try {
           await axios.post("http://localhost:8081/api/panda/accounts/", {
             name: account.name,
@@ -94,24 +110,49 @@ export default {
     },
     removeAccount(account) {
       try {
-        axios.delete("http://localhost:8081/api/panda/accounts/"+account.name)
+        axios.delete("http://localhost:8081/api/panda/accounts/" + account.name)
         this.accounts = this.accounts.filter(p => p.name !== account.name)
       } catch (e) {
         alert('Server Access Exception')
       }
     },
+    async updateAccount(updatedAccount) {
+      console.log(updatedAccount)
+      if (this.checkData(updatedAccount)) {
+        try {
+          await axios.post("http://localhost:8081/api/panda/accounts/", {
+            name: updatedAccount.name,
+            account: updatedAccount.account,
+            mail: updatedAccount.mail,
+            owner: updatedAccount.owner,
+            password: updatedAccount.password,
+            link: updatedAccount.link,
+            type: updatedAccount.type,
+            description: updatedAccount.description
+          })
+        } catch (e) {
+          alert('Server Access Exception')
+        }
+      }
+    },
+    updateDialog(account) {
+      this.updatedAccount = account;
+      this.isCreate = false;
+      this.dialogVisible = true;
+    },
     showDialog() {
       this.dialogVisible = true;
     },
     hideDialog() {
+      this.isCreate = true;
       this.dialogVisible = false;
     },
-    checkData(inputAccount){
-      if(this.accounts.filter((account) => account.name.match(inputAccount.name)).length>0){
+    checkData(inputAccount) {
+      if (this.accounts.filter((account) => account.name.match(inputAccount.name)).length > 0) {
         alert("NameExist")
         return false;
       }
-      if(this.accounts.filter((account) => account.password.match(inputAccount.password)).length>0){
+      if (this.accounts.filter((account) => account.password.match(inputAccount.password)).length > 0) {
         alert("PassExist")
         return false;
       }

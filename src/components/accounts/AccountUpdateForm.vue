@@ -2,9 +2,9 @@
   <div class="btn_wrapper">
     <p-button
         style="align-self: flex-end; margin-top: 15px"
-        @click="createAccount"
+        @click="updateAccount"
     >
-      <strong>Создать</strong>
+      <strong>Обновить</strong>
     </p-button>
     <p-button
         style="align-self: flex-end; margin-top: 15px"
@@ -25,20 +25,18 @@
           v-model.trim="account.name"
           type="text"
           placeholder="Название:"
-      />
-
+      >
+      </p-input>
       <p-input
           v-model.trim="account.mail"
           type="text"
           placeholder="Почта:"
       />
-
       <p-input
           v-model.trim="account.password"
           type="text"
           placeholder="Пароль:"
       />
-
       <panda-button @click="generatePassword">
         generate
       </panda-button>
@@ -48,7 +46,6 @@
           type="text"
           placeholder="Аккаунт:"
       />
-
       <p-input
           v-model.trim="account.link"
           type="text"
@@ -86,20 +83,20 @@ import axios from "axios";
 
 export default {
   components: {PandaSelect, PandaButton, PButton, PInput},
-  emits: ["create", "hide"],
+  emits: ["create", "hide", "update"],
   data() {
     return {
       account: {
-        name: 'Dmain',
-        account: 'Dmain',
-        mail: 'Dmain',
-        owner: 'Ditar',
-        password: 'Dmain',
-        link: 'Dmain',
-        type: '',
-        description: 'Dmain',
+        name: this.selectedAccount.name,
+        account: this.selectedAccount.account,
+        mail: this.selectedAccount.mail,
+        owner: this.selectedAccount.owner,
+        password: this.selectedAccount.password,
+        link: this.selectedAccount.link,
+        type: this.selectedAccount.type,
+        description: this.selectedAccount.description,
       },
-      selectedSort: '',
+      selectedSort: this.selectedAccount.type,
     }
   },
   props: {
@@ -107,14 +104,18 @@ export default {
       type: Array,
       default: () => []
     },
+    selectedAccount:{
+      type: Object,
+    }
   },
+
   methods: {
-    createAccount() {
+    updateAccount() {
       this.account.id = Date.now();
       this.account.type = this.selectedSort;
-      this.$emit('create', this.account);
+      this.$emit('update', this.account);
     },
-    clear(){
+    clear() {
       this.account = {
         name: '',
         account: '',
@@ -143,9 +144,10 @@ export default {
 
 <style scoped>
 /* растягивание */
-form{
+form {
   padding: 5px;
 }
+
 .btn_wrapper {
   padding-left: 5px;
   padding-right: 5px;
@@ -153,6 +155,7 @@ form{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -163,7 +166,8 @@ form{
   border-radius: 4px;
   padding: 5px;
 }
-.description{
+
+.description {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   padding: 5px;

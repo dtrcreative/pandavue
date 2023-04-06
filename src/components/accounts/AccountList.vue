@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="wrapper">
-      <input type="checkbox" id="checkbox" v-model="checked">
       <div class="columnTitle" v-for="column in columNames" :key="column.id">
         <p>{{ column.body }}</p>
       </div>
     </div>
     <div class="wrapper" v-if="accounts.length > 0">
-        <account-row
-            v-for="account in accounts"
-            :key="account.name"
-            :account="account"
-            @remove="$emit('remove', account)"
-        />
+      <account-row
+          v-for="account in accounts"
+          :key="account.name"
+          :account="account"
+          @remove="$emit('remove', account)"
+          @update="$emit('update', account)"
+      />
     </div>
     <h2 v-else style="text-align: center">Нет Данных</h2>
   </div>
@@ -22,7 +22,7 @@
 import AccountRow from "@/components/accounts/AccountRow";
 
 export default {
-  emits: ["remove"],
+  emits: ["remove", "update"],
   components: {AccountRow},
   data() {
     return {
@@ -31,9 +31,11 @@ export default {
         {id: 2, body: 'Account'},
         {id: 3, body: 'Mail'},
         {id: 4, body: 'Password'},
-        {id: 5, body: 'Del'},
+        {id: 5, body: 'Upd'},
+        {id: 6, body: 'Del'},
       ],
-      checked: true
+      checked: true,
+      selectedAccounts: [],
     }
   },
   props: {
@@ -41,7 +43,7 @@ export default {
       type: Array,
       request: true
     }
-  }
+  },
 }
 </script>
 
@@ -57,7 +59,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 4fr 4fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 
