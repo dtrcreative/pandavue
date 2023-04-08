@@ -158,7 +158,7 @@ form {
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 4fr 4fr 4fr 1fr;
 }
 
 .input {

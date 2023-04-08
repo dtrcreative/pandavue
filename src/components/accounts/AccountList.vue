@@ -6,7 +6,7 @@
       </div>
     </div>
     <div v-if="accounts.length > 0">
-      <transition-group name="user-list">
+      <transition-group name="account-list">
           <account-row
               v-for="account in accounts"
               :key="account.name"
@@ -65,20 +65,20 @@ export default {
   grid-template-rows: repeat(1, 1fr);
 }
 
-.user-list-item {
+.account-list-item {
   display: inline-block;
   margin-right: 10px;
 }
-.user-list-enter-active,
-.user-list-leave-active {
+.account-list-enter-active,
+.account-list-leave-active {
   transition: all 0.4s ease;
 }
-.user-list-enter-from,
-.user-list-leave-to {
+.account-list-enter-from,
+.account-list-leave-to {
   opacity: 0;
-  transform: translateX(130px);
+  transform: translateX(-130px);
 }
-.user-list-move {
+.account-list-move {
   transition: transform 0.4s ease;
 }
 </style>
