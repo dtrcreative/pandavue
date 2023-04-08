@@ -97,6 +97,7 @@ export default {
         description: this.selectedAccount.description,
       },
       selectedSort: this.selectedAccount.type,
+      oldName: this.selectedAccount.name,
     }
   },
   props: {
@@ -113,7 +114,7 @@ export default {
     updateAccount() {
       this.account.id = Date.now();
       this.account.type = this.selectedSort;
-      this.$emit('update', this.account);
+      this.$emit('update', this.account, this.oldName);
     },
     clear() {
       this.account = {

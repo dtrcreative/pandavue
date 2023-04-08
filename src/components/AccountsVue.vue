@@ -116,12 +116,12 @@ export default {
         alert('Server Access Exception')
       }
     },
-    async updateAccount(updatedAccount) {
-      console.log(updatedAccount)
+    async updateAccount(updatedAccount, oldName) {
       if (this.checkData(updatedAccount)) {
         try {
-          await axios.post("http://localhost:8081/api/panda/accounts/", {
+          await axios.put("http://localhost:8081/api/panda/accounts/", {
             name: updatedAccount.name,
+            oldName: oldName,
             account: updatedAccount.account,
             mail: updatedAccount.mail,
             owner: updatedAccount.owner,
@@ -133,7 +133,10 @@ export default {
         } catch (e) {
           alert('Server Access Exception')
         }
+        await this.getData();
       }
+      this.isCreate=true;
+      this.dialogVisible=false;
     },
     updateDialog(account) {
       this.updatedAccount = account;

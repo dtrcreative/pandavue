@@ -90,14 +90,14 @@ export default {
   data() {
     return {
       account: {
-        name: 'Dmain',
-        account: 'Dmain',
-        mail: 'Dmain',
-        owner: 'Ditar',
-        password: 'Dmain',
-        link: 'Dmain',
+        name: '',
+        account: '',
+        mail: '',
+        owner: '',
+        password: '',
+        link: '',
         type: '',
-        description: 'Dmain',
+        description: '',
       },
       selectedSort: '',
     }
