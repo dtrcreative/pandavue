@@ -293,6 +293,18 @@ return [...this.posts] - разворачивание нового массив�
 return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
 --
 ******************
+
+
 передача данных ребёнок -> родитель - 0:40:00
 сортировка - 1:25:00
 1:30:00
+
+
+////////
+<!--        <account-row-->
+<!--            v-for="account in accounts"-->
+<!--            :key="account.name"-->
+<!--            :account="account"-->
+<!--            @remove="$emit('remove', account)"-->
+<!--        />-->
+////////

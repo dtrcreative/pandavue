@@ -1,16 +1,18 @@
 <template class="row">
-  <div class="cell">{{ account.name }}</div>
-  <div class="cell">{{ account.account }}</div>
-  <div class="cell">{{ account.mail }}</div>
-  <div class="cell">{{ account.password }}</div>
-  <panda-button
-      @click="$emit('update', account)"
-  >Upd
-  </panda-button>
-  <panda-button
-      @click="$emit('remove', account)"
-  >Del
-  </panda-button>
+  <div class="wrapper">
+    <div class="cell">{{ account.name }}</div>
+    <div class="cell">{{ account.account }}</div>
+    <div class="cell">{{ account.mail }}</div>
+    <div class="cell">{{ account.password }}</div>
+    <panda-button
+        @click="$emit('update', account)"
+    >Upd
+    </panda-button>
+    <panda-button
+        @click="$emit('remove', account)"
+    >Del
+    </panda-button>
+  </div>
 </template>
 
 <script>
@@ -41,6 +43,12 @@ export default {
   background-color: antiquewhite;
   padding: 10px;
   margin: 10px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
+  grid-template-rows: repeat(1, 1fr);
 }
 
 </style>

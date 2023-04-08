@@ -5,14 +5,16 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div class="wrapper" v-if="accounts.length > 0">
-      <account-row
-          v-for="account in accounts"
-          :key="account.name"
-          :account="account"
-          @remove="$emit('remove', account)"
-          @update="$emit('update', account)"
-      />
+    <div v-if="accounts.length > 0">
+      <transition-group name="user-list">
+          <account-row
+              v-for="account in accounts"
+              :key="account.name"
+              :account="account"
+              @remove="$emit('remove', account)"
+              @update="$emit('update', account)"
+          />
+      </transition-group>
     </div>
     <h2 v-else style="text-align: center">Нет Данных</h2>
   </div>
@@ -63,4 +65,20 @@ export default {
   grid-template-rows: repeat(1, 1fr);
 }
 
+.user-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.user-list-enter-active,
+.user-list-leave-active {
+  transition: all 0.4s ease;
+}
+.user-list-enter-from,
+.user-list-leave-to {
+  opacity: 0;
+  transform: translateX(130px);
+}
+.user-list-move {
+  transition: transform 0.4s ease;
+}
 </style>
