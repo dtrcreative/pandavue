@@ -39,12 +39,6 @@ export default {
   text-align: center;
 }
 
-.row {
-  background-color: antiquewhite;
-  padding: 10px;
-  margin: 10px;
-}
-
 .wrapper {
   display: grid;
   grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;

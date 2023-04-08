@@ -13,6 +13,8 @@
               :account="account"
               @remove="$emit('remove', account)"
               @update="$emit('update', account)"
+              v-on:mouseover="mouseover"
+              v-on:mouseleave="mouseleave"
           />
       </transition-group>
     </div>
@@ -46,10 +48,31 @@ export default {
       request: true
     }
   },
+  methods: {
+    mouseover: function(){
+      console.log("over")
+      this.message = 'Good!'
+    },
+    mouseleave: function(){
+      console.log("leave")
+      this.message = 'Hover Me!'
+    },
+    mouseScroll: function(){
+      console.log("scroll")
+    }
+  }
 }
 </script>
 
 <style scoped>
+
+.mouseover{
+  border-radius: 4px;
+}
+
+.mouseleave{
+
+}
 
 .columnTitle {
   text-align: center;
@@ -63,6 +86,18 @@ export default {
   display: grid;
   grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
+}
+
+.row {
+  background-color: antiquewhite;
+  padding: 10px;
+  margin: 10px;
+}
+
+hoverClass{
+  background-color: #85d269;
+  padding: 10px;
+  margin: 10px;
 }
 
 .account-list-item {
