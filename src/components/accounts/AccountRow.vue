@@ -4,10 +4,19 @@
        v-on:mouseleave="mouseleave"
        :class="{hovering: isHovering}"
   >
-    <div class="cell">{{ account.name }}</div>
-    <div class="cell">{{ account.account }}</div>
-    <div class="cell">{{ account.mail }}</div>
-    <div class="cell">{{ account.password }}</div>
+    <p-cell
+        :value="account.name"
+    ></p-cell>
+    <p-cell
+        :value="account.account"
+    ></p-cell>
+    <p-cell
+        :value="account.mail"
+    ></p-cell>
+    <p-cell
+        :value="account.password"
+    ></p-cell>
+
     <panda-button
         @click="$emit('update', account)"
     >Upd
@@ -21,10 +30,11 @@
 
 <script>
 import PandaButton from "@/components/UI/PButton";
+import PCell from "@/components/UI/PCell";
 
 export default {
   emits: ["remove", "update"],
-  components: {PandaButton},
+  components: {PCell, PandaButton},
   data() {
     return {
       isHovering: false
@@ -37,15 +47,12 @@ export default {
     },
   },
   methods: {
-    mouseover: function(){
-      this.isHovering=true
+    mouseover: function () {
+      this.isHovering = true
     },
-    mouseleave: function(){
-      this.isHovering=false
+    mouseleave: function () {
+      this.isHovering = false
     },
-    mouseScroll: function(){
-      console.log("scroll")
-    }
   }
 }
 </script>
@@ -65,7 +72,7 @@ export default {
   grid-template-rows: repeat(1, 1fr);
 }
 
-.hovering{
+.hovering {
   background-color: rgba(203, 225, 189, 0.72);
 }
 
