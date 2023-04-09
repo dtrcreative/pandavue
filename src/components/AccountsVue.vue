@@ -51,7 +51,7 @@
 
       <div v-else> Loading...</div>
     </div>
-
+    <p-info class="info">{{infoText}}</p-info>
   </div>
 </template>
 
@@ -64,9 +64,11 @@ import AccountCreateForm from "@/components/accounts/AccountCreateForm";
 import AccountUpdateForm from "@/components/accounts/AccountUpdateForm";
 import AccountList from "@/components/accounts/AccountList";
 import PandaInput from "@/components/UI/PInput";
+import PInfo from "@/components/UI/PInfo";
 
 export default {
   components: {
+    PInfo,
     PandaInput,
     AccountCreateForm,
     AccountList,
@@ -85,7 +87,8 @@ export default {
       isPostsLoading: false,
       searchQuery: '',
       isCreate: true,
-      updatedAccount: ''
+      updatedAccount: '',
+      infoText:' Info ',
     }
   },
   methods: {
@@ -103,6 +106,7 @@ export default {
             description: account.description
           })
           this.accounts.push(account)
+          this.setInfo("Create successfully");
         } catch (e) {
           alert('Server Access Exception')
         }
@@ -115,6 +119,7 @@ export default {
       } catch (e) {
         alert('Server Access Exception')
       }
+      this.setInfo("Remove successfully");
     },
     async updateAccount(updatedAccount, oldName) {
       if (this.checkData(updatedAccount)) {
@@ -134,6 +139,7 @@ export default {
           alert('Server Access Exception')
         }
         await this.getData();
+        this.setInfo("Update successfully");
       }
       this.isCreate=true;
       this.dialogVisible=false;
@@ -177,6 +183,9 @@ export default {
       } finally {
         // this.isPostsLoading = false;
       }
+    },
+    setInfo(text){
+      this.infoText = text;
     }
   },
   mounted() {
@@ -213,5 +222,15 @@ export default {
   /*border-radius: 4px;*/
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
+}
+.info{
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top:0px;
+  padding: 2px;
+  background-color: rgba(160, 231, 290, 0.3);
+  border-radius: 5px;
+  border: 1px solid teal;
+  text-align: center;
 }
 </style>
