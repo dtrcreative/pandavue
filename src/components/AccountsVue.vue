@@ -32,6 +32,7 @@
             placeholder="Поиск...."
         />
         <p-button @click="getData">Request</p-button>
+        <p-button @click="loadJson">loadJson</p-button>
       </div>
     </div>
 
@@ -144,6 +145,13 @@ export default {
       this.isCreate=true;
       this.dialogVisible=false;
     },
+    async loadJson() {
+      try {
+        await axios.get('http://localhost:8081/api/panda/data/loadJson');
+      } catch (e) {
+        alert('Server Access Exception')
+      }
+    },
     updateDialog(account) {
       this.updatedAccount = account;
       this.isCreate = false;
@@ -220,7 +228,7 @@ export default {
   display: grid;
   /*border: 2px solid teal;*/
   /*border-radius: 4px;*/
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 4fr 4fr 4fr 1fr 1fr;
   justify-content: space-between;
 }
 .info{
