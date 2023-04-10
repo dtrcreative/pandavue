@@ -200,9 +200,12 @@ export default {
     this.getData();
   },
   computed: {
+    sortedByName() {
+      return [...this.accounts].sort((account1, account2) => account1.name?.localeCompare(account2.name))
+    },
     sortedAccounts() {
       //сортировка массива при измененнии значения в ячейке pSelect
-      return [...this.accounts].filter((account) => account.type.match(this.selectedSort))
+      return this.sortedByName.filter((account) => account.type.match(this.selectedSort))
     },
 
     sortedAndSearchedPosts() {
