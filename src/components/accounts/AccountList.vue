@@ -5,7 +5,7 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div v-if="accounts.length > 0" @scroll="handleScroll">
+    <div class="scroll" v-if="accounts.length > 0">
       <transition-group name="account-list">
           <account-row
               v-for="account in accounts"
@@ -62,6 +62,12 @@ export default {
   border: 2px solid teal;
   border-radius: 8px;
   background-color: aliceblue;
+}
+
+.scroll{
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 300px;
 }
 
 .wrapper {

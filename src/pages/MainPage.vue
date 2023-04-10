@@ -21,4 +21,10 @@ export default {
   padding: 20px;
 }
 
+a {
+  display: inline-block;
+  width: 50px;
+  text-decoration: none;
+}
+
 </style>

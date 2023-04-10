@@ -138,7 +138,9 @@ export default {
             password: updatedAccount.password,
             link: updatedAccount.link,
             type: updatedAccount.type,
-            description: updatedAccount.description
+            description: updatedAccount.description,
+            startIndex:0,
+            endIndex:10,
           })
         } catch (e) {
           alert('Server Access Exception')
@@ -211,14 +213,16 @@ export default {
     this.getData();
   },
   computed: {
+    slice() {
+      return [...this.accounts]
+    },
     sortedByName() {
-      return [...this.accounts].sort((account1, account2) => account1.name?.localeCompare(account2.name))
+      return [...this.slice].sort((account1, account2) => account1.name?.localeCompare(account2.name))
     },
     sortedAccounts() {
       //сортировка массива при измененнии значения в ячейке pSelect
       return this.sortedByName.filter((account) => account.type.match(this.selectedSort))
     },
-
     sortedAndSearchedPosts() {
       return this.sortedAccounts.filter(account => account.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
     }
