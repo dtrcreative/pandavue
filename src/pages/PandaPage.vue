@@ -19,7 +19,6 @@ export default {
 .wrapper{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 50%;
 }
 
 </style>

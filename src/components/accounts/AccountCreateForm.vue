@@ -23,6 +23,7 @@
     <div class="wrapper">
       <p-input
           v-model.trim="account.name"
+          v-focus
           type="text"
           placeholder="Название:"
       />

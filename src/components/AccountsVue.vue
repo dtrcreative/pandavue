@@ -29,6 +29,7 @@
 
         <panda-input
             v-model="searchQuery"
+            v-focus
             placeholder="Поиск...."
         />
         <p-button @click="getData">Request</p-button>
@@ -90,6 +91,9 @@ export default {
       isCreate: true,
       updatedAccount: '',
       infoText:' Info ',
+      page: 1,
+      limit: 10,
+      totalPages: 0,
     }
   },
   methods: {
@@ -179,8 +183,15 @@ export default {
       try {
         this.isPostsLoading = true;
 
-        const accountsList = await axios.get('http://localhost:8081/api/panda/accounts/all');
-        this.accounts = accountsList.data;
+        const response = await axios.get('http://localhost:8081/api/panda/accounts/all',{
+          params: {
+            _page: this.page,
+            _limit: this.limit
+          }
+        });
+        this.totalPages = Math.ceil(response.data.length / this.limit)
+        this.accounts = [...this.accounts, ...response.data];
+        // this.accounts = accountsList.data;
 
         const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
         this.ownersOptions = ownersList.data;

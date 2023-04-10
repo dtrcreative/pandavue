@@ -5,7 +5,7 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div v-if="accounts.length > 0">
+    <div v-if="accounts.length > 0" @scroll="handleScroll">
       <transition-group name="account-list">
           <account-row
               v-for="account in accounts"
@@ -37,13 +37,17 @@ export default {
         {id: 6, body: 'Del'},
       ],
       checked: true,
-      selectedAccounts: [],
     }
   },
   props: {
     accounts: {
       type: Array,
       request: true
+    }
+  },
+  methods: {
+    handleScroll (event) {
+      console.log(event)// Any code to be executed when the window is scrolled
     }
   },
 
