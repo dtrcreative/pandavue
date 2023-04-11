@@ -13,10 +13,10 @@
     <p-cell
         :value="account.mail"
     ></p-cell>
-    <p-cell
-        :value="account.password"
-    ></p-cell>
-
+    <panda-button
+        @click="$emit('password', account)"
+    >Pwd
+    </panda-button>
     <panda-button
         @click="$emit('update', account)"
     >Upd
@@ -33,7 +33,7 @@ import PandaButton from "@/components/UI/PButton";
 import PCell from "@/components/UI/PCell";
 
 export default {
-  emits: ["remove", "update"],
+  emits: ["remove", "update","password"],
   components: {PCell, PandaButton},
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 1fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 

@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="scroll">
     <div class="wrapper">
       <div class="columnTitle" v-for="column in columNames" :key="column.id">
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div class="scroll" v-if="accounts.length > 0">
+    <div  v-if="accounts.length > 0">
       <transition-group name="account-list">
           <account-row
               v-for="account in accounts"
@@ -13,6 +13,7 @@
               :account="account"
               @remove="$emit('remove', account)"
               @update="$emit('update', account)"
+              @password="$emit('password', account)"
           />
       </transition-group>
     </div>
@@ -24,7 +25,7 @@
 import AccountRow from "@/components/accounts/AccountRow";
 
 export default {
-  emits: ["remove", "update"],
+  emits: ["remove", "update", "password"],
   components: {AccountRow},
   data() {
     return {
@@ -32,7 +33,7 @@ export default {
         {id: 1, body: 'Name'},
         {id: 2, body: 'Account'},
         {id: 3, body: 'Mail'},
-        {id: 4, body: 'Password'},
+        {id: 4, body: 'Pwd'},
         {id: 5, body: 'Upd'},
         {id: 6, body: 'Del'},
       ],
@@ -46,11 +47,7 @@ export default {
     }
   },
   methods: {
-    handleScroll (event) {
-      console.log(event)// Any code to be executed when the window is scrolled
-    }
   },
-
 }
 </script>
 
@@ -67,12 +64,12 @@ export default {
 .scroll{
   overflow-y: scroll;
   scroll-behavior: smooth;
-  height: 300px;
+  max-height: 700px;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 1fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 

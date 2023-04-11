@@ -1,6 +1,5 @@
 <template>
   <div class="post">
-
     <div v-if="dialogVisible">
       <div v-if="isCreate">
         <account-create-form
@@ -48,12 +47,13 @@
           :accounts="sortedAndSearchedPosts"
           @remove="removeAccount"
           @update="updateDialog"
+          @password="getPassword"
           v-if="!isPostsLoading"
       />
 
       <div v-else> Loading...</div>
     </div>
-    <p-info class="info">{{infoText}}</p-info>
+    <p-info class="info">{{ infoText }}</p-info>
   </div>
 </template>
 
@@ -90,7 +90,7 @@ export default {
       searchQuery: '',
       isCreate: true,
       updatedAccount: '',
-      infoText:' Info ',
+      infoText: ' Info ',
       page: 1,
       limit: 10,
       totalPages: 0,
@@ -100,7 +100,7 @@ export default {
     async createAccount(account) {
       if (this.checkData(account)) {
         try {
-          await axios.post("http://localhost:8081/api/panda/accounts/", {
+          const responce = await axios.post("http://localhost:8081/api/panda/accounts/", {
             name: account.name,
             account: account.account,
             mail: account.mail,
@@ -110,7 +110,9 @@ export default {
             type: account.type,
             description: account.description
           })
-          this.accounts.push(account)
+          if(responce.status===200){
+            this.accounts.push(responce.data);
+          }
           this.setInfo("Create successfully");
         } catch (e) {
           alert('Server Access Exception')
@@ -127,9 +129,11 @@ export default {
       this.setInfo("Remove successfully");
     },
     async updateAccount(updatedAccount, oldName) {
+      console.log(updatedAccount)
+      console.log(oldName)
       if (this.checkData(updatedAccount)) {
         try {
-          await axios.put("http://localhost:8081/api/panda/accounts/", {
+          const response = await axios.put("http://localhost:8081/api/panda/accounts/", {
             name: updatedAccount.name,
             oldName: oldName,
             account: updatedAccount.account,
@@ -139,17 +143,32 @@ export default {
             link: updatedAccount.link,
             type: updatedAccount.type,
             description: updatedAccount.description,
-            startIndex:0,
-            endIndex:10,
           })
+          if(response.status===200){
+            updatedAccount = response.data;
+            this.isCreate = true;
+            this.dialogVisible = false;
+          }
         } catch (e) {
           alert('Server Access Exception')
         }
         await this.getData();
         this.setInfo("Update successfully");
       }
-      this.isCreate=true;
-      this.dialogVisible=false;
+    },
+    async getPassword(account) {
+      try {
+        console.log("getPassword")
+        const pwd = await axios.get('http://localhost:8081/api/panda/accounts/pwd',{
+          params:{
+            name: account.name
+          }
+        });
+        navigator.clipboard.writeText(pwd.data);
+        this.setInfo(pwd.data)
+      } catch (e) {
+        alert('Server Access Exception')
+      }
     },
     async loadJson() {
       try {
@@ -171,7 +190,19 @@ export default {
       this.dialogVisible = false;
     },
     checkData(inputAccount) {
-      if (this.accounts.filter((account) => account.name.match(inputAccount.name)).length > 0) {
+      if(inputAccount.name.length<1){
+        alert("Fill name please");
+        return false;
+      }
+      if(inputAccount.password.length<1){
+        alert("Fill password please");
+        return false;
+      }
+      if(inputAccount.type===""){
+        alert("Select accountType please");
+        return false;
+      }
+      if (this.isCreate && (this.accounts.filter((account) => account.name.match(inputAccount.name)).length > 0)) {
         alert("NameExist")
         return false;
       }
@@ -185,15 +216,8 @@ export default {
       try {
         this.isPostsLoading = true;
 
-        const response = await axios.get('http://localhost:8081/api/panda/accounts/all',{
-          params: {
-            _page: this.page,
-            _limit: this.limit
-          }
-        });
-        this.totalPages = Math.ceil(response.data.length / this.limit)
-        this.accounts = [...this.accounts, ...response.data];
-        // this.accounts = accountsList.data;
+        const response = await axios.get('http://localhost:8081/api/panda/accounts/all', );
+        this.accounts = response.data;
 
         const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
         this.ownersOptions = ownersList.data;
@@ -205,7 +229,8 @@ export default {
         // this.isPostsLoading = false;
       }
     },
-    setInfo(text){
+
+    setInfo(text) {
       this.infoText = text;
     }
   },
@@ -249,10 +274,11 @@ export default {
   grid-template-columns: 4fr 4fr 4fr 1fr 1fr;
   justify-content: space-between;
 }
-.info{
+
+.info {
   margin-left: 5px;
   margin-right: 5px;
-  margin-top:0px;
+  margin-top: 0px;
   padding: 2px;
   background-color: rgba(160, 231, 290, 0.3);
   border-radius: 5px;
