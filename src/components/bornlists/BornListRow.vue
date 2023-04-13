@@ -5,35 +5,35 @@
        :class="{hovering: isHovering}"
   >
     <p-cell
-        :value="account.name"
+        :value="unit.firstName"
     ></p-cell>
     <p-cell
-        :value="account.account"
+        :value="unit.lastName"
     ></p-cell>
     <p-cell
-        :value="account.mail"
+        :value="unit.date"
+    ></p-cell>
+    <p-cell
+        :value="unit.daysLeft"
     ></p-cell>
     <panda-button
-        @click="$emit('password', account)"
-    >Pwd
+        @click="$emit('remove', unit)"
+    >Del
     </panda-button>
     <panda-button
         @click="$emit('update', account)"
     >Upd
     </panda-button>
-    <panda-button
-        @click="$emit('remove', account)"
-    >Del
-    </panda-button>
   </div>
 </template>
 
 <script>
-import PandaButton from "@/components/UI/PButton";
 import PCell from "@/components/UI/PCell";
+import PandaButton from "@/components/UI/PButton";
 
 export default {
-  emits: ["remove", "update","password"],
+  name: "BornListRow",
+  emits: ['remove','update'],
   components: {PCell, PandaButton},
   data() {
     return {
@@ -41,7 +41,7 @@ export default {
     }
   },
   props: {
-    account: {
+    unit: {
       type: Object,
       required: true,
     },
@@ -57,23 +57,12 @@ export default {
 }
 </script>
 
-<style>
-
-.cell {
-  padding: 5px 5px;
-  border-radius: 3px;
-  border: 1px solid teal;
-  text-align: center;
-}
+<style scoped>
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
-}
-
-.hovering {
-  background-color: rgba(203, 225, 189, 0.72);
 }
 
 </style>
