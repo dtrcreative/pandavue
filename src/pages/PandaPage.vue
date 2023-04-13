@@ -11,7 +11,8 @@ import AccountsVue from "@/components/AccountsVue";
 export default {
   name: "MainPage",
   components: {
-    AccountsVue,BornListVue
+    AccountsVue,
+    BornListVue
   }
 }
 </script>

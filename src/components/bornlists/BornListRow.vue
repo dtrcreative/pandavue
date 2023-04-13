@@ -17,12 +17,12 @@
         :value="unit.daysLeft"
     ></p-cell>
     <panda-button
-        @click="$emit('remove', unit)"
-    >Del
+        @click="$emit('update', unit)"
+    >Upd
     </panda-button>
     <panda-button
-        @click="$emit('update', account)"
-    >Upd
+        @click="$emit('remove', unit)"
+    >Del
     </panda-button>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 4fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 2fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 

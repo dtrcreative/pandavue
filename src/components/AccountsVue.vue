@@ -29,7 +29,7 @@
         <panda-input
             v-model="searchQuery"
             v-focus
-            placeholder="Поиск...."
+            placeholder="Search...."
         />
         <p-button @click="getData">Request</p-button>
         <p-button @click="loadJson">loadJson</p-button>
@@ -81,7 +81,7 @@ export default {
   },
   data() {
     return {
-      accountColumns: ['Name', 'Account', 'Mail', 'Password'],
+      // accountColumns: ['Name', 'Account', 'Mail', 'Pwd', 'Upd', 'Del'],
       accounts: [],
       ownersOptions: [],
       selectedSort: '',

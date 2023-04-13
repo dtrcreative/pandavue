@@ -5,12 +5,12 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div  v-if="accounts.length > 0">
-      <transition-group name="account-list">
+    <div  v-if="units.length > 0">
+      <transition-group name="unit-list">
         <born-list-row
             v-for="unit in units"
-            :key="unit.name"
-            :account="unit"
+            :key="unit.id"
+            :unit="unit"
             @remove="$emit('remove', unit)"
             @update="$emit('update', unit)"
             @password="$emit('password', unit)"
@@ -25,13 +25,14 @@ import BornListRow from "@/components/bornlists/BornListRow";
 export default {
   name: "BornList",
   components: {BornListRow},
+  emits: ["remove", "update"],
   data() {
     return {
       columNames: [
         {id: 1, body: 'FirstName'},
         {id: 2, body: 'LastName'},
-        {id: 3, body: 'DaysLeft'},
-        {id: 4, body: 'Date'},
+        {id: 3, body: 'Date'},
+        {id: 4, body: 'DaysLeft'},
         {id: 5, body: 'Upd'},
         {id: 6, body: 'Del'},
       ],
@@ -64,23 +65,23 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 2fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
-.account-list-item {
+.unit-list-item {
   display: inline-block;
   margin-right: 10px;
 }
-.account-list-enter-active,
-.account-list-leave-active {
+.unit-list-enter-active,
+.unit-list-leave-active {
   transition: all 0.4s ease;
 }
-.account-list-enter-from,
-.account-list-leave-to {
+.unit-list-enter-from,
+.unit-list-leave-to {
   opacity: 0;
   transform: translateX(-130px);
 }
-.account-list-move {
+.unit-list-move {
   transition: transform 0.4s ease;
 }
 </style>

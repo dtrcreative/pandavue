@@ -1,7 +1,7 @@
 <template>
   <div class="scroll">
     <div class="wrapper">
-      <div class="columnTitle" v-for="column in columNames" :key="column.id">
+      <div class="columnTitle" v-for="column in columnNames" :key="column.id">
         <p>{{ column.body }}</p>
       </div>
     </div>
@@ -29,7 +29,7 @@ export default {
   components: {AccountRow},
   data() {
     return {
-      columNames: [
+      columnNames: [
         {id: 1, body: 'Name'},
         {id: 2, body: 'Account'},
         {id: 3, body: 'Mail'},
@@ -44,7 +44,7 @@ export default {
     accounts: {
       type: Array,
       request: true
-    }
+    },
   },
   methods: {
   },
