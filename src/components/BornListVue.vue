@@ -31,7 +31,7 @@
     <div class="pTable">
 
       <born-list-table
-          :units="sortedByName"
+          :units="sortedByLeftDays"
           v-if="!isPostsLoading"
           @remove="removeUnit"
           @update="updateDialog"
@@ -92,8 +92,12 @@ export default {
     createUnit(unit) {
       console.log(unit);
     },
-    loadJson(){
-
+    async loadJson(){
+      try {
+        await axios.get('http://localhost:8082/api/i113/bornlist/data/loadJson');
+      } catch (e) {
+        alert('Server Access Exception')
+      }
     },
     updateDialog(unit) {
       this.updatedUnit = unit;
@@ -118,6 +122,9 @@ export default {
     },
     sortedByName() {
       return [...this.slice].sort((unit1, unit2) => unit1.name?.localeCompare(unit2.name))
+    },
+    sortedByLeftDays() {
+      return [...this.sortedByName].sort((unit1, unit2) => unit1.daysLeft - unit2.daysLeft);
     },
   }
 }
