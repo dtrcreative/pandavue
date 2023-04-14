@@ -84,7 +84,13 @@ export default {
       }
     },
     removeUnit(unit) {
-      console.log(unit);
+      try {
+        axios.delete("http://localhost:8082/api/i113/bornlist/" + unit.id)
+        this.units = this.units.filter(p => p.id !== unit.id)
+      } catch (e) {
+        alert('Server Access Exception')
+      }
+      this.setInfo("Remove successfully");
     },
     updateUnit(unit) {
       console.log(unit);
