@@ -94,8 +94,7 @@ export default {
       this.setInfo("Remove successfully");
     },
     async updateUnit(unit) {
-      console.log("Update" + unit.id)
-      // if (this.checkData(updatedAccount)) {
+      if (this.checkData(unit)) {
         try {
           const response = await axios.put("http://localhost:8082/api/i113/bornlist/", {
             id: unit.id,
@@ -114,7 +113,7 @@ export default {
           alert('Server Access Exception')
         }
         this.setInfo("Update successfully");
-      // }
+      }
     },
     createUnit(unit) {
       console.log(unit);
@@ -140,7 +139,22 @@ export default {
     },
     setInfo(text) {
       this.infoText = text;
-    }
+    },
+    checkData(unit) {
+      if(unit.firstName.length<1){
+        alert("Fill name please");
+        return false;
+      }
+      if(unit.lastName.length<1){
+        alert("Fill lastName please");
+        return false;
+      }
+      if(unit.date.length<1){
+        alert("Fill date please");
+        return false;
+      }
+      return true;
+    },
   },
   mounted() {
     this.getData();
