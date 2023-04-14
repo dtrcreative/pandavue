@@ -71,7 +71,6 @@ export default {
 
   methods: {
     updateUnit() {
-      this.unit.id = Date.now();
       this.$emit('update', this.unit);
     },
     clear() {
@@ -79,7 +78,7 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
-        userName: 'Ditar',
+        userName: 'drogozhnikov',
       }
     },
     close() {

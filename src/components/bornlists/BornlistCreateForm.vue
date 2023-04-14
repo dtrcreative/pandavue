@@ -58,7 +58,7 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
-        userName: 'Ditar',
+        userName: 'drogozhnikov',
       },
     }
   },
@@ -72,7 +72,7 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
-        userName: 'Ditar',
+        userName: 'drogozhnikov',
       }
     },
     close() {

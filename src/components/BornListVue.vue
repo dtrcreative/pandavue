@@ -53,6 +53,7 @@ import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 
 export default {
   name: "BornListVue",
+  emits: ['remove','update', 'create'],
   components: {
     BornlistUpdateForm,
     BornlistCreateForm,
@@ -92,8 +93,28 @@ export default {
       }
       this.setInfo("Remove successfully");
     },
-    updateUnit(unit) {
-      console.log(unit);
+    async updateUnit(unit) {
+      console.log("Update" + unit.id)
+      // if (this.checkData(updatedAccount)) {
+        try {
+          const response = await axios.put("http://localhost:8082/api/i113/bornlist/", {
+            id: unit.id,
+            userName: 'drogozhnikov',
+            firstName: unit.firstName,
+            lastName: unit.lastName,
+            date: unit.date,
+            description: unit.description,
+          })
+          if(response.status===200){
+            await this.getData();
+            this.isCreate = true;
+            this.dialogVisible = false;
+          }
+        } catch (e) {
+          alert('Server Access Exception')
+        }
+        this.setInfo("Update successfully");
+      // }
     },
     createUnit(unit) {
       console.log(unit);
@@ -117,7 +138,9 @@ export default {
       this.isCreate = true;
       this.dialogVisible = false;
     },
-
+    setInfo(text) {
+      this.infoText = text;
+    }
   },
   mounted() {
     this.getData();
