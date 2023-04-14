@@ -115,8 +115,24 @@ export default {
         this.setInfo("Update successfully");
       }
     },
-    createUnit(unit) {
-      console.log(unit);
+    async createUnit(unit) {
+      if (this.checkData(unit)) {
+        try {
+          const responce = await axios.post("http://localhost:8082/api/i113/bornlist/", {
+            userName: 'drogozhnikov',
+            firstName: unit.firstName,
+            lastName: unit.lastName,
+            date: unit.date,
+            description: unit.description,
+          })
+          if(responce.status===200){
+            this.units.push(responce.data);
+          }
+          this.setInfo("Create successfully");
+        } catch (e) {
+          alert('Server Access Exception')
+        }
+      }
     },
     async loadJson(){
       try {
