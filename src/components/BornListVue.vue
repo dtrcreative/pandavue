@@ -53,7 +53,7 @@ import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 
 export default {
   name: "BornListVue",
-  emits: ['remove','update', 'create'],
+  emits: ['remove','update', 'create', 'setNotify'],
   components: {
     BornlistUpdateForm,
     BornlistCreateForm,
@@ -71,6 +71,7 @@ export default {
       isCreate: true,
       infoText: ' Info ',
       updatedUnit: '',
+      isNotify: '',
     }
   },
   methods: {
@@ -78,6 +79,9 @@ export default {
       try {
         this.isPostsLoading = true;
           const response = await axios.get('http://localhost:8082/api/i113/bornlist/all',);
+          if(response.data.length===0){
+            this.setInfo("List is Empty")
+          }
           this.units = response.data;
         this.isPostsLoading = false;
       } catch (e) {
@@ -143,6 +147,7 @@ export default {
     },
     updateDialog(unit) {
       this.updatedUnit = unit;
+      this.isNotify = unit.notify;
       this.isCreate = false;
       this.dialogVisible = true;
     },

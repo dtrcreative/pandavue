@@ -41,13 +41,20 @@
       />
 
     </div>
-
   </form>
+  <div class="description">
+    <panda-input
+        v-model.trim="unit.description"
+        type="text"
+        placeholder="Description:"
+    />
+  </div>
 </template>
 
 <script>
 import PandaButton from "@/components/UI/PButton";
 import PandaInput from "@/components/UI/PInput";
+
 export default {
   name: "BornlistCreateForm",
   components: {PandaInput, PandaButton},
@@ -58,13 +65,14 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
+        description: '',
+        notyfy: '',
         userName: 'drogozhnikov',
       },
     }
   },
-  methods:{
+  methods: {
     createUnit() {
-      this.unit.id = Date.now();
       this.$emit('create', this.unit);
     },
     clear() {
@@ -72,6 +80,7 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
+        description: '',
         userName: 'drogozhnikov',
       }
     },
@@ -104,5 +113,13 @@ form {
 .wrapper {
   display: grid;
   grid-template-columns: 4fr 4fr 4fr;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding-right: 5px;
+  padding-left: 5px;
+  width: 100%;
 }
 </style>

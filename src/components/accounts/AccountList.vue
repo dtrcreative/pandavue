@@ -5,7 +5,7 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div  v-if="accounts.length > 0">
+    <div>
       <transition-group name="account-list">
           <account-row
               v-for="account in accounts"
@@ -17,7 +17,6 @@
           />
       </transition-group>
     </div>
-    <h2 v-else style="text-align: center">Нет Данных</h2>
   </div>
 </template>
 

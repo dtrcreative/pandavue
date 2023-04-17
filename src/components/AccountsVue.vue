@@ -56,7 +56,7 @@
     <p-info class="info">{{ infoText }}</p-info>
   </div>
 </template>
-
+units
 <script>
 import axios from 'axios'
 import PButton from "@/components/UI/PButton";
@@ -216,6 +216,10 @@ export default {
 
         const response = await axios.get('http://localhost:8081/api/panda/accounts/all', );
         this.accounts = response.data;
+
+        if(response.data.length===0){
+          this.setInfo("List is Empty")
+        }
 
         const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
         this.ownersOptions = ownersList.data;

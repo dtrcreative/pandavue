@@ -40,8 +40,14 @@
       />
 
     </div>
-
   </form>
+  <div class="description">
+    <panda-input
+        v-model.trim="unit.description"
+        type="text"
+        placeholder="Description:"
+    />
+  </div>
 </template>
 
 <script>
@@ -59,6 +65,7 @@ export default {
         firstName: this.selectedUnit.firstName,
         lastName: this.selectedUnit.lastName,
         date: this.selectedUnit.date,
+        description: this.selectedUnit.description,
         userName: this.selectedUnit.userName,
       },
     }
@@ -78,6 +85,7 @@ export default {
         firstName: '',
         lastName: '',
         date: '',
+        description:'',
         userName: 'drogozhnikov',
       }
     },
@@ -110,5 +118,13 @@ form {
 .wrapper {
   display: grid;
   grid-template-columns: 4fr 4fr 4fr;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding-right: 5px;
+  padding-left: 5px;
+  width: 100%;
 }
 </style>
