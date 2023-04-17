@@ -121,21 +121,19 @@ export default {
     },
     removeAccount(account) {
       try {
-        axios.delete("http://localhost:8081/api/panda/accounts/" + account.name)
-        this.accounts = this.accounts.filter(p => p.name !== account.name)
+        axios.delete("http://localhost:8081/api/panda/accounts/" + account.id)
+        this.accounts = this.accounts.filter(p => p.id !== account.id)
       } catch (e) {
         alert('Server Access Exception')
       }
       this.setInfo("Remove successfully");
     },
-    async updateAccount(updatedAccount, oldName) {
-      console.log(updatedAccount)
-      console.log(oldName)
+    async updateAccount(updatedAccount) {
       if (this.checkData(updatedAccount)) {
         try {
           const response = await axios.put("http://localhost:8081/api/panda/accounts/", {
+            id: updatedAccount.id,
             name: updatedAccount.name,
-            oldName: oldName,
             account: updatedAccount.account,
             mail: updatedAccount.mail,
             owner: updatedAccount.owner,
@@ -159,7 +157,7 @@ export default {
     async getPassword(account) {
       try {
         console.log("getPassword")
-        const pwd = await axios.get('http://localhost:8081/api/panda/accounts/pwd',{
+        const pwd = await axios.get('http://localhost:8081/api/panda/data/passgen',{
           params:{
             name: account.name
           }

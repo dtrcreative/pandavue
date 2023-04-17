@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       account: {
+        id: this.selectedAccount.id,
         name: this.selectedAccount.name,
         account: this.selectedAccount.account,
         mail: this.selectedAccount.mail,
@@ -98,7 +99,6 @@ export default {
         description: this.selectedAccount.description,
       },
       selectedSort: this.selectedAccount.type,
-      oldName: this.selectedAccount.name,
     }
   },
   props: {
@@ -113,9 +113,8 @@ export default {
 
   methods: {
     updateAccount() {
-      this.account.id = Date.now();
       this.account.type = this.selectedSort;
-      this.$emit('update', this.account, this.oldName);
+      this.$emit('update', this.account);
     },
     clear() {
       this.account = {

@@ -112,7 +112,6 @@ export default {
 
   methods: {
     createAccount() {
-      this.account.id = Date.now();
       this.account.type = this.selectedSort;
       this.$emit('create', this.account);
     },
