@@ -31,7 +31,7 @@
     <div class="pTable">
 
       <born-list-table
-          :units="sortedByLeftDays"
+          :units="sortedAndSearchedUnits"
           v-if="!isPostsLoading"
           @remove="removeUnit"
           @update="updateDialog"
@@ -193,6 +193,12 @@ export default {
     sortedByLeftDays() {
       return [...this.sortedByName].sort((unit1, unit2) => unit1.daysLeft - unit2.daysLeft);
     },
+    sortedAndSearchedUnits() {
+      return this.sortedByLeftDays.filter(unit =>
+          unit.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) |
+          unit.lastName.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+    }
   }
 }
 </script>
