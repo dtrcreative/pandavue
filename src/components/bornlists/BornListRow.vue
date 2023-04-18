@@ -17,11 +17,6 @@
         :value="unit.daysLeft"
         :class="{isNotify: isNotify}"
     ></p-cell>
-    <div class="checkbox">
-      <p-checkbox
-          :value="true">
-      </p-checkbox>
-    </div>
     <panda-button
         @click="$emit('update', unit)"
     >Upd
@@ -36,12 +31,11 @@
 <script>
 import PCell from "@/components/UI/PCell";
 import PandaButton from "@/components/UI/PButton";
-import PCheckbox from "@/components/UI/PCheckbox";
 
 export default {
   name: "BornListRow",
   emits: ['remove', 'update', 'setNotify'],
-  components: {PCheckbox, PCell, PandaButton},
+  components: {PCell, PandaButton},
   data() {
     return {
       isHovering: false,
@@ -60,6 +54,7 @@ export default {
   methods: {
     mouseover: function () {
       this.isHovering = true
+      // console.log(this.isNotify)
     },
     mouseleave: function () {
       this.isHovering = false
@@ -75,16 +70,12 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 5fr 1fr 2fr 1fr 1fr;
+  grid-template-columns: 5fr 5fr 5fr 1fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 
 .isNotify {
   background-color: rgba(190, 220, 182, 0.72);
-}
-
-.checkbox {
-
 }
 
 </style>

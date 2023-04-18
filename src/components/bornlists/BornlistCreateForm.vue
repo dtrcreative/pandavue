@@ -48,17 +48,24 @@
         type="text"
         placeholder="Description:"
     />
+    <p-checkbox
+        :init-value="isNotify"
+        @changeValue="changeNotifyValue"
+    >
+      Notify me
+    </p-checkbox>
   </div>
 </template>
 
 <script>
 import PandaButton from "@/components/UI/PButton";
 import PandaInput from "@/components/UI/PInput";
+import PCheckbox from "@/components/UI/PCheckbox";
 
 export default {
   name: "BornlistCreateForm",
-  components: {PandaInput, PandaButton},
-  emits: ["create", "hide"],
+  components: {PCheckbox, PandaInput, PandaButton},
+  emits: ["create", "hide", 'changeValue'],
   data() {
     return {
       unit: {
@@ -66,13 +73,15 @@ export default {
         lastName: '',
         date: '',
         description: '',
-        notyfy: '',
+        notify: '',
         userName: 'drogozhnikov',
       },
+      isNotify: true,
     }
   },
   methods: {
     createUnit() {
+      this.unit.notify = this.isNotify
       this.$emit('create', this.unit);
     },
     clear() {
@@ -83,6 +92,9 @@ export default {
         description: '',
         userName: 'drogozhnikov',
       }
+    },
+    changeNotifyValue(value){
+      this.isNotify = value;
     },
     close() {
       this.$emit('hide')
@@ -117,7 +129,7 @@ form {
 
 .description {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 4fr 1fr 1fr;
   padding-right: 5px;
   padding-left: 5px;
   width: 100%;

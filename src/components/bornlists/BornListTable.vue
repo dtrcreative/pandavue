@@ -33,9 +33,8 @@ export default {
         {id: 2, body: 'LastName'},
         {id: 3, body: 'Date'},
         {id: 4, body: 'DaysLeft'},
-        {id: 5, body: 'Notify'},
-        {id: 6, body: 'Upd'},
-        {id: 7, body: 'Del'},
+        {id: 5, body: 'Upd'},
+        {id: 6, body: 'Del'},
       ],
       checked: true,
     }
@@ -66,7 +65,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 5fr 2fr 2fr 1fr 1fr;
+  grid-template-columns: 5fr 5fr 5fr 2fr 1fr 1fr;
   grid-template-rows: repeat(1, 1fr);
 }
 .unit-list-item {

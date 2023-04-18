@@ -12,6 +12,9 @@ virtual dom - изменения накапливаются в нём, зате�
 
 https://v3.ru.vuejs.org/
 
+*used Libraries
+ https://github.com/vueform/toggle
+
 npm install -g @vue/cli
 
 vue create .->
@@ -299,6 +302,10 @@ return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCo
 сортировка - 1:25:00
 1:30:00
 
+
+      <p-checkbox
+          :init-value="unit.notify">
+      </p-checkbox>
 
 ////////
 <!--        <account-row-->

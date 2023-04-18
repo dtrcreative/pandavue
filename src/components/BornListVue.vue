@@ -106,6 +106,7 @@ export default {
             firstName: unit.firstName,
             lastName: unit.lastName,
             date: unit.date,
+            notify: unit.notify,
             description: unit.description,
           })
           if(response.status===200){
@@ -120,6 +121,7 @@ export default {
       }
     },
     async createUnit(unit) {
+      console.log(unit)
       if (this.checkData(unit)) {
         try {
           const responce = await axios.post("http://localhost:8082/api/i113/bornlist/", {
@@ -127,6 +129,7 @@ export default {
             firstName: unit.firstName,
             lastName: unit.lastName,
             date: unit.date,
+            notify: unit.notify,
             description: unit.description,
           })
           if(responce.status===200){
