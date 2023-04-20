@@ -125,9 +125,9 @@ export default {
               this.isCreate = true;
               this.dialogVisible = false;
               this.setInfo("Update successfully");
+              this.getData();
             }
         );
-        await this.getData();
       }
     },
     async getPassword(account) {

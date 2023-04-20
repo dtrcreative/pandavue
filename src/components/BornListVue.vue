@@ -43,17 +43,18 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import BornListTable from "@/components/bornlists/BornListTable";
 import PandaButton from "@/components/UI/PButton";
 import PandaInput from "@/components/UI/PInput";
 import PInfo from "@/components/UI/PInfo";
 import BornlistCreateForm from "@/components/bornlists/BornlistCreateForm";
 import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
+import BornlistService from "@/services/bornlist.service";
 
 export default {
   name: "BornListVue",
-  emits: ['remove','update', 'create', 'setNotify'],
+  emits: ['remove', 'update', 'create', 'setNotify'],
   components: {
     BornlistUpdateForm,
     BornlistCreateForm,
@@ -76,77 +77,51 @@ export default {
   },
   methods: {
     async getData() {
-      try {
-        this.isPostsLoading = true;
-          const response = await axios.get('http://localhost:8080/api/i113/bornlist/all',);
-          if(response.data.length===0){
-            this.setInfo("List is Empty")
+      BornlistService.getUnits().then(
+          (response) => {
+            this.isPostsLoading = true;
+            this.units = response;
+            this.isPostsLoading = false;
           }
-          this.units = response.data;
-        this.isPostsLoading = false;
-      } catch (e) {
-        alert('Server Access Exception')
-      }
+      );
     },
     removeUnit(unit) {
-      try {
-        axios.delete("http://localhost:8080/api/i113/bornlist/" + unit.id)
-        this.units = this.units.filter(p => p.id !== unit.id)
-      } catch (e) {
-        alert('Server Access Exception')
-      }
-      this.setInfo("Remove successfully");
+      BornlistService.removeUnit(unit.id).then(
+          (response) => {
+            if(response.status===200){
+              this.units = this.units.filter(p => p.id !== unit.id)
+              this.setInfo("Remove successfully");
+            }
+          });
     },
     async updateUnit(unit) {
+
       if (this.checkData(unit)) {
-        try {
-          const response = await axios.put("http://localhost:8080/api/i113/bornlist/", {
-            id: unit.id,
-            userName: 'drogozhnikov',
-            firstName: unit.firstName,
-            lastName: unit.lastName,
-            date: unit.date,
-            notify: unit.notify,
-            description: unit.description,
-          })
-          if(response.status===200){
-            await this.getData();
-            this.isCreate = true;
-            this.dialogVisible = false;
-          }
-        } catch (e) {
-          alert('Server Access Exception')
-        }
-        this.setInfo("Update successfully");
+        BornlistService.updateUnit(unit).then(
+            (response) => {
+              this.updatedUnit = response.data;
+              this.isCreate = true;
+              this.dialogVisible = false;
+              this.setInfo("Update successfully");
+              this.getData();
+            }
+        );
       }
-    },
+      },
+
     async createUnit(unit) {
-      console.log(unit)
       if (this.checkData(unit)) {
-        try {
-          const responce = await axios.post("http://localhost:8080/api/i113/bornlist/", {
-            userName: 'drogozhnikov',
-            firstName: unit.firstName,
-            lastName: unit.lastName,
-            date: unit.date,
-            notify: unit.notify,
-            description: unit.description,
-          })
-          if(responce.status===200){
-            this.units.push(responce.data);
-          }
-          this.setInfo("Create successfully");
-        } catch (e) {
-          alert('Server Access Exception')
-        }
+          BornlistService.createUnit(unit).then(
+              (response) => {
+                if (response.status === 200) {
+                  this.units.push(response.data);
+                  this.setInfo("Create successfully");
+                }
+              });
       }
     },
-    async loadJson(){
-      try {
-        await axios.get('http://localhost:8080/api/i113/bornlist/data/loadJson');
-      } catch (e) {
-        alert('Server Access Exception')
-      }
+    async loadJson() {
+      BornlistService.loadJson();
     },
     updateDialog(unit) {
       this.updatedUnit = unit;
@@ -165,15 +140,15 @@ export default {
       this.infoText = text;
     },
     checkData(unit) {
-      if(unit.firstName.length<1){
+      if (unit.firstName.length < 1) {
         alert("Fill name please");
         return false;
       }
-      if(unit.lastName.length<1){
+      if (unit.lastName.length < 1) {
         alert("Fill lastName please");
         return false;
       }
-      if(unit.date.length<1){
+      if (unit.date.length < 1) {
         alert("Fill date please");
         return false;
       }
@@ -212,12 +187,15 @@ export default {
   grid-template-columns: 4fr 4fr 1fr 1fr;
   justify-content: space-between;
 }
+
 .pTable {
   padding: 5px;
 }
+
 .post {
   margin-top: 5px;
 }
+
 .info {
   margin-left: 5px;
   margin-right: 5px;

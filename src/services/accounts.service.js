@@ -49,8 +49,8 @@ class AccountService {
 
     async getAccounts() {
         try {
-            const responce = await axios.get(API_URL + 'accounts/all',);
-            return responce.data;
+            const response = await axios.get(API_URL + 'accounts/all',);
+            return response.data;
         } catch (e) {
             alert('Server Access Exception')
         }
