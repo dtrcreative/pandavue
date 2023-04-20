@@ -58,7 +58,6 @@
 </template>
 units
 <script>
-import axios from 'axios'
 import PButton from "@/components/UI/PButton";
 import PDialog from "@/components/UI/PDialog";
 import PSelect from "@/components/UI/PSelect";
@@ -67,6 +66,7 @@ import AccountUpdateForm from "@/components/accounts/AccountUpdateForm";
 import AccountList from "@/components/accounts/AccountList";
 import PandaInput from "@/components/UI/PInput";
 import PInfo from "@/components/UI/PInfo";
+import AccountsService from "@/services/accounts.service";
 
 export default {
   components: {
@@ -99,81 +99,47 @@ export default {
   methods: {
     async createAccount(account) {
       if (this.checkData(account)) {
-        try {
-          const responce = await axios.post("http://localhost:8081/api/panda/accounts/", {
-            name: account.name,
-            account: account.account,
-            mail: account.mail,
-            owner: account.owner,
-            password: account.password,
-            link: account.link,
-            type: account.type,
-            description: account.description
-          })
-          if(responce.status===200){
-            this.accounts.push(responce.data);
-          }
-          this.setInfo("Create successfully");
-        } catch (e) {
-          alert('Server Access Exception')
-        }
+        AccountsService.removeAccount(account.id).then(
+            (response) => {
+              if(response.status===200){
+                this.accounts.push(response.data);
+                this.setInfo("Create successfully");
+              }
+            });
       }
     },
     removeAccount(account) {
-      try {
-        axios.delete("http://localhost:8081/api/panda/accounts/" + account.id)
-        this.accounts = this.accounts.filter(p => p.id !== account.id)
-      } catch (e) {
-        alert('Server Access Exception')
-      }
-      this.setInfo("Remove successfully");
+      AccountsService.removeAccount(account.id).then(
+      (response) => {
+        if(response.status===200){
+          this.accounts = this.accounts.filter(p => p.id !== account.id)
+          this.setInfo("Remove successfully");
+        }
+      });
     },
     async updateAccount(updatedAccount) {
       if (this.checkData(updatedAccount)) {
-        try {
-          const response = await axios.put("http://localhost:8081/api/panda/accounts/", {
-            id: updatedAccount.id,
-            name: updatedAccount.name,
-            account: updatedAccount.account,
-            mail: updatedAccount.mail,
-            owner: updatedAccount.owner,
-            password: updatedAccount.password,
-            link: updatedAccount.link,
-            type: updatedAccount.type,
-            description: updatedAccount.description,
-          })
-          if(response.status===200){
-            updatedAccount = response.data;
-            this.isCreate = true;
-            this.dialogVisible = false;
-          }
-        } catch (e) {
-          alert('Server Access Exception')
-        }
+        AccountsService.updateAccount(updatedAccount).then(
+            (response) => {
+              updatedAccount = response.data;
+              this.isCreate = true;
+              this.dialogVisible = false;
+              this.setInfo("Update successfully");
+            }
+        );
         await this.getData();
-        this.setInfo("Update successfully");
       }
     },
     async getPassword(account) {
-      try {
-        console.log("getPassword")
-        const pwd = await axios.get('http://localhost:8081/api/panda/data/passgen',{
-          params:{
-            name: account.name
+      AccountsService.getPassword(account.name).then(
+          (response) => {
+            navigator.clipboard.writeText(response.data);
+            this.setInfo(response.data)
           }
-        });
-        navigator.clipboard.writeText(pwd.data);
-        this.setInfo(pwd.data)
-      } catch (e) {
-        alert('Server Access Exception')
-      }
+      );
     },
     async loadJson() {
-      try {
-        await axios.get('http://localhost:8081/api/panda/data/loadJson');
-      } catch (e) {
-        alert('Server Access Exception')
-      }
+      AccountsService.loadJson();
     },
     updateDialog(account) {
       this.updatedAccount = account;
@@ -188,15 +154,15 @@ export default {
       this.dialogVisible = false;
     },
     checkData(inputAccount) {
-      if(inputAccount.name.length<1){
+      if (inputAccount.name.length < 1) {
         alert("Fill name please");
         return false;
       }
-      if(inputAccount.password.length<1){
+      if (inputAccount.password.length < 1) {
         alert("Fill password please");
         return false;
       }
-      if(inputAccount.type===""){
+      if (inputAccount.type === "") {
         alert("Select accountType please");
         return false;
       }
@@ -210,26 +176,20 @@ export default {
       }
       return true;
     },
+
     async getData() {
-      try {
-        this.isPostsLoading = true;
-
-        const response = await axios.get('http://localhost:8081/api/panda/accounts/all', );
-        this.accounts = response.data;
-
-        if(response.data.length===0){
-          this.setInfo("List is Empty")
-        }
-
-        const ownersList = await axios.get('http://localhost:8081/api/panda/data/types');
-        this.ownersOptions = ownersList.data;
-
-        this.isPostsLoading = false;
-      } catch (e) {
-        alert('Server Access Exception')
-      } finally {
-        // this.isPostsLoading = false;
-      }
+      this.isPostsLoading = true;
+      AccountsService.getAccounts().then(
+          (response) => {
+            this.accounts = response
+          }
+      );
+      AccountsService.getOwners().then(
+          (response) => {
+            this.ownersOptions = response
+          }
+      )
+      this.isPostsLoading = false;
     },
 
     setInfo(text) {

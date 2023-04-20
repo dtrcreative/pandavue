@@ -83,7 +83,7 @@ import PInput from "@/components/UI/PInput";
 import PButton from "@/components/UI/PButton";
 import PandaButton from "@/components/UI/PButton";
 import PandaSelect from "@/components/UI/PSelect";
-import axios from "axios";
+import AccountsService from "@/services/accounts.service";
 
 export default {
   components: {PandaSelect, PandaButton, PButton, PInput},
@@ -127,13 +127,12 @@ export default {
         description: '',
       }
     },
-    async generatePassword() {
-      try {
-        const passwordResponse = await axios.get('http://localhost:8081/api/panda/data/passgen');
-        this.account.password = passwordResponse.data;
-      } catch (e) {
-        alert('Server Access Exception')
-      }
+    generatePassword() {
+      AccountsService.generatePassword().then(
+          (response) => {
+            this.account.password = response.data;
+          }
+      );
     },
     close() {
       this.$emit('hide')

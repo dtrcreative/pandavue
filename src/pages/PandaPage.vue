@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper">
     <accounts-vue></accounts-vue>
-    <BornListVue></BornListVue>
+<!--    <BornListVue></BornListVue>-->
   </div>
 </template>
 
 <script>
-import BornListVue from "@/components/BornListVue";
+// import BornListVue from "@/components/BornListVue";
 import AccountsVue from "@/components/AccountsVue";
 export default {
   name: "MainPage",
   components: {
     AccountsVue,
-    BornListVue
+    // BornListVue
   }
 }
 </script>

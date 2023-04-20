@@ -78,7 +78,7 @@ export default {
     async getData() {
       try {
         this.isPostsLoading = true;
-          const response = await axios.get('http://localhost:8082/api/i113/bornlist/all',);
+          const response = await axios.get('http://localhost:8080/api/i113/bornlist/all',);
           if(response.data.length===0){
             this.setInfo("List is Empty")
           }
@@ -90,7 +90,7 @@ export default {
     },
     removeUnit(unit) {
       try {
-        axios.delete("http://localhost:8082/api/i113/bornlist/" + unit.id)
+        axios.delete("http://localhost:8080/api/i113/bornlist/" + unit.id)
         this.units = this.units.filter(p => p.id !== unit.id)
       } catch (e) {
         alert('Server Access Exception')
@@ -100,7 +100,7 @@ export default {
     async updateUnit(unit) {
       if (this.checkData(unit)) {
         try {
-          const response = await axios.put("http://localhost:8082/api/i113/bornlist/", {
+          const response = await axios.put("http://localhost:8080/api/i113/bornlist/", {
             id: unit.id,
             userName: 'drogozhnikov',
             firstName: unit.firstName,
@@ -124,7 +124,7 @@ export default {
       console.log(unit)
       if (this.checkData(unit)) {
         try {
-          const responce = await axios.post("http://localhost:8082/api/i113/bornlist/", {
+          const responce = await axios.post("http://localhost:8080/api/i113/bornlist/", {
             userName: 'drogozhnikov',
             firstName: unit.firstName,
             lastName: unit.lastName,
@@ -143,7 +143,7 @@ export default {
     },
     async loadJson(){
       try {
-        await axios.get('http://localhost:8082/api/i113/bornlist/data/loadJson');
+        await axios.get('http://localhost:8080/api/i113/bornlist/data/loadJson');
       } catch (e) {
         alert('Server Access Exception')
       }
