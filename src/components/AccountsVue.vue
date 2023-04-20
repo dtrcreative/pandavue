@@ -99,7 +99,7 @@ export default {
   methods: {
     async createAccount(account) {
       if (this.checkData(account)) {
-        AccountsService.removeAccount(account.id).then(
+        AccountsService.createAccount(account).then(
             (response) => {
               if(response.status===200){
                 this.accounts.push(response.data);

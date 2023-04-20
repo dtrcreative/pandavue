@@ -6,7 +6,7 @@ class AccountService {
 
     async createAccount(account){
         try {
-            return  await axios.post("http://localhost:8080/api/panda/accounts/", {
+            return  await axios.post(API_URL + 'accounts/', {
                 name: account.name,
                 account: account.account,
                 mail: account.mail,
@@ -23,7 +23,7 @@ class AccountService {
 
     async updateAccount(updatedAccount){
         try {
-            return  await axios.put(API_URL + 'accounts/', {
+            return await axios.put(API_URL + 'accounts/', {
                 id: updatedAccount.id,
                 name: updatedAccount.name,
                 account: updatedAccount.account,
