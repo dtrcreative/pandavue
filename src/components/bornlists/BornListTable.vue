@@ -79,7 +79,7 @@ export default {
 .unit-list-enter-from,
 .unit-list-leave-to {
   opacity: 0;
-  transform: translateX(-130px);
+  transform: translateX(130px);
 }
 .unit-list-move {
   transition: transform 0.4s ease;
