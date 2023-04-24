@@ -171,7 +171,8 @@ export default {
     sortedAndSearchedUnits() {
       return this.sortedByLeftDays.filter(unit =>
           unit.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) |
-          unit.lastName.toLowerCase().includes(this.searchQuery.toLowerCase())
+          unit.lastName.toLowerCase().includes(this.searchQuery.toLowerCase()) |
+          unit.date.includes(this.searchQuery)
       )
     }
   }
