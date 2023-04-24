@@ -26,18 +26,21 @@
           v-focus
           type="text"
           placeholder="Название:"
+          maxlength="20"
       />
 
       <p-input
           v-model.trim="account.mail"
           type="text"
           placeholder="Почта:"
+          maxlength="40"
       />
 
       <p-input
           v-model.trim="account.password"
           type="text"
           placeholder="Пароль:"
+          maxlength="30"
       />
 
       <panda-button @click="generatePassword">
@@ -48,12 +51,14 @@
           v-model.trim="account.account"
           type="text"
           placeholder="Аккаунт:"
+          maxlength="40"
       />
 
       <p-input
           v-model.trim="account.link"
           type="text"
           placeholder="Ссылка:"
+          maxlength="100"
       />
       <p-input
           v-model.trim="account.owner"
@@ -73,6 +78,7 @@
         v-model.trim="account.description"
         type="text"
         placeholder="Описание:"
+        maxlength="200"
     />
   </div>
 
@@ -86,7 +92,8 @@ import PandaSelect from "@/components/UI/PSelect";
 import AccountsService from "@/services/accounts.service";
 
 export default {
-  components: {PandaSelect, PandaButton, PButton, PInput},
+  components: {PandaSelect, PandaButton, PButton, PInput,
+  },
   emits: ["create", "hide"],
   data() {
     return {

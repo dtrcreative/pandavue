@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <panda-button class="btn btn-primary btn-block" :disabled="loading">
+        <panda-button class="btn-block btn-outline-success" :disabled="loading">
             <span
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
@@ -107,10 +107,6 @@ label {
 .btn {
   width: 100%;
   margin-top: 15px;
-}
-
-.input{
-  width: 100%;
 }
 
 .profile-img-card {
