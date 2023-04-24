@@ -1,32 +1,55 @@
 <template>
-  <div class="navbar">
-    <div @click="$router.push('/')"><strong>i113_Panda_main</strong></div>
-    <div class="navbar__btns">
-      <panda-button style="margin-right: 10px" @click="showLoginDialog">LogIn</panda-button>
-      <panda-button style="margin-right: 10px" @click="$router.push('/panda')">Panda</panda-button>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">i113_Panda</a>
+    <div class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <router-link to="/" class="nav-link">
+          <font-awesome-icon icon="home" /> Home
+        </router-link>
+      </li>
+    </div>
+    <div class="navbar-nav ml-auto" style="margin-left: auto">
+<!--      <li class="nav-item">-->
+<!--        <router-link to="/register" class="nav-link">-->
+<!--          <font-awesome-icon icon="user-plus" /> Register-->
+<!--        </router-link>-->
+<!--      </li>-->
+      <li class="nav-item">
+        <label @click="showLoginDialog" class="nav-link">
+          <font-awesome-icon icon="sign-in-alt" /> LogIn
+        </label>
+      </li>
     </div>
       <panda-dialog v-model:show="logInDialogVisible">
         <auth-vue></auth-vue>
       </panda-dialog>
-  </div>
+  </nav>
 </template>
 
 <script>
-import PandaButton from "@/components/UI/PButton";
 import PandaDialog from "@/components/UI/PDialog";
 import AuthVue from "@/components/AuthVue";
 export default {
   name: "MainVue",
-  components: {AuthVue, PandaDialog, PandaButton},
+  components: {AuthVue, PandaDialog},
 
   data() {
     return {
       logInDialogVisible: false,
     }
   },
+  computed: {
+    // currentUser() {
+    //   return this.$store.state.auth.user;
+    // },
+  },
   methods:{
     showLoginDialog(){
       this.logInDialogVisible = !this.logInDialogVisible;
+    },
+    logOut() {
+      // this.$store.dispatch('auth/logout');
+      // this.$router.push('/login');
     }
   }
 }
@@ -39,8 +62,6 @@ export default {
 .navbar {
   height: 50px;
   background-color: bisque;
-  box-shadow: 2px 2px 4px rgba(128, 128, 128, 0.89);
-  border-radius: 20px;
   display: flex;
   align-items: center;
   padding: 0 15px;

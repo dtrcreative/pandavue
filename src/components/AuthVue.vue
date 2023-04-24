@@ -1,96 +1,129 @@
 <template>
-  <form @submit.prevent>
-    <h1>LogIn</h1>
-    <div class="post">
-      <p-input
-          v-model.trim="authUser.username"
-          type="text"
-          placeholder="UserName:"
-      ></p-input>
-    </div>
-    <div class="post">
-      <p-input
-          v-model.trim="authUser.password"
-          type="text"
-          placeholder="Password:"
-      ></p-input>
-    </div>
-    <div class="post">
-      <p-button @click=login>LogIn</p-button>
-    </div>
-  </form>
+  <div>
+    <div class="card card-container">
+      <img
+          id="profile-img"
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          class="profile-img-card"
+      />
+      <Form @submit="handleLogin" :validation-schema="schema">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <Field name="username" type="text" class="form-control"/>
+          <div>
+            <ErrorMessage name="username" class="error-feedback"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <Field name="password" type="password" class="form-control"/>
+          <div>
+            <ErrorMessage name="password" class="error-feedback"/>
+          </div>
+        </div>
 
+        <panda-button class="btn btn-primary btn-block" :disabled="loading">
+            <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+            ></span>
+          <span>Login</span>
+        </panda-button>
+
+        <div>
+          <div v-if="message" class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        </div>
+      </Form>
+    </div>
+  </div>
 </template>
 
 <script>
 
-
-import PButton from "@/components/UI/PButton";
-import PInput from "@/components/UI/PInput";
-import axios from "axios";
+import {Form, Field, ErrorMessage} from "vee-validate";
+import * as yup from "yup";
+import PandaButton from "@/components/UI/PButton";
 
 export default {
   name: "AuthVue",
 
   components: {
-    PInput,PButton,
+    PandaButton,
+    Form,
+    Field,
+    ErrorMessage,
   },
 
-  data(){
-    return{
-      authUser:{
-        username:'user',
-        password:'user'
-      }
-    }
+  data() {
+    const schema = yup.object().shape({
+      username: yup.string().required("Username is required!"),
+      password: yup.string().required("Password is required!"),
+    });
+
+    return {
+      loading: false,
+      message: "",
+      schema,
+    };
   },
 
   methods: {
-    login(){
-      console.log(this.authUser)
-      this.auth(this.authUser)
-      // this.clear()
+    handleLogin(user) {
+      this.loading = true;
+      this.$store.dispatch("auth/login", user).then(
+          () => {
+            this.$router.push("/profile");
+          },
+          (error) => {
+            this.loading = false;
+            this.message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+          }
+      );
     },
-
-    async auth(user) {
-      try {
-        axios.post("http://localhost:8080/api/auth/login",
-            {
-          username: user.username,
-          password: user.password,
-        })
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-      } catch (e) {
-        alert('Server Access Exception')
-      } finally {
-        // this.isPostsLoading = false;
-      }
-      this.$router.push()
-    },
-    clear(){
-      this.authUser = {
-        userName: '',
-        password: ''
-      }
-    }
-  }
+  },
 
 }
 </script>
 
 <style scoped>
-* {
- width: 300px;
+label {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin-top: 10px;
 }
 
-  .post {
-    width: 100%;
-    margin-top: 3px;
-    display: flex;
-  }
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.input{
+  width: 100%;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.error-feedback {
+  color: red;
+}
 </style>

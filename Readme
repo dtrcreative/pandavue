@@ -14,6 +14,8 @@ https://v3.ru.vuejs.org/
 
 *used Libraries
  https://github.com/vueform/toggle
+ npm i vee-validate --save
+ npm install vue-yup-validation --save
 
 npm install -g @vue/cli
 
