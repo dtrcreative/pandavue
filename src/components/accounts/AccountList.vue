@@ -53,6 +53,7 @@ export default {
 <style scoped>
 
 .columnTitle {
+  max-height: 40px;
   text-align: center;
   padding: 5px;
   border: 2px solid teal;
@@ -63,12 +64,12 @@ export default {
 .scroll{
   overflow-y: scroll;
   scroll-behavior: smooth;
-  max-height: 700px;
+  max-height: 800px;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 4fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 50px 50px 50px;
   grid-template-rows: repeat(1, 1fr);
 }
 

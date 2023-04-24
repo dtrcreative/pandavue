@@ -15,15 +15,15 @@
     ></p-cell>
     <panda-button
         @click="$emit('password', account)"
-    >Pwd
+    ><font-awesome-icon icon="key" />
     </panda-button>
     <panda-button
         @click="$emit('update', account)"
-    >Upd
+    ><font-awesome-icon icon="pen" />
     </panda-button>
     <panda-button
         @click="$emit('remove', account)"
-    >Del
+    ><font-awesome-icon icon="trash" />
     </panda-button>
   </div>
 </template>

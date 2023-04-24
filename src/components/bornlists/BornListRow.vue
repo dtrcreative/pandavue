@@ -19,11 +19,11 @@
     ></p-cell>
     <panda-button
         @click="$emit('update', unit)"
-    >Upd
+    ><font-awesome-icon icon="pen" />
     </panda-button>
     <panda-button
         @click="$emit('remove', unit)"
-    >Del
+    ><font-awesome-icon icon="trash" />
     </panda-button>
   </div>
 </template>

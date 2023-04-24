@@ -9,7 +9,6 @@
 <script>
 import Toggle from '@vueform/toggle'
 export default {
-
   name: "PCheckbox",
   emits: ["changeValue"],
   components: {
@@ -29,9 +28,6 @@ export default {
 }
 </script>
 
-<style src="@vueform/toggle/themes/default.css">
-.checkbox{
- align-content: center;
-  vertical-align: center;
-}
+<style >
+
 </style>

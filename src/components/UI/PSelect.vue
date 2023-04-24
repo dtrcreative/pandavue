@@ -39,7 +39,7 @@ export default {
 <style scoped>
   select{
     border-radius: 3px;
-    padding: 10px 15px;
+    padding: 5px 10px;
     background: none;
     color: teal;
     border: 1px solid teal;

@@ -4,7 +4,7 @@
     <div class="navbar-nav mr-auto">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
-          <font-awesome-icon icon="home" /> Home
+          <font-awesome-icon icon="house" /> Home
         </router-link>
       </li>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <button
-        class="btn"
+        class="btn  btn-block btn-outline-success"
         v-on:mouseover="mouseover"
         v-on:mouseleave="mouseleave"
         @click="handleClick"
@@ -33,12 +33,11 @@
     }
 </script>
 
-<style scoped>
+<style>
     .btn {
       border-radius: 3px;
         padding: 10px 10px;
         background: none;
-        color: teal;
         border: 1px solid teal;
     }
     .hovering{

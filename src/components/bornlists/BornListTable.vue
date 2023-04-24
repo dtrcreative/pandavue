@@ -32,7 +32,7 @@ export default {
         {id: 1, body: 'FirstName'},
         {id: 2, body: 'LastName'},
         {id: 3, body: 'Date'},
-        {id: 4, body: 'DaysLeft'},
+        {id: 4, body: 'Days'},
         {id: 5, body: 'Upd'},
         {id: 6, body: 'Del'},
       ],
@@ -50,6 +50,7 @@ export default {
 
 <style scoped>
 .columnTitle {
+  max-height: 40px;
   text-align: center;
   padding: 5px;
   border: 2px solid teal;
@@ -65,7 +66,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 5fr 2fr 1fr 1fr;
+  grid-template-columns: 5fr 5fr 5fr 50px 50px 50px;
   grid-template-rows: repeat(1, 1fr);
 }
 .unit-list-item {

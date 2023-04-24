@@ -42,6 +42,7 @@ export default {
 <style scoped>
 
 .cell {
+  max-height: 40px;
   padding: 5px 5px;
   border-radius: 3px;
   border: 1px solid teal;
