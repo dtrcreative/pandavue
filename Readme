@@ -303,15 +303,3 @@ return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCo
 1:30:00
 
 
-      <p-checkbox
-          :init-value="unit.notify">
-      </p-checkbox>
-
-////////
-<!--        <account-row-->
-<!--            v-for="account in accounts"-->
-<!--            :key="account.name"-->
-<!--            :account="account"-->
-<!--            @remove="$emit('remove', account)"-->
-<!--        />-->
-////////
