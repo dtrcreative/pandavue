@@ -26,18 +26,22 @@
           v-focus
           type="text"
           placeholder="FirstName:"
+          maxlength="15"
       />
 
       <panda-input
           v-model.trim="unit.lastName"
           type="text"
           placeholder="LastName:"
+          maxlength="30"
       />
 
       <panda-input
           v-model.trim="unit.date"
           type="text"
-          placeholder="BirthdayDate:"
+          placeholder="yyyy/mm/dd"
+          maxlength="10"
+          v-on:keyup="validateDate"
       />
 
     </div>
@@ -63,6 +67,7 @@ import PandaInput from "@/components/UI/PInput";
 import PCheckbox from "@/components/UI/PCheckbox";
 
 export default {
+
   name: "BornlistCreateForm",
   components: {PCheckbox, PandaInput, PandaButton},
   emits: ["create", "hide", 'changeValue'],
@@ -98,6 +103,14 @@ export default {
     },
     close() {
       this.$emit('hide')
+    },
+    validateDate(){
+      if(this.unit.date.length===4){
+        this.unit.date += "-"
+      }
+      if(this.unit.date.length===7){
+        this.unit.date += "-"
+      }
     }
   }
 }

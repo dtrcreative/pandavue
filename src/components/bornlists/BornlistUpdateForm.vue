@@ -36,7 +36,9 @@
       <panda-input
           v-model.trim="unit.date"
           type="text"
-          placeholder="BirthdayDate:"
+          placeholder="yyyy/mm/dd"
+          maxlength="10"
+          v-on:keyup="validateDate"
       />
 
     </div>
@@ -103,6 +105,14 @@ export default {
     },
     close() {
       this.$emit('hide')
+    },
+    validateDate(){
+      if(this.unit.date.length===4){
+        this.unit.date += "-"
+      }
+      if(this.unit.date.length===7){
+        this.unit.date += "-"
+      }
     }
   }
 }
