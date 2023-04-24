@@ -1,18 +1,25 @@
 <template>
-    <Toggle
+  <div class="form-check form-switch">
+    <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckChecked"
+        checked
         v-model="value"
         @change = "changeValue"
-    ></Toggle>
-    <slot>{{}}</slot>
+    >
+    <label class="form-check-label" for="flexSwitchCheckChecked">Notify Me</label>
+  </div>
+
 </template>
 
 <script>
-import Toggle from '@vueform/toggle'
 export default {
   name: "PCheckbox",
   emits: ["changeValue"],
   components: {
-    Toggle,
+
   },
   data() {
     return {
@@ -24,10 +31,22 @@ export default {
     changeValue(){
       this.$emit('changeValue', this.value)
     },
-  }
+  },
 }
 </script>
 
 <style >
 
+.form-check-input{
+  min-height: 30px;
+  min-width: 60px;
+}
+.form-check{
+  margin-left: 5px;
+}
+.form-check-label{
+  margin-left: 10px;
+  margin-top: 5px;
+  text-align: left;
+}
 </style>

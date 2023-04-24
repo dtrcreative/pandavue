@@ -1,6 +1,8 @@
 <template>
   <div class="table-info">
-    <p><slot></slot></p>
+    <p>
+      <slot></slot>
+    </p>
   </div>
 </template>
 
@@ -11,5 +13,7 @@ export default {
 </script>
 
 <style scoped>
-
+.table-info {
+  max-height: 30px;
+}
 </style>

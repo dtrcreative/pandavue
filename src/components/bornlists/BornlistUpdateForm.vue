@@ -113,12 +113,6 @@ form {
   padding: 5px;
 }
 
-.input {
-  border: 1px solid #00800b;
-  border-radius: 4px;
-  padding: 5px;
-}
-
 .btn_wrapper {
   padding-left: 5px;
   padding-right: 5px;
@@ -134,7 +128,7 @@ form {
 
 .description {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   padding-right: 5px;
   padding-left: 5px;
   width: 100%;
