@@ -9,19 +9,21 @@
         </router-link>
       </li>
     </div>
-    <div class="navbar-nav ml-auto" style="margin-left: auto">
-      <!--      <li class="nav-item">-->
-      <!--        <router-link to="/register" class="nav-link">-->
-      <!--          <font-awesome-icon icon="user-plus" /> Register-->
-      <!--        </router-link>-->
-      <!--      </li>-->
-      <li v-if="!currentUser" class="nav-item">
+    <div v-if="!currentUser" class="navbar-nav ml-auto" style="margin-left: auto">
+      <li class="nav-item">
+        <label @click="showRegisterDialog" class="nav-link">
+          <font-awesome-icon icon="sign-in-alt"/>
+          Sign In
+        </label>
+      </li>
+      <li class="nav-item">
         <label @click="showLoginDialog" class="nav-link">
           <font-awesome-icon icon="sign-in-alt"/>
-          LogIn
+          Login
         </label>
       </li>
     </div>
+
     <panda-dialog
         v-model:show="logInDialogVisible">
       <log-in-form
@@ -29,16 +31,24 @@
       ></log-in-form>
     </panda-dialog>
 
-    <div v-if="currentUser" class="navbar-nav ml-auto">
+    <panda-dialog
+        v-model:show="registerDialogVisible">
+      <register-form
+          @hide="showRegisterDialog"
+      ></register-form>
+    </panda-dialog>
+
+    <div v-if="currentUser" class="navbar-nav ml-auto" style="margin-left: auto">
       <li class="nav-item">
         <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
-          <font-awesome-icon icon="user" />
+          <font-awesome-icon icon="user"/>
           {{ currentUser.username }}
         </router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" @click.prevent="logOut">
-          <font-awesome-icon icon="sign-out-alt" /> LogOut
+          <font-awesome-icon icon="sign-out-alt"/>
+          LogOut
         </a>
       </li>
     </div>
@@ -48,14 +58,16 @@
 <script>
 import PandaDialog from "@/components/UI/PDialog";
 import LoginForm from "@/components/auth/LogInForm";
+import RegisterForm from "@/components/auth/RegisterForm";
 
 export default {
   name: "MainVue",
-  components: {LogInForm: LoginForm, PandaDialog},
+  components: {RegisterForm, LogInForm: LoginForm, PandaDialog},
 
   data() {
     return {
       logInDialogVisible: false,
+      registerDialogVisible: false,
     }
   },
   computed: {
@@ -66,6 +78,9 @@ export default {
   methods: {
     showLoginDialog() {
       this.logInDialogVisible = !this.logInDialogVisible;
+    },
+    showRegisterDialog() {
+      this.registerDialogVisible = !this.registerDialogVisible;
     },
     logOut() {
       this.$store.dispatch('auth/logout');

@@ -22,7 +22,10 @@ class AuthService {
     }
 
     register(user){
-        console.log(user);
+        return axios.post(API_URL + 'signup', {
+            username: user.username,
+            password: user.password
+        });
     }
 
 }
