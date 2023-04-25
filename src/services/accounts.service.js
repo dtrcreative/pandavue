@@ -6,12 +6,13 @@ const API_URL = 'http://localhost:8080/api/panda/';
 class AccountService {
 
     async createAccount(account){
+        const user = JSON.parse(localStorage.getItem('user'));
         try {
             return  await axios.post(API_URL + 'accounts/', {
                 name: account.name,
                 account: account.account,
                 mail: account.mail,
-                owner: account.owner,
+                owner: user.username,
                 password: account.password,
                 link: account.link,
                 type: account.type,
@@ -23,13 +24,14 @@ class AccountService {
     }
 
     async updateAccount(updatedAccount){
+        const user = JSON.parse(localStorage.getItem('user'));
         try {
             return await axios.put(API_URL + 'accounts/', {
                 id: updatedAccount.id,
                 name: updatedAccount.name,
                 account: updatedAccount.account,
                 mail: updatedAccount.mail,
-                owner: updatedAccount.owner,
+                owner: user.username,
                 password: updatedAccount.password,
                 link: updatedAccount.link,
                 type: updatedAccount.type,

@@ -64,6 +64,7 @@
           v-model.trim="account.owner"
           type="text"
           placeholder="Владелец:"
+          disabled="true"
       />
       <panda-select
           v-model="selectedSort"
