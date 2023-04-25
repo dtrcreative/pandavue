@@ -4,6 +4,7 @@ import App from './App.vue'
 import components from '@/components/UI'
 import directives from '@/directives';
 import router from "@/router/router";
+import store from "./store";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,5 +29,6 @@ directives.forEach(directive => {
 app
     .use(pinia)
     .use(router)
+    .use(store)
     .component("font-awesome-icon", FontAwesomeIcon)
     .mount('#app')

@@ -16,6 +16,11 @@ https://v3.ru.vuejs.org/
  https://github.com/vueform/toggle
  npm i vee-validate --save
  npm install vue-yup-validation --save
+ npm install vue bootstrap bootstrap-vue
+ npm i --save @fortawesome/vue-fontawesome@latest-3
+ npm i --save @fortawesome/fontawesome-svg-core
+ npm i --save @fortawesome/free-solid-svg-icons
+ npm i --save @fortawesome/free-brands-svg-icons
 
 npm install -g @vue/cli
 
