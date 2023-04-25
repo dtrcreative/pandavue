@@ -11,8 +11,10 @@
 import PandaButton from "@/components/UI/PButton";
 
 export default {
-  components: {PandaButton}
+  components: {PandaButton},
+
 }
+
 </script>
 
 <style scoped>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from "@/services/auth-header";
 
 const API_URL = 'http://localhost:8080/api/i113/';
 
@@ -13,7 +14,7 @@ class BornlistService {
                 date: unit.date,
                 notify: unit.notify,
                 description: unit.description,
-            })
+            }, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -21,7 +22,7 @@ class BornlistService {
 
     async getUnits(){
         try {
-            const responce = await axios.get(API_URL + 'bornlist/all',);
+            const responce = await axios.get(API_URL + 'bornlist/all', { headers: authHeader() });
             return responce.data;
         } catch (e) {
             alert('Server Access Exception')
@@ -38,7 +39,7 @@ class BornlistService {
                 date: unit.date,
                 notify: unit.notify,
                 description: unit.description,
-            })
+            }, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -46,7 +47,7 @@ class BornlistService {
 
     async removeUnit(id){
         try {
-            return axios.delete(API_URL + 'bornlist/' + id)
+            return axios.delete(API_URL + 'bornlist/' + id, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -54,7 +55,7 @@ class BornlistService {
 
     async loadJson() {
         try {
-            await axios.get(API_URL + 'data/loadJson');
+            await axios.get(API_URL + 'data/loadJson', { headers: authHeader() });
         } catch (e) {
             alert('Server Access Exception')
         }

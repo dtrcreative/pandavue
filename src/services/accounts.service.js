@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from './auth-header';
 
 const API_URL = 'http://localhost:8080/api/panda/';
 
@@ -15,7 +16,7 @@ class AccountService {
                 link: account.link,
                 type: account.type,
                 description: account.description
-            })
+            }, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -33,7 +34,7 @@ class AccountService {
                 link: updatedAccount.link,
                 type: updatedAccount.type,
                 description: updatedAccount.description,
-            })
+            }, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -41,7 +42,7 @@ class AccountService {
 
     async removeAccount(id){
         try {
-            return axios.delete(API_URL + 'accounts/' + id)
+            return axios.delete(API_URL + 'accounts/' + id, { headers: authHeader() })
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -49,7 +50,7 @@ class AccountService {
 
     async getAccounts() {
         try {
-            const response = await axios.get(API_URL + 'accounts/all',);
+            const response = await axios.get(API_URL + 'accounts/all', { headers: authHeader() });
             return response.data;
         } catch (e) {
             alert('Server Access Exception')
@@ -58,7 +59,7 @@ class AccountService {
 
     async getOwners() {
         try {
-            const responce = await axios.get(API_URL + 'data/types',);
+            const responce = await axios.get(API_URL + 'data/types', { headers: authHeader() });
             return responce.data;
         } catch (e) {
             alert('Server Access Exception')
@@ -67,7 +68,7 @@ class AccountService {
 
     async loadJson() {
         try {
-            await axios.get(API_URL + 'data/loadJson');
+            await axios.get(API_URL + 'data/loadJson', { headers: authHeader() });
         } catch (e) {
             alert('Server Access Exception')
         }
@@ -76,8 +77,9 @@ class AccountService {
     async getPassword(name) {
         try {
             return await axios.get(API_URL + 'data/passgen', {
+                headers: authHeader(),
                 params: {
-                    name: name
+                    name: name,
                 }
             });
         } catch (e) {
@@ -87,7 +89,7 @@ class AccountService {
 
     async generatePassword(){
         try {
-            return  await axios.get('http://localhost:8080/api/panda/data/passgen');
+            return  await axios.get('http://localhost:8080/api/panda/data/passgen', { headers: authHeader() });
         } catch (e) {
             alert('Server Access Exception')
         }

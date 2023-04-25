@@ -1,16 +1,16 @@
 <template>
   <div class="auth">
-    <auth-vue></auth-vue>
+    <login-form></login-form>
   </div>
 </template>
 
 <script>
-import AuthVue from "@/components/AuthVue";
+import LoginForm from "@/components/auth/LogInForm";
 
 export default {
   name: "LoginPage",
   components: {
-    AuthVue
+    LoginForm
   }
 
 }

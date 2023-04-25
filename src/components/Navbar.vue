@@ -24,14 +24,14 @@
     </div>
     <panda-dialog
         v-model:show="logInDialogVisible">
-      <auth-vue
+      <log-in-form
           @hide="showLoginDialog"
-      ></auth-vue>
+      ></log-in-form>
     </panda-dialog>
 
     <div v-if="currentUser" class="navbar-nav ml-auto">
       <li class="nav-item">
-        <router-link to="/profile" class="nav-link">
+        <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
           <font-awesome-icon icon="user" />
           {{ currentUser.username }}
         </router-link>
@@ -47,11 +47,11 @@
 
 <script>
 import PandaDialog from "@/components/UI/PDialog";
-import AuthVue from "@/components/AuthVue";
+import LoginForm from "@/components/auth/LogInForm";
 
 export default {
   name: "MainVue",
-  components: {AuthVue, PandaDialog},
+  components: {LogInForm: LoginForm, PandaDialog},
 
   data() {
     return {
@@ -60,18 +60,16 @@ export default {
   },
   computed: {
     currentUser() {
-      console.log(this.$store.state.auth.user)
       return this.$store.state.auth.user;
     },
   },
   methods: {
     showLoginDialog() {
-      console.log("hidedede")
       this.logInDialogVisible = !this.logInDialogVisible;
     },
     logOut() {
       this.$store.dispatch('auth/logout');
-      // this.$router.push('/login');
+      this.$router.push('/');
     }
   }
 }
