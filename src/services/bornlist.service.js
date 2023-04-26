@@ -17,7 +17,7 @@ class BornlistService {
                 description: unit.description,
             }, { headers: authHeader() })
         } catch (e) {
-            alert('Server Access Exception')
+            // alert('Server Access Exception')
         }
     }
 
@@ -26,7 +26,7 @@ class BornlistService {
             const responce = await axios.get(API_URL + 'bornlist/all', { headers: authHeader() });
             return responce.data;
         } catch (e) {
-            alert('Server Access Exception')
+            // alert('Server Access Exception')
         }
     }
 
@@ -43,7 +43,7 @@ class BornlistService {
                 description: unit.description,
             }, { headers: authHeader() })
         } catch (e) {
-            alert('Server Access Exception')
+            // alert('Server Access Exception')
         }
     }
 
@@ -51,7 +51,7 @@ class BornlistService {
         try {
             return axios.delete(API_URL + 'bornlist/' + id, { headers: authHeader() })
         } catch (e) {
-            alert('Server Access Exception')
+            // alert('Server Access Exception')
         }
     }
 
@@ -59,7 +59,7 @@ class BornlistService {
         try {
             await axios.get(API_URL + 'data/loadJson', { headers: authHeader() });
         } catch (e) {
-            alert('Server Access Exception')
+            // alert('Server Access Exception')
         }
     }
 
