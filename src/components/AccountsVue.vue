@@ -54,6 +54,10 @@
       <div v-else> Loading...</div>
     </div>
     <p-info class="info">{{ infoText }}</p-info>
+    <p-upload-file
+        v-model="this.file"
+        @update="setFile"
+    ></p-upload-file>
   </div>
 </template>
 units
@@ -67,6 +71,7 @@ import AccountList from "@/components/accounts/AccountList";
 import PandaInput from "@/components/UI/PInput";
 import PInfo from "@/components/UI/PInfo";
 import AccountsService from "@/services/accounts.service";
+import PUploadFile from "@/components/UI/PUploadFile";
 
 export default {
   components: {
@@ -77,7 +82,8 @@ export default {
     PSelect,
     PDialog,
     PButton,
-    AccountUpdateForm
+    AccountUpdateForm,
+    PUploadFile
   },
   data() {
     return {
@@ -94,6 +100,7 @@ export default {
       page: 1,
       limit: 10,
       totalPages: 0,
+      file:'',
     }
   },
   methods: {
@@ -139,7 +146,13 @@ export default {
       );
     },
     async loadJson() {
-      AccountsService.loadJson();
+      if(this.file!==''){
+        AccountsService.loadJson(this.file);
+      }else{
+        this.setInfo(
+            "No Account JSONFile choisen"
+        )
+      }
     },
     updateDialog(account) {
       this.updatedAccount = account;
@@ -194,6 +207,9 @@ export default {
 
     setInfo(text) {
       this.infoText = text;
+    },
+    setFile(file){
+      this.file = file;
     }
   },
   mounted() {

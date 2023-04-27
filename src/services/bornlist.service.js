@@ -55,9 +55,10 @@ class BornlistService {
         }
     }
 
-    async loadJson() {
+    async loadJson(file) {
         try {
-            await axios.get(API_URL + 'data/loadJson', { headers: authHeader() });
+            console.log(file)
+            // await axios.get(API_URL + 'data/loadJson', { headers: authHeader() });
         } catch (e) {
             // alert('Server Access Exception')
         }

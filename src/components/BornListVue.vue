@@ -25,6 +25,7 @@
         />
         <panda-button @click="getData">Request</panda-button>
         <panda-button @click="loadJson">loadJson</panda-button>
+
       </div>
     </div>
 
@@ -39,6 +40,10 @@
 
     </div>
     <p-info class="info">{{ infoText }}</p-info>
+    <p-upload-file
+        v-model="this.file"
+        @update="setFile"
+    ></p-upload-file>
   </div>
 </template>
 
@@ -51,6 +56,7 @@ import PInfo from "@/components/UI/PInfo";
 import BornlistCreateForm from "@/components/bornlists/BornlistCreateForm";
 import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 import BornlistService from "@/services/bornlist.service";
+import PUploadFile from "@/components/UI/PUploadFile";
 
 export default {
   name: "BornListVue",
@@ -61,7 +67,8 @@ export default {
     PInfo,
     PandaInput,
     PandaButton,
-    BornListTable
+    BornListTable,
+    PUploadFile
   },
   data() {
     return {
@@ -73,6 +80,7 @@ export default {
       infoText: ' Info ',
       updatedUnit: '',
       isNotify: '',
+      file:'',
     }
   },
   methods: {
@@ -121,7 +129,13 @@ export default {
       }
     },
     async loadJson() {
-      BornlistService.loadJson();
+      if(this.file.length>0){
+        BornlistService.loadJson(this.file);
+      }else{
+        this.setInfo(
+            "No BornList JSONFile choisen"
+        )
+      }
     },
     updateDialog(unit) {
       this.updatedUnit = unit;
@@ -138,6 +152,9 @@ export default {
     },
     setInfo(text) {
       this.infoText = text;
+    },
+    setFile(file){
+      this.file = file;
     },
     checkData(unit) {
       if (unit.firstName.length < 1) {
