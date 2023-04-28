@@ -70,11 +70,10 @@ class AccountService {
 
     async loadJson(file) {
         try {
-            console.log(file.valueOf());
-            //TODO
-            // await axios.post(API_URL + 'data/loadJson',  {body:file},{ headers: authHeader() });
+            var formData = new FormData();
+            formData.append("file", file);
+            await axios.post(API_URL + 'data/loadJson',  formData,{ headers: authHeader() });
         } catch (e) {
-            console.log(e)
             alert('Server Access Exception')
         }
     }
