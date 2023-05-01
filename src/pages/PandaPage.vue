@@ -3,7 +3,16 @@
     <accounts-vue></accounts-vue>
     <BornListVue></BornListVue>
   </div>
-  <div v-else style="text-align: center"><strong>Authorization required</strong></div>
+  <div v-else style="text-align: center">
+    <div>
+      <strong>Authorization required</strong>
+    </div>
+    <div>
+      <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
+        <img src="../assets/panda-angry.png">
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -1,17 +1,22 @@
 <template>
+  <div style="text-align: center">
+          <strong> WelCome to Panda!</strong>
+  </div>
+  <div style="text-align: center">
+    <panda-button @click="$router.push(`/panda`)">Show Tables</panda-button>
+  </div>
   <div class="welcome">
     <div>
-      WelCome to Panda!
+      <img src="../assets/panda-cute-hello.png">
     </div>
-    <panda-button @click="$router.push(`/panda`)">Show Tables</panda-button>
   </div>
 </template>
 
 <script>
-import PandaButton from "@/components/UI/PButton";
+// import PandaButton from "@/components/UI/PButton";
 
 export default {
-  components: {PandaButton},
+  // components: {PandaButton},
 
 }
 
@@ -21,6 +26,9 @@ export default {
 
 .welcome {
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 </style>
