@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="/" class="navbar-brand">i113_Panda</a>
+    <div>
+      <img class = "hello-image" src="../assets/panda-hello-cute-contur.png">
+    </div>
     <div class="navbar-nav mr-auto">
       <li class="nav-item">
         <router-link to="/" class="nav-link">
@@ -93,6 +95,10 @@ export default {
 
 }
 <style scoped>
+
+.hello-image{
+  max-height: 40px;
+}
 
 .navbar {
   height: 50px;
