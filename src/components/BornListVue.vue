@@ -57,6 +57,7 @@ import BornlistCreateForm from "@/components/bornlists/BornlistCreateForm";
 import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 import BornlistService from "@/services/bornlist.service";
 import PUploadFile from "@/components/UI/PUploadFile";
+import AccountsService from "@/services/accounts.service";
 
 export default {
   name: "BornListVue",
@@ -135,7 +136,7 @@ export default {
         BornlistService.loadJson(this.file);
       }else{
         this.setInfo(
-            "No BornList JSONFile choisen"
+            "No BornList JSONFile selected"
         )
       }
     },
@@ -159,6 +160,10 @@ export default {
       this.file = file;
     },
     checkData(unit) {
+      if(AccountsService.getUser() === null){
+        alert("Authorization required");
+        return false;
+      }
       if (unit.firstName.length < 1) {
         alert("Fill name please");
         return false;

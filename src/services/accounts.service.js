@@ -19,7 +19,7 @@ class AccountService {
                 description: account.description
             }, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -38,7 +38,7 @@ class AccountService {
                 description: updatedAccount.description,
             }, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -46,7 +46,7 @@ class AccountService {
         try {
             return axios.delete(API_URL + 'accounts/' + id, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -55,7 +55,7 @@ class AccountService {
             const response = await axios.get(API_URL + 'accounts/all', { headers: authHeader() });
             return response.data;
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -64,7 +64,7 @@ class AccountService {
             const responce = await axios.get(API_URL + 'data/types', { headers: authHeader() });
             return responce.data;
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -74,7 +74,7 @@ class AccountService {
             formData.append("file", file);
             await axios.post(API_URL + 'data/loadJson',  formData,{ headers: authHeader() });
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -87,7 +87,7 @@ class AccountService {
                 }
             });
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -95,7 +95,19 @@ class AccountService {
         try {
             return  await axios.get('http://localhost:8080/api/panda/data/passgen', { headers: authHeader() });
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
+        }
+    }
+
+    getUser(){
+        return JSON.parse(localStorage.getItem('user'));
+    }
+
+    errorHandler(error){
+        if(error.response.status === 500){
+            console.log(error.message)
+        }else{
+            console.log(error.response.data)
         }
     }
 }

@@ -17,7 +17,7 @@ class BornlistService {
                 description: unit.description,
             }, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -26,7 +26,7 @@ class BornlistService {
             const responce = await axios.get(API_URL + 'bornlist/all', { headers: authHeader() });
             return responce.data;
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -43,7 +43,7 @@ class BornlistService {
                 description: unit.description,
             }, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -51,7 +51,7 @@ class BornlistService {
         try {
             return axios.delete(API_URL + 'bornlist/' + id, { headers: authHeader() })
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
         }
     }
 
@@ -61,7 +61,15 @@ class BornlistService {
             formData.append("file", file);
             await axios.post(API_URL + 'data/loadJson',  formData,{ headers: authHeader() });
         } catch (e) {
-            console.log(e.response.data)
+            this.errorHandler(e)
+        }
+    }
+
+    errorHandler(error){
+        if(error.response.status === 500){
+            console.log(error.message)
+        }else{
+            console.log(error.response.data)
         }
     }
 

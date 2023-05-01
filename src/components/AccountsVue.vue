@@ -150,7 +150,7 @@ export default {
         AccountsService.loadJson(this.file);
       }else{
         this.setInfo(
-            "No Account JSONFile choisen"
+            "No Account JSONFile selected"
         )
       }
     },
@@ -167,6 +167,10 @@ export default {
       this.dialogVisible = false;
     },
     checkData(inputAccount) {
+      if(AccountsService.getUser() === null){
+        alert("Authorization required");
+        return false;
+      }
       if (inputAccount.name.length < 1) {
         alert("Fill name please");
         return false;
