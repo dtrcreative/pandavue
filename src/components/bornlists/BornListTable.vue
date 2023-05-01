@@ -61,7 +61,7 @@ export default {
 .scroll{
   overflow-y: scroll;
   scroll-behavior: smooth;
-  max-height: 700px;
+  max-height: 600px;
 }
 
 .wrapper {

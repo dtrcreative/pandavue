@@ -84,16 +84,17 @@ export default {
         this.$store.dispatch("auth/login", user).then(
             () => {
               this.closeLoginDialog();
-              this.$router.push("/");
+              this.$router.push("/panda");
             },
             (error) => {
               this.loading = false;
-              this.message =
-                  (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                  error.message ||
-                  error.toString();
+              if(error.response.status === 403){
+                this.message = "Wrong login or password"
+              }else{
+                this.message =
+                    error.message ||
+                    error.toString();
+              }
             }
         );
       },
