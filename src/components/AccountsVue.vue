@@ -194,13 +194,17 @@ export default {
       this.isPostsLoading = true;
       AccountsService.getAccounts().then(
           (response) => {
-            this.accounts = response
-          }
+            if(response !== undefined){
+              this.accounts = response
+            }
+          },
       );
       AccountsService.getOwners().then(
           (response) => {
-            this.ownersOptions = response
-          }
+            if(response !== undefined){
+              this.ownersOptions = response
+            }
+          },
       )
       this.isPostsLoading = false;
     },

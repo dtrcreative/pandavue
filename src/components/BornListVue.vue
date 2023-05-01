@@ -85,13 +85,15 @@ export default {
   },
   methods: {
     async getData() {
+      this.isPostsLoading = true;
       BornlistService.getUnits().then(
           (response) => {
-            this.isPostsLoading = true;
-            this.units = response;
-            this.isPostsLoading = false;
+            if(response !== undefined){
+              this.units = response;
+            }
           }
       );
+      this.isPostsLoading = false;
     },
     removeUnit(unit) {
       BornlistService.removeUnit(unit.id).then(
