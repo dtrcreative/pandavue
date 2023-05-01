@@ -8,7 +8,7 @@
       <strong>Authorization required</strong>
     </div>
     <div>
-      <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
+      <router-link to="/" class="nav-link">
         <img src="../assets/panda-angry.png">
       </router-link>
     </div>

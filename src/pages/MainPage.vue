@@ -1,14 +1,8 @@
 <template>
-  <div style="text-align: center">
-          <strong> WelCome to Panda!</strong>
-  </div>
-  <div style="text-align: center">
-    <panda-button @click="$router.push(`/panda`)">Show Tables</panda-button>
-  </div>
   <div class="welcome">
-    <div>
+    <router-link to="/panda" class="nav-link">
       <img src="../assets/panda-cute-hello.png">
-    </div>
+    </router-link>
   </div>
 </template>
 
