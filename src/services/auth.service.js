@@ -22,13 +22,19 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + 'signup', {
+        axios.post(API_URL + 'signup', {
             username: user.username,
             email: user.email,
             password: user.password
+        }).then((response) => {
+            return response;
         });
     }
-
+    async telegramRegister(username) {
+        await axios.post('http://localhost:8080/api/i113/telegrambot/register', {
+            regUser: username,
+        })
+    }
 }
 
 export default new AuthService();

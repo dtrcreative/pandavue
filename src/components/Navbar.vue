@@ -42,6 +42,12 @@
 
     <div v-if="currentUser" class="navbar-nav ml-auto" style="margin-left: auto">
       <li class="nav-item">
+        <a class="nav-link" @click.prevent="registerUserToTelBot">
+          <font-awesome-icon icon="sign-out-alt"/>
+          RegisterTelegram
+        </a>
+      </li>
+      <li class="nav-item">
         <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
           <font-awesome-icon icon="user"/>
           {{ currentUser.username }}
@@ -61,6 +67,7 @@
 import PandaDialog from "@/components/UI/PDialog";
 import LoginForm from "@/components/auth/LogInForm";
 import RegisterForm from "@/components/auth/RegisterForm";
+import authService from "@/services/auth.service";
 
 export default {
   name: "MainVue",
@@ -87,6 +94,10 @@ export default {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/');
+    },
+    registerUserToTelBot(){
+      const user = this.$store.state.auth.user;
+      authService.telegramRegister(user.username)
     }
   }
 }
