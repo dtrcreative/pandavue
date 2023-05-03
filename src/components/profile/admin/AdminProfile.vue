@@ -1,10 +1,12 @@
 <template>
-  <div><p>AdminProfile</p></div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "AdminProfile"
+  name: "AdminProfile",
+  components: {}
+
 }
 </script>
 
