@@ -72,6 +72,7 @@ import PandaInput from "@/components/UI/PInput";
 import PInfo from "@/components/UI/PInfo";
 import AccountsService from "@/services/accounts.service";
 import PUploadFile from "@/components/UI/PUploadFile";
+import UtilService from "@/services/util-service";
 
 export default {
   components: {
@@ -140,35 +141,10 @@ export default {
     async getPassword(account) {
       AccountsService.getPassword(account.name).then(
           (response) => {
-            this.copyToClipboard(response.data)
+            UtilService.copyToClipboard(response.data)
             this.setInfo(response.data)
           }
       );
-    },
-
-    async copyToClipboard(data) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(data);
-      } else {
-        // Use the 'out of viewport hidden text area' trick
-        const textArea = document.createElement("textarea");
-        textArea.value = data;
-
-        // Move textarea out of the viewport so it's not visible
-        textArea.style.position = "absolute";
-        textArea.style.left = "-999999px";
-
-        document.body.prepend(textArea);
-        textArea.select();
-
-        try {
-          document.execCommand('copy');
-        } catch (error) {
-          console.error(error);
-        } finally {
-          textArea.remove();
-        }
-      }
     },
 
     async loadJson() {

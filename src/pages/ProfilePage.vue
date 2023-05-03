@@ -56,5 +56,15 @@ export default {
 .image {
   max-height: 60%;
 }
+@media screen and (max-width: 1370px) {
+  .image {
+    max-height: 45%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .image {
+    max-height: 0%;
+  }
+}
 
 </style>

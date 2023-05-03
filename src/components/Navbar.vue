@@ -44,7 +44,7 @@
       <li class="nav-item">
         <a class="nav-link" @click.prevent="registerUserToTelBot">
           <font-awesome-icon icon="sign-out-alt"/>
-          RegisterTelegram
+          Telegram
         </a>
       </li>
       <li class="nav-item">

@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import UtilService from "@/services/util-service";
+
 export default {
   name: "PCell",
   data() {
@@ -33,7 +35,7 @@ export default {
       this.isHovering=false
     },
     click: function(){
-      navigator.clipboard.writeText(this.value);
+      UtilService.copyToClipboard(this.value)
     }
   }
 }
