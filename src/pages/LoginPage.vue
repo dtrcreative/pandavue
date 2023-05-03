@@ -1,3 +1,4 @@
+<!--INACTIVE-->
 <template>
   <div class="auth">
     <login-form></login-form>

@@ -2,6 +2,7 @@ import MainPage from "@/pages/MainPage";
 import {createRouter, createWebHistory} from "vue-router";
 import LoginPage from "@/pages/LoginPage";
 import PandaPage from "@/pages/PandaPage";
+import ProfilePage from "@/pages/ProfilePage";
 
 
 const routes = [
@@ -16,6 +17,10 @@ const routes = [
     {
         path: '/login',
         component: LoginPage
+    },
+    {
+        path: '/profile',
+        component: ProfilePage
     },
 ]
 

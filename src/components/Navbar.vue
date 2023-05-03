@@ -48,7 +48,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <router-link to="/" class="nav-link"> <!-- TODO: user profile-->
+        <router-link to="/profile" class="nav-link"> <!-- TODO: user profile-->
           <font-awesome-icon icon="user"/>
           {{ currentUser.username }}
         </router-link>

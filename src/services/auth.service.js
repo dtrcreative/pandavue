@@ -22,14 +22,13 @@ class AuthService {
     }
 
     register(user) {
-        axios.post(API_URL + 'auth/signup', {
+        return axios.post(API_URL + 'auth/signup', {
             username: user.username,
             email: user.email,
             password: user.password
-        }).then((response) => {
-            return response;
-        });
+        })
     }
+
     async telegramRegister(username) {
         await axios.post('i113/telegrambot/register', {
             regUser: username,

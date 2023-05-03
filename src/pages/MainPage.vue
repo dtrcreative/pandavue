@@ -7,10 +7,8 @@
 </template>
 
 <script>
-// import PandaButton from "@/components/UI/PButton";
 
 export default {
-  // components: {PandaButton},
 
 }
 
