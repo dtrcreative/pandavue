@@ -93,7 +93,7 @@ class AccountService {
 
     async generatePassword(){
         try {
-            return  await axios.get('http://localhost:8080/api/panda/data/passgen', { headers: authHeader() });
+            return  await axios.get('http://192.168.100.4:8080/api/panda/data/passgen', { headers: authHeader() });
         } catch (e) {
             this.errorHandler(e)
         }

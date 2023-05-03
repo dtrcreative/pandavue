@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.100.4:8080/api/auth/';
+const API_URL = 'http://192.168.100.4:8080/api/';
 
 class AuthService {
     login(user) {
         return axios
-            .post(API_URL + 'login', {
+            .post(API_URL + 'auth/login', {
                 username: user.username,
                 password: user.password
             })
@@ -22,7 +22,7 @@ class AuthService {
     }
 
     register(user) {
-        axios.post(API_URL + 'signup', {
+        axios.post(API_URL + 'auth/signup', {
             username: user.username,
             email: user.email,
             password: user.password
@@ -31,7 +31,7 @@ class AuthService {
         });
     }
     async telegramRegister(username) {
-        await axios.post('http://localhost:8080/api/i113/telegrambot/register', {
+        await axios.post('i113/telegrambot/register', {
             regUser: username,
         })
     }

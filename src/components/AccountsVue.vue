@@ -209,14 +209,14 @@ export default {
         alert("Select accountType please");
         return false;
       }
-      if (this.isCreate && (this.accounts.filter((account) => account.name.match(inputAccount.name)).length > 0)) {
-        alert("NameExist")
-        return false;
-      }
-      if (this.accounts.filter((account) => account.password.match(inputAccount.password)).length > 0) {
-        alert("PassExist")
-        return false;
-      }
+      // if (this.isCreate && (this.accounts.filter((account) => account.name.match(inputAccount.name)).length > 0)) {
+      //   alert("NameExist")
+      //   return false;
+      // }
+      // if (this.accounts.filter((account) => account.password.match(inputAccount.password)).length > 0) {
+      //   alert("PassExist")
+      //   return false;
+      // }
       return true;
     },
 
