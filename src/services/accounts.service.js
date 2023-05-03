@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/panda/';
+const API_URL = 'http://192.168.100.4:8080/api/panda/';
 
 class AccountService {
 

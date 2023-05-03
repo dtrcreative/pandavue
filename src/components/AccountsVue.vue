@@ -100,7 +100,7 @@ export default {
       page: 1,
       limit: 10,
       totalPages: 0,
-      file:'',
+      file: '',
     }
   },
   methods: {
@@ -108,7 +108,7 @@ export default {
       if (this.checkData(account)) {
         AccountsService.createAccount(account).then(
             (response) => {
-              if(response.status===200){
+              if (response.status === 200) {
                 this.accounts.push(response.data);
                 this.setInfo("Create successfully");
               }
@@ -117,12 +117,12 @@ export default {
     },
     removeAccount(account) {
       AccountsService.removeAccount(account.id).then(
-      (response) => {
-        if(response.status===200){
-          this.accounts = this.accounts.filter(p => p.id !== account.id)
-          this.setInfo("Remove successfully");
-        }
-      });
+          (response) => {
+            if (response.status === 200) {
+              this.accounts = this.accounts.filter(p => p.id !== account.id)
+              this.setInfo("Remove successfully");
+            }
+          });
     },
     async updateAccount(updatedAccount) {
       if (this.checkData(updatedAccount)) {
@@ -140,15 +140,41 @@ export default {
     async getPassword(account) {
       AccountsService.getPassword(account.name).then(
           (response) => {
-            navigator.clipboard.writeText(response.data);
+            this.copyToClipboard(response.data)
             this.setInfo(response.data)
           }
       );
     },
+
+    async copyToClipboard(data) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(data);
+      } else {
+        // Use the 'out of viewport hidden text area' trick
+        const textArea = document.createElement("textarea");
+        textArea.value = data;
+
+        // Move textarea out of the viewport so it's not visible
+        textArea.style.position = "absolute";
+        textArea.style.left = "-999999px";
+
+        document.body.prepend(textArea);
+        textArea.select();
+
+        try {
+          document.execCommand('copy');
+        } catch (error) {
+          console.error(error);
+        } finally {
+          textArea.remove();
+        }
+      }
+    },
+
     async loadJson() {
-      if(this.file!==''){
+      if (this.file !== '') {
         AccountsService.loadJson(this.file);
-      }else{
+      } else {
         this.setInfo(
             "No Account JSONFile selected"
         )
@@ -167,7 +193,7 @@ export default {
       this.dialogVisible = false;
     },
     checkData(inputAccount) {
-      if(AccountsService.getUser() === null){
+      if (AccountsService.getUser() === null) {
         alert("Authorization required");
         return false;
       }
@@ -198,14 +224,14 @@ export default {
       this.isPostsLoading = true;
       AccountsService.getAccounts().then(
           (response) => {
-            if(response !== undefined){
+            if (response !== undefined) {
               this.accounts = response
             }
           },
       );
       AccountsService.getOwners().then(
           (response) => {
-            if(response !== undefined){
+            if (response !== undefined) {
               this.ownersOptions = response
             }
           },
@@ -216,7 +242,7 @@ export default {
     setInfo(text) {
       this.infoText = text;
     },
-    setFile(file){
+    setFile(file) {
       this.file = file;
     }
   },
