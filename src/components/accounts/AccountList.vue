@@ -67,6 +67,14 @@ export default {
   max-height: 600px;
 }
 
+@media screen and (max-width: 1370px) {
+  .scroll{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 450px;
+  }
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 4fr 4fr 4fr 50px 50px 50px;
