@@ -1,4 +1,5 @@
 <template>
+  <sliding-panel-left></sliding-panel-left>
   <div class="welcome">
     <router-link to="/panda" class="nav-link">
       <img src="../assets/panda-cute-hello.png">
@@ -8,8 +9,9 @@
 
 <script>
 
+import SlidingPanelLeft from "@/components/slides/SlidingPanelLeft";
 export default {
-
+  components: {SlidingPanelLeft}
 }
 
 </script>
