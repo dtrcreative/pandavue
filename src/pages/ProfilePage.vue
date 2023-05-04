@@ -4,12 +4,20 @@
       <img class="image" src="../assets/profile_panda_left.png">
     </div>
 
-    <div v-if="isAuthorized" class="wrapper">
+    <div v-if="isAuthorized">
       <div v-if="role==='USER'">
-        <user-profile></user-profile>
+        <user-profile
+            :username="this.user.username"
+        >
+
+        </user-profile>
       </div>
       <div v-if="role==='ADMIN'">
-        <admin-profile></admin-profile>
+        <admin-profile
+            :username="this.user.username"
+        >
+
+        </admin-profile>
       </div>
     </div>
 
@@ -31,12 +39,14 @@ export default {
     return {
       isAuthorized: false,
       role: "USER",
+      user: ''
     }
   },
   methods: {
     checkAuthorization() {
       const user = JSON.parse(localStorage.getItem('user'))
       this.isAuthorized = user !== null;
+      this.user = user;
       this.role = user.user_role;
     }
   },
@@ -56,11 +66,13 @@ export default {
 .image {
   max-height: 60%;
 }
+
 @media screen and (max-width: 1370px) {
   .image {
     max-height: 45%;
   }
 }
+
 @media screen and (max-width: 800px) {
   .image {
     max-height: 0%;
