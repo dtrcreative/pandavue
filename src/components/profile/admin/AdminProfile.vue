@@ -1,15 +1,26 @@
 <template>
-  <div></div>
+  <div class="wrapper">
+    <div> <strong><p>{{username}}</p></strong></div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "AdminProfile",
-  components: {}
+  components: {},
+  props:{
+    username: {
+      type: String
+    }
+  }
 
 }
 </script>
 
 <style scoped>
-
+.wrapper {
+  display: grid;
+  align-content: center;
+  grid-template-columns: 1fr;
+}
 </style>
