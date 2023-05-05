@@ -4,7 +4,6 @@ import LoginPage from "@/pages/LoginPage";
 import PandaPage from "@/pages/PandaPage";
 import ProfilePage from "@/pages/ProfilePage";
 
-
 const routes = [
     {
         path: '/',

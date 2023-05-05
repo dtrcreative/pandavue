@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-<!--    <div>-->
-<!--      <img class="image" src="../assets/profile_panda_left.png">-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--      <img class="image" src="../assets/profile_panda_left.png">-->
+    <!--    </div>-->
 
     <div class="left-profile-bar">
-      <div class="profile-img">
+      <div>
         <img
             id="profile-img"
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -14,40 +14,53 @@
 
       </div>
       <div class="user-name-label">
-        <strong><p><slot>
-          {{this.user.username}}
-        </slot></p></strong>
+        <strong>
+          <p>
+            <slot>
+              {{ this.user.username }}
+            </slot>
+          </p>
+        </strong>
       </div>
-    </div>
 
-    <div v-if="isAuthorized">
-      <div v-if="role==='USER'">
-        <user-profile
-            :username="this.user.username"
-        >
-        </user-profile>
-      </div>
-      <div v-if="role==='ADMIN'">
-        <admin-profile
-            :username="this.user.username"
-        >
-        </admin-profile>
-      </div>
     </div>
+    <router-link to="/panda" class="nav-link">
+      <panda-button>test</panda-button>
+    </router-link>
 
-<!--    <div>-->
-<!--      <img class="image" style="margin-left: auto; float: right;" src="../assets/profile_panda_right.png">-->
-<!--    </div>-->
+    <!--    <div v-if="isAuthorized">-->
+    <!--      <div v-if="role==='USER'">-->
+    <!--        <user-profile-->
+    <!--            :username="this.user.username"-->
+    <!--        >-->
+    <!--        </user-profile>-->
+    <!--      </div>-->
+    <!--      <div v-if="role==='ADMIN'">-->
+    <!--        <admin-profile-->
+    <!--            :username="this.user.username"-->
+    <!--        >-->
+    <!--        </admin-profile>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div>-->
+    <!--      <img class="image" style="margin-left: auto; float: right;" src="../assets/profile_panda_right.png">-->
+    <!--    </div>-->
   </div>
 </template>
 
 <script>
-import UserProfile from "@/components/profile/user/UserProfile";
-import AdminProfile from "@/components/profile/admin/AdminProfile";
+// import UserProfile from "@/components/profile/user/UserProfile";
+// import AdminProfile from "@/components/profile/admin/AdminProfile";
+// import AccountsVue from "@/components/AccountsVue";
+import PandaButton from "@/components/UI/PButton";
 
 export default {
   name: "ProfilePage",
-  components: { AdminProfile, UserProfile},
+  components: {
+    PandaButton,
+    // AccountsVue
+  },
 
   data() {
     return {
@@ -72,8 +85,18 @@ export default {
 
 <style scoped>
 
-.user-name-label{
-  margin: 10px auto 10px;
+
+.left-profile-bar {
+  background: #39464e;
+  height: 800px;
+  width: 250px;
+  padding: 0;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.user-name-label {
+  margin: 0 auto 10px;
   width: 200px;
   max-height: 40px;
   padding: 5px 5px;
@@ -83,51 +106,32 @@ export default {
   background-color: rgba(100, 224, 184, 0.72);
 }
 
-.left-profile-bar{
+.profile-img-card {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr;
-  background: #39464e;
-  height: 800px;
-  width: 250px;
-  padding: 0;
-  border-radius: 0 5px 5px 0;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-}
-
-.profile-img-card{
   width: 96px;
   height: 96px;
-
-  /*display: block;*/
-  /*-moz-border-radius: 50%;*/
-  /*-webkit-border-radius: 50%;*/
-  border-radius: 50%;
-}
-
-.profile-img{
   margin: 10px auto 10px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 250px 1fr 1fr;
+  grid-template-columns: 250px 1fr;
 }
 
-.image {
-  max-height: 60%;
-}
+/*@media screen and (max-width: 1370px) {*/
+/*  .left-profile-bar {*/
+/*    max-width: 45%;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 1370px) {
-  .image {
-    max-height: 45%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .image {
-    max-height: 0%;
-  }
-}
+/*@media screen and (max-width: 800px) {*/
+/*  .left-profile-bar {*/
+/*    max-width: 0%;*/
+/*  }*/
+/*}*/
 
 </style>
