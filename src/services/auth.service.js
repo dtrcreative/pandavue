@@ -30,7 +30,7 @@ class AuthService {
     }
 
     async telegramRegister(username) {
-        await axios.post('i113/telegrambot/register', {
+        await axios.post(API_URL + 'i113/telegrambot/register', {
             regUser: username,
         })
     }
