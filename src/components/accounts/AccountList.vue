@@ -64,7 +64,7 @@ export default {
 .scroll{
   overflow-y: scroll;
   scroll-behavior: smooth;
-  max-height: 600px;
+  max-height: 800px;
 }
 
 @media screen and (max-width: 1370px) {
@@ -92,7 +92,7 @@ export default {
 .account-list-enter-from,
 .account-list-leave-to {
   opacity: 0;
-  transform: translateX(-130px);
+  transform: translateX(130px);
 }
 .account-list-move {
   transition: transform 0.4s ease;

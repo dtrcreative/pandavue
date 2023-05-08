@@ -17,19 +17,24 @@
         </p>
       </strong>
     </div>
-      <panda-button @click="$router.push('/profile/panda')">Panda</panda-button>
-      <panda-button @click="$router.push('/profile/bornlist')">BornList</panda-button>
+    <div class="nav-button-wrapper">
+      <img class = "panda-image" src="../assets/panda-top-cute.png">
+      <p-nav-button @click="$router.push('/profile/panda')">Panda</p-nav-button>
+      <p-nav-button @click="$router.push('/profile/bornlist')">BornList</p-nav-button>
+      <img class = "panda-image" src="../assets/panda-bottom-cute.png">
+    </div>
+
   </div>
 
 </template>
 
 <script>
 import AuthService from "@/services/auth.service";
-import PandaButton from "@/components/UI/PButton";
+import PNavButton from "@/components/UI/PNavButton";
 
 export default {
   name: "ProfileVue",
-  components: {PandaButton},
+  components: {PNavButton},
   data() {
     return {
       isAuthorized: false,
@@ -53,9 +58,20 @@ export default {
 </script>
 
 <style scoped>
+
+.panda-image{
+  width: 100%;
+  /*max-height: 80px;*/
+}
+
+.nav-button-wrapper{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 .left-profile-bar {
   background: #39464e;
-  height: 800px;
+  height: 900px;
   width: 250px;
   padding: 0;
   border-radius: 0 5px 5px 0;

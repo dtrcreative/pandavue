@@ -61,7 +61,7 @@ export default {
 .scroll{
   overflow-y: scroll;
   scroll-behavior: smooth;
-  max-height: 600px;
+  max-height: 800px;
 }
 @media screen and (max-width: 1370px) {
   .scroll{

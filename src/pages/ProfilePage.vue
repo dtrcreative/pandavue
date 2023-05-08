@@ -2,7 +2,10 @@
 
   <div class="wrapper" v-if="isAuthorized">
     <profile-vue></profile-vue>
-    <router-view></router-view>
+    <div class="content-border">
+      <router-view></router-view>
+    </div>
+
   </div>
   <div v-else style="text-align: center">
     <div>
@@ -44,6 +47,12 @@ export default {
 </script>
 
 <style scoped>
+
+.content-border{
+  margin: 5px;
+  border-radius: 15px;
+  background: #ffffff;
+}
 
 .wrapper {
   display: grid;
