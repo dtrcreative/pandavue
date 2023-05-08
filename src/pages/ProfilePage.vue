@@ -1,8 +1,18 @@
 <template>
 
-  <div class="wrapper">
+  <div class="wrapper" v-if="isAuthorized">
     <profile-vue></profile-vue>
     <router-view></router-view>
+  </div>
+  <div v-else style="text-align: center">
+    <div>
+      <strong>Authorization required</strong>
+    </div>
+    <div>
+      <router-link to="/" class="nav-link">
+        <img src="../assets/panda-angry.png">
+      </router-link>
+    </div>
   </div>
 
 </template>
@@ -20,16 +30,11 @@ export default {
   data() {
     return {
       isAuthorized: false,
-      role: "USER",
-      user: ''
     }
   },
   methods: {
-    checkAuthorization() {
-      const user = JSON.parse(localStorage.getItem('user'))
-      this.isAuthorized = user !== null;
-      this.user = user;
-      this.role = user.user_role;
+    checkAuthorization(){
+      this.isAuthorized = JSON.parse(localStorage.getItem('user')) !== null;
     }
   },
   mounted() {

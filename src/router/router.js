@@ -19,6 +19,7 @@ const routes = [
         path: '/profile',
         component: ProfilePage,
         children: [
+            {path: '', component: MainPage},
             {path: 'panda', component: AccountsVue},
             {path: 'bornlist', component: BornListVue},
         ]

@@ -1,6 +1,6 @@
 <template>
   <div class="welcome">
-    <router-link to="/panda" class="nav-link">
+    <router-link to="/profile" class="nav-link">
       <img src="../assets/panda-cute-hello.png">
     </router-link>
   </div>
