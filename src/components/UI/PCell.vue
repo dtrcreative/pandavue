@@ -49,6 +49,9 @@ export default {
   border-radius: 3px;
   border: 1px solid teal;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hovering{
