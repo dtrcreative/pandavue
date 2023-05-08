@@ -84,7 +84,7 @@ export default {
         this.$store.dispatch("auth/login", user).then(
             () => {
               this.closeLoginDialog();
-              this.$router.push("/panda");
+              this.$router.push("/profile");
             },
             (error) => {
               this.loading = false;

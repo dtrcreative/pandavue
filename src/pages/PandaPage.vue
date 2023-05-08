@@ -1,7 +1,7 @@
 <template>
   <div v-if="isAuthorized" class="wrapper">
     <accounts-vue></accounts-vue>
-    <BornListVue></BornListVue>
+<!--    <BornListVue></BornListVue>-->
   </div>
   <div v-else style="text-align: center">
     <div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import BornListVue from "@/components/BornListVue";
+// import BornListVue from "@/components/BornListVue";
 import AccountsVue from "@/components/AccountsVue";
 export default {
   name: "MainPage",
@@ -35,7 +35,7 @@ export default {
   },
   components: {
     AccountsVue,
-    BornListVue
+    // BornListVue
   }
 }
 </script>

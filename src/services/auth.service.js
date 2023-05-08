@@ -29,6 +29,17 @@ class AuthService {
         })
     }
 
+    isUser() {
+        const user = this.getUser();
+        if (user !== null) {
+            return true;
+        }
+    }
+
+    getUser(){
+        return JSON.parse(localStorage.getItem('user'))
+    }
+
     async telegramRegister(username) {
         await axios.post(API_URL + 'i113/telegrambot/register', {
             regUser: username,
