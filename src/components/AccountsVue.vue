@@ -20,19 +20,17 @@
     <div v-else>
       <div class="app__btns">
         <p-button @click="showDialog">Create</p-button>
-        <p-select
-            v-model="selectedSort"
-            :options="ownersOptions">
-          Show all
-        </p-select>
-
         <panda-input
             v-model="searchQuery"
             v-focus
             placeholder="Search...."
         />
-        <p-button @click="getData">Request</p-button>
-        <p-button @click="loadJson">loadJson</p-button>
+        <p-select
+            v-model="selectedSort"
+            :options="ownersOptions">
+          Show all
+        </p-select>
+        <p-button @click="getData"><font-awesome-icon icon="arrows-rotate"/></p-button>
       </div>
     </div>
 
@@ -257,9 +255,10 @@ export default {
 .app__btns {
   margin: 10px;
   display: grid;
+  padding-right: 10px;
   /*border: 2px solid teal;*/
   /*border-radius: 4px;*/
-  grid-template-columns: 4fr 4fr 4fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr 50px;
   justify-content: space-between;
 }
 

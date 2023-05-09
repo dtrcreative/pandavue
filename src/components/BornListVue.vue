@@ -23,9 +23,8 @@
             v-model="searchQuery"
             placeholder="Search...."
         />
-        <panda-button @click="getData">Request</panda-button>
-        <panda-button @click="loadJson">loadJson</panda-button>
 
+        <panda-button @click="getData"><font-awesome-icon icon="arrows-rotate"/></panda-button>
       </div>
     </div>
 
@@ -206,10 +205,11 @@ export default {
 <style scoped>
 .app__btns {
   margin: 10px;
+  padding-right: 10px;
   display: grid;
   /*border: 2px solid teal;*/
   /*border-radius: 4px;*/
-  grid-template-columns: 4fr 4fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 50px;
   justify-content: space-between;
 }
 
