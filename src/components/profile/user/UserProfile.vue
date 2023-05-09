@@ -15,16 +15,25 @@
       <BornListProperties></BornListProperties>
     </div>
 
+    <div>
+      <p-info></p-info>
+    </div>
+
   </div>
 </template>
 
 <script>
 import PandaProperties from "@/components/profile/user/properties/PandaProperties";
 import BornListProperties from "@/components/profile/user/properties/BornListProperties";
+import PInfo from "@/components/UI/PInfo";
 
 export default {
   name: "UserProfile",
-  components: {BornListProperties, PandaProperties},
+  components: {
+    BornListProperties,
+    PandaProperties,
+    PInfo,
+  },
   data() {
     return {
       pandaPropertiesHeader: "Panda",

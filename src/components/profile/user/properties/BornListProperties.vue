@@ -6,19 +6,25 @@
       <panda-button>Replace all</panda-button>
   </div>
   <div class="register-button-wrapper">
-    <panda-button>Register me for notification</panda-button>
+    <panda-button @click.prevent="registerUserToTelBot">Register me for notification</panda-button>
   </div>
-
 </template>
 
 <script>
 import PandaButton from "@/components/UI/PButton";
 import PUploadFile from "@/components/UI/PUploadFile";
+import authService from "@/services/auth.service";
 export default {
   name: "BornListProperties",
   components: {
     PandaButton,
     PUploadFile
+  },
+  methods:{
+    registerUserToTelBot(){
+      const user = this.$store.state.auth.user;
+      authService.telegramRegister(user.username)
+    }
   }
 }
 </script>
