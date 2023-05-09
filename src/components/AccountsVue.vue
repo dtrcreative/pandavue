@@ -58,7 +58,7 @@
     ></p-upload-file>
   </div>
 </template>
-units
+
 <script>
 import PButton from "@/components/UI/PButton";
 import PDialog from "@/components/UI/PDialog";
@@ -99,7 +99,6 @@ export default {
       page: 1,
       limit: 10,
       totalPages: 0,
-      file: '',
     }
   },
   methods: {
@@ -143,16 +142,6 @@ export default {
             this.setInfo(response.data)
           }
       );
-    },
-
-    async loadJson() {
-      if (this.file !== '') {
-        AccountsService.loadJson(this.file);
-      } else {
-        this.setInfo(
-            "No Account JSONFile selected"
-        )
-      }
     },
     updateDialog(account) {
       this.updatedAccount = account;
@@ -216,9 +205,6 @@ export default {
     setInfo(text) {
       this.infoText = text;
     },
-    setFile(file) {
-      this.file = file;
-    }
   },
   mounted() {
     this.getData();

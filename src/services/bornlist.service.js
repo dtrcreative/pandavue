@@ -1,5 +1,6 @@
 import axios from 'axios';
 import authHeader from "@/services/auth-header";
+import authService from "@/services/auth.service";
 
 const API_URL = 'http://192.168.100.4:8080/api/i113/';
 
@@ -59,7 +60,8 @@ class BornlistService {
         try {
             var formData = new FormData();
             formData.append("file", file);
-            await axios.post(API_URL + 'data/loadJson',  formData,{ headers: authHeader() });
+            var username = authService.getUser().username
+            await axios.post(API_URL + 'bornlist/data/loadJson?username=' + username,  formData,{ headers: authHeader() });
         } catch (e) {
             this.errorHandler(e)
         }
