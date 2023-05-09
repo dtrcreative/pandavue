@@ -5,7 +5,7 @@
         <p>{{ column.body }}</p>
       </div>
     </div>
-    <div  v-if="units.length > 0">
+    <div>
       <transition-group name="unit-list">
         <born-list-row
             v-for="unit in units"
