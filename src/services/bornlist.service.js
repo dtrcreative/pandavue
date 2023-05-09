@@ -66,6 +66,16 @@ class BornlistService {
             this.errorHandler(e)
         }
     }
+    async loadAndReplaceJson(file) {
+        try {
+            var formData = new FormData();
+            formData.append("file", file);
+            var username = authService.getUser().username
+            await axios.post(API_URL + 'data/loadAndReplaceJson?username=' + username,  formData,{ headers: authHeader() });
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
 
     errorHandler(error){
         if(error.response.status === 500){
