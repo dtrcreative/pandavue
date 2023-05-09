@@ -6,7 +6,6 @@
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           class="profile-img-card"
       />
-
     </div>
     <div class="user-name-label">
       <strong>
@@ -21,6 +20,7 @@
       <img class = "panda-image" src="../assets/panda-top-cute.png">
       <p-nav-button @click="$router.push('/profile/panda')">Panda</p-nav-button>
       <p-nav-button @click="$router.push('/profile/bornlist')">BornList</p-nav-button>
+      <p-nav-button @click="$router.push('/profile/properties')">Properties</p-nav-button>
       <img class = "panda-image" src="../assets/panda-bottom-cute.png">
     </div>
 

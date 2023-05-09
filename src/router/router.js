@@ -1,19 +1,14 @@
 import MainPage from "@/pages/MainPage";
 import {createRouter, createWebHistory} from "vue-router";
-import LoginPage from "@/pages/LoginPage";
-// import PandaPage from "@/pages/PandaPage";
 import ProfilePage from "@/pages/ProfilePage";
 import AccountsVue from "@/components/AccountsVue";
 import BornListVue from "@/components/BornListVue";
+import UserProfile from "@/components/profile/user/UserProfile";
 
 const routes = [
     {
         path: '/',
         component: MainPage
-    },
-    {
-        path: '/login',
-        component: LoginPage
     },
     {
         path: '/profile',
@@ -22,6 +17,7 @@ const routes = [
             {path: '', component: MainPage},
             {path: 'panda', component: AccountsVue},
             {path: 'bornlist', component: BornListVue},
+            {path: 'properties', component: UserProfile},
         ]
     },
 ]
