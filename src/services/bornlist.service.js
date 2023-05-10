@@ -77,6 +77,27 @@ class BornlistService {
         }
     }
 
+    async loadTemplate(){
+        try {
+            const responce = await axios.get(API_URL + 'bornlist/data/template', { headers: authHeader() });
+
+            let text = JSON.stringify(responce.data);
+            let filename = 'BornListTemplate.json';
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+            document.body.removeChild(element);
+
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+
     errorHandler(error){
         if(error.response.status === 500){
             console.log(error.message)

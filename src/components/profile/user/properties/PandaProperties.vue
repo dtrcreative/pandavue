@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-      <panda-button>Get template</panda-button>
+      <panda-button
+      @click="loadTemplate"
+      >Get template</panda-button>
       <p-upload-file
           v-model="this.file"
           @update="setFile"
@@ -33,6 +35,9 @@ export default {
   methods:{
     setFile(file) {
       this.file = file;
+    },
+    loadTemplate(){
+      AccountsService.loadTemplate();
     },
     async loadJson() {
       if (this.file !== '') {
