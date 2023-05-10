@@ -74,7 +74,7 @@ class AccountService {
             var formData = new FormData();
             formData.append("file", file);
             var username = authService.getUser().username
-            await axios.post(API_URL + 'data/loadJson?username=' + username,  formData,{ headers: authHeader() });
+            return await axios.post(API_URL + 'data/loadJson?username=' + username,  formData,{ headers: authHeader() });
         } catch (e) {
             this.errorHandler(e)
         }
@@ -84,7 +84,7 @@ class AccountService {
             var formData = new FormData();
             formData.append("file", file);
             var username = authService.getUser().username
-            await axios.post(API_URL + 'data/loadAndReplaceJson?username=' + username,  formData,{ headers: authHeader() });
+            return await axios.post(API_URL + 'data/loadAndReplaceJson?username=' + username,  formData,{ headers: authHeader() });
         } catch (e) {
             this.errorHandler(e)
         }
@@ -134,6 +134,14 @@ class AccountService {
 
     getUser(){
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    deleteAll(){
+        try {
+            return axios.delete(API_URL + 'accounts/',{ headers: authHeader() })
+        } catch (e) {
+            this.errorHandler(e)
+        }
     }
 
     errorHandler(error){

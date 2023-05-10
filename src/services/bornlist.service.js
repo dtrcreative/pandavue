@@ -6,7 +6,7 @@ const API_URL = 'http://192.168.100.4:8080/api/i113/';
 
 class BornlistService {
 
-    async createUnit(unit){
+    async createUnit(unit) {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
             return await axios.post(API_URL + 'bornlist/', {
@@ -16,22 +16,22 @@ class BornlistService {
                 date: unit.date,
                 notify: unit.notify,
                 description: unit.description,
-            }, { headers: authHeader() })
+            }, {headers: authHeader()})
         } catch (e) {
             this.errorHandler(e)
         }
     }
 
-    async getUnits(){
+    async getUnits() {
         try {
-            const responce = await axios.get(API_URL + 'bornlist/all', { headers: authHeader() });
+            const responce = await axios.get(API_URL + 'bornlist/all', {headers: authHeader()});
             return responce.data;
         } catch (e) {
             this.errorHandler(e)
         }
     }
 
-    async updateUnit(unit){
+    async updateUnit(unit) {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
             return await axios.put(API_URL + 'bornlist/', {
@@ -42,15 +42,15 @@ class BornlistService {
                 date: unit.date,
                 notify: unit.notify,
                 description: unit.description,
-            }, { headers: authHeader() })
+            }, {headers: authHeader()})
         } catch (e) {
             this.errorHandler(e)
         }
     }
 
-    async removeUnit(id){
+    async removeUnit(id) {
         try {
-            return axios.delete(API_URL + 'bornlist/' + id, { headers: authHeader() })
+            return axios.delete(API_URL + 'bornlist/' + id, {headers: authHeader()})
         } catch (e) {
             this.errorHandler(e)
         }
@@ -61,25 +61,26 @@ class BornlistService {
             var formData = new FormData();
             formData.append("file", file);
             var username = authService.getUser().username
-            await axios.post(API_URL + 'bornlist/data/loadJson?username=' + username,  formData,{ headers: authHeader() });
-        } catch (e) {
-            this.errorHandler(e)
-        }
-    }
-    async loadAndReplaceJson(file) {
-        try {
-            var formData = new FormData();
-            formData.append("file", file);
-            var username = authService.getUser().username
-            await axios.post(API_URL + 'data/loadAndReplaceJson?username=' + username,  formData,{ headers: authHeader() });
+            return await axios.post(API_URL + 'bornlist/data/loadJson?username=' + username, formData, {headers: authHeader()});
         } catch (e) {
             this.errorHandler(e)
         }
     }
 
-    async loadTemplate(){
+    async loadAndReplaceJson(file) {
         try {
-            const responce = await axios.get(API_URL + 'bornlist/data/template', { headers: authHeader() });
+            var formData = new FormData();
+            formData.append("file", file);
+            var username = authService.getUser().username
+            return await axios.post(API_URL + 'bornlist/data/loadAndReplaceJson?username=' + username, formData, {headers: authHeader()});
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+
+    async loadTemplate() {
+        try {
+            const responce = await axios.get(API_URL + 'bornlist/data/template', {headers: authHeader()});
 
             let text = JSON.stringify(responce.data);
             let filename = 'BornListTemplate.json';
@@ -98,10 +99,28 @@ class BornlistService {
         }
     }
 
-    errorHandler(error){
-        if(error.response.status === 500){
+    async telegramRegister(username) {
+        try {
+            return await axios.post(API_URL + 'telegrambot/register', {
+                regUser: username,
+            })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+
+    deleteAll(){
+        try {
+            return axios.delete(API_URL + 'bornlist/',{ headers: authHeader() })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+
+    errorHandler(error) {
+        if (error.response.status === 500) {
             console.log(error.message)
-        }else{
+        } else {
             console.log(error.response.data)
         }
     }

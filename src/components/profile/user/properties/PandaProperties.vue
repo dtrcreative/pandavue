@@ -7,12 +7,20 @@
           v-model="this.file"
           @update="setFile"
       ></p-upload-file>
-      <panda-button>Add if not exist</panda-button>
-      <panda-button>Replace all</panda-button>
+      <panda-button @click="loadJson">Add if not exist</panda-button>
+      <panda-button @click="loadAndReplaceJson">Replace all</panda-button>
 
   </div>
   <div class="clear-button-wrapper">
-    <panda-button style="color: red">Clear All</panda-button>
+    <panda-button
+        style="color: red"
+        @click="deleteAll"
+    >
+      Clear All
+    </panda-button>
+  </div>
+  <div class="info">
+    <p-info>{{this.infoMessage}}</p-info>
   </div>
 </template>
 
@@ -20,16 +28,19 @@
 import PandaButton from "@/components/UI/PButton";
 import PUploadFile from "@/components/UI/PUploadFile";
 import AccountsService from "@/services/accounts.service";
+import PInfo from "@/components/UI/PInfo";
 
 export default {
   name: "PandaProperties",
   components: {
+    PInfo,
     PandaButton,
     PUploadFile,
   },
   data(){
     return{
       file: '',
+      infoMessage:''
     }
   },
   methods:{
@@ -41,10 +52,44 @@ export default {
     },
     async loadJson() {
       if (this.file !== '') {
-        AccountsService.loadJson(this.file);
+        AccountsService.loadJson(this.file).then(
+            (response) => {
+              if (response !== undefined && response.status===200) {
+                this.infoMessage = "File upload successfull";
+              }else{
+                this.infoMessage = "Smth went wrong";
+              }
+            },
+        );
       } else {
-        //TODO notification if file not select
+        this.infoMessage = "BornList template file not selected"
       }
+    },
+    async loadAndReplaceJson() {
+      if (this.file !== '') {
+        AccountsService.loadAndReplaceJson(this.file).then(
+            (response) => {
+              if (response !== undefined && response.status===200) {
+                this.infoMessage = "File upload successfull";
+              }else{
+                this.infoMessage = "Smth went wrong";
+              }
+            },
+        );
+      } else {
+        this.infoMessage = "BornList template file not selected"
+      }
+    },
+    deleteAll(){
+      AccountsService.deleteAll().then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+              this.infoMessage = "Clear Panda successfull";
+            }else{
+              this.infoMessage = "Smth went wrong";
+            }
+          },
+      )
     },
   }
 }
@@ -60,5 +105,10 @@ export default {
   padding: 5px;
   display: grid;
   grid-template-columns: 1fr;
+}
+.info {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 0px;
 }
 </style>

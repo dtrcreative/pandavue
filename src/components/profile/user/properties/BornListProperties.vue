@@ -10,30 +10,40 @@
         @update="setFile"
     ></p-upload-file>
     <panda-button @click="loadJson">Add if not exist</panda-button>
-    <panda-button @click="loadJson">Replace all</panda-button>
+    <panda-button @click="loadAndReplaceJson">Replace all</panda-button>
   </div>
   <div class="register-button-wrapper">
     <panda-button @click.prevent="registerUserToTelBot">Register me for notification</panda-button>
   </div>
   <div class="clear-button-wrapper">
-    <panda-button style="color: red">Clear All</panda-button>
+    <panda-button
+        style="color: red"
+        @click="deleteAll"
+    >
+      Clear All
+    </panda-button>
+  </div>
+  <div class="info">
+    <p-info>{{this.infoMessage}}</p-info>
   </div>
 </template>
 
 <script>
 import PandaButton from "@/components/UI/PButton";
 import PUploadFile from "@/components/UI/PUploadFile";
-import authService from "@/services/auth.service";
 import BornlistService from "@/services/bornlist.service";
+import PInfo from "@/components/UI/PInfo";
 export default {
   name: "BornListProperties",
   components: {
+    PInfo,
     PandaButton,
     PUploadFile
   },
   data() {
     return {
       file: '',
+      infoMessage:''
     }
   },
   methods: {
@@ -45,15 +55,55 @@ export default {
     },
     async loadJson() {
       if (this.file !== '') {
-        BornlistService.loadJson(this.file);
+        BornlistService.loadJson(this.file).then(
+            (response) => {
+              if (response !== undefined && response.status===200) {
+                this.infoMessage = "File upload successfull";
+              }else{
+                this.infoMessage = "Smth went wrong";
+              }
+            },
+        );
       } else {
-        //TODO notification if file not select
+        this.infoMessage = "BornList template file not selected"
+      }
+    },
+    async loadAndReplaceJson() {
+      if (this.file !== '') {
+        BornlistService.loadAndReplaceJson(this.file).then(
+            (response) => {
+              if (response !== undefined && response.status===200) {
+                this.infoMessage = "File upload successfull";
+              }else{
+                this.infoMessage = "Smth went wrong";
+              }
+            },
+        );
+      } else {
+        this.infoMessage = "BornList template file not selected"
       }
     },
     registerUserToTelBot() {
       const user = this.$store.state.auth.user;
-      authService.telegramRegister(user.username)
-    }
+      BornlistService.telegramRegister(user.username).then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+             this.infoMessage = "User: " + response.data.regUser + " registered"
+            }
+          },
+      );
+    },
+    deleteAll(){
+      BornlistService.deleteAll().then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+              this.infoMessage = "Clear Panda successfull";
+            }else{
+              this.infoMessage = "Smth went wrong";
+            }
+          },
+      )
+    },
   }
 }
 </script>
@@ -74,5 +124,11 @@ export default {
   padding: 5px;
   display: grid;
   grid-template-columns: 1fr;
+}
+
+.info {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 0px;
 }
 </style>
