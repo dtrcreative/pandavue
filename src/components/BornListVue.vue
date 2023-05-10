@@ -39,10 +39,6 @@
 
     </div>
     <p-info class="info">{{ infoText }}</p-info>
-    <p-upload-file
-        v-model="this.file"
-        @update="setFile"
-    ></p-upload-file>
   </div>
 </template>
 
@@ -55,7 +51,6 @@ import PInfo from "@/components/UI/PInfo";
 import BornlistCreateForm from "@/components/bornlists/BornlistCreateForm";
 import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 import BornlistService from "@/services/bornlist.service";
-import PUploadFile from "@/components/UI/PUploadFile";
 import AccountsService from "@/services/accounts.service";
 
 export default {
@@ -68,7 +63,6 @@ export default {
     PandaInput,
     PandaButton,
     BornListTable,
-    PUploadFile
   },
   data() {
     return {

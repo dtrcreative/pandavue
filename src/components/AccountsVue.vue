@@ -52,10 +52,6 @@
       <div v-else> Loading...</div>
     </div>
     <p-info class="info">{{ infoText }}</p-info>
-    <p-upload-file
-        v-model="this.file"
-        @update="setFile"
-    ></p-upload-file>
   </div>
 </template>
 
@@ -69,7 +65,6 @@ import AccountList from "@/components/accounts/AccountList";
 import PandaInput from "@/components/UI/PInput";
 import PInfo from "@/components/UI/PInfo";
 import AccountsService from "@/services/accounts.service";
-import PUploadFile from "@/components/UI/PUploadFile";
 import UtilService from "@/services/util-service";
 
 export default {
@@ -82,7 +77,6 @@ export default {
     PDialog,
     PButton,
     AccountUpdateForm,
-    PUploadFile
   },
   data() {
     return {
