@@ -74,7 +74,6 @@ export default {
       } else {
         AccountsService.loadAndReplaceJson(this.file).then(
             (response) => {
-              console.log(response)
               if (response !== undefined) {
                 if (response.status === 200) {
                   this.infoMessage = "File upload successfull";
