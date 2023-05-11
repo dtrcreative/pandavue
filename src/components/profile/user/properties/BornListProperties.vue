@@ -69,18 +69,23 @@ export default {
       }
     },
     async loadAndReplaceJson() {
-      if (this.file !== '') {
+      if (this.file === '') {
+        this.infoMessage = "BornList template file not selected"
+      } else if (this.file.name !== 'PandaTemplate.json') {
+        this.infoMessage = "Wrong file selected. check template Filename. must be BornListTemplate.json"
+      } else {
         BornlistService.loadAndReplaceJson(this.file).then(
             (response) => {
-              if (response !== undefined && response.status===200) {
-                this.infoMessage = "File upload successfull";
+              console.log(response)
+              if(response !== undefined){
+                if (response.status===200) {
+                  this.infoMessage = "File upload successfull";
+                }
               }else{
                 this.infoMessage = "Smth went wrong";
               }
             },
         );
-      } else {
-        this.infoMessage = "BornList template file not selected"
       }
     },
     registerUserToTelBot() {
