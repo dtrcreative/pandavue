@@ -8,9 +8,10 @@
     <div>
       <transition-group name="unit-list">
         <adminka-row
-            v-for="unit in users"
-            :key="unit.id"
-            :unit="unit"
+            v-for="user in users"
+            :key="user.username"
+            :user="user"
+            @remove="$emit('remove', user)"
         ></adminka-row>
       </transition-group>
     </div>
@@ -23,6 +24,7 @@ import AdminkaRow from "@/components/profile/admin/AdminkaRow";
 export default {
   name: "AdminkaTable",
   components: {AdminkaRow},
+  emits: ["remove"],
   data() {
     return {
       columNames: [

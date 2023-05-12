@@ -18,7 +18,7 @@
     ></p-cell>
 
     <panda-button
-        @click="$emit('remove', unit)"
+        @click="$emit('remove', user)"
     ><font-awesome-icon icon="trash" />
     </panda-button>
   </div>
@@ -26,9 +26,11 @@
 
 <script>
 import PandaButton from "@/components/UI/PButton";
+import PCell from "@/components/UI/PCell";
 export default {
   name: "AdminkaRow",
-  components: {PandaButton},
+  emits: ['remove'],
+  components: {PCell, PandaButton},
   data() {
     return {
       isHovering: false,
