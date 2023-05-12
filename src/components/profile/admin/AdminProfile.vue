@@ -1,14 +1,18 @@
 <template>
-  <div class="wrapper">
-    <div> <strong><p>{{username}}</p></strong></div>
+  <div class="pTable">
+    <adminka-table
+
+    ></adminka-table>
   </div>
 </template>
 
 <script>
+import AdminkaTable from "@/components/profile/admin/AdminkaTable";
+
 export default {
   name: "AdminProfile",
-  components: {},
-  props:{
+  components: {AdminkaTable},
+  props: {
     username: {
       type: String
     }

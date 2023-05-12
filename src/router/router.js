@@ -4,6 +4,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import AccountsVue from "@/components/AccountsVue";
 import BornListVue from "@/components/BornListVue";
 import UserProfile from "@/components/profile/user/UserProfile";
+import AdminProfile from "@/components/profile/admin/AdminProfile";
 
 const routes = [
     {
@@ -18,6 +19,7 @@ const routes = [
             {path: 'panda', component: AccountsVue},
             {path: 'bornlist', component: BornListVue},
             {path: 'properties', component: UserProfile},
+            {path: 'adminka', component: AdminProfile},
         ]
     },
 ]

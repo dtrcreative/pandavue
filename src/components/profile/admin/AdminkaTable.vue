@@ -62,7 +62,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 5fr 50px 50px 50px;
+  grid-template-columns: 5fr 5fr 100px 100px 50px;
   grid-template-rows: repeat(1, 1fr);
 }
 .unit-list-item {

@@ -57,7 +57,7 @@ export default {
 <style scoped>
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 5fr 1fr 1fr 1fr;
+  grid-template-columns: 5fr 5fr 100px 100px 50px;
   grid-template-rows: repeat(1, 1fr);
 }
 
