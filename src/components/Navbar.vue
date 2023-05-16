@@ -103,6 +103,7 @@ export default {
 
 .navbar {
   height: 50px;
+  min-width: 600px;
   background-color: bisque;
   display: flex;
   align-items: center;
