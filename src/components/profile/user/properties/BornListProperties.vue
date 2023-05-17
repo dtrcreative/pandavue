@@ -71,7 +71,7 @@ export default {
     async loadAndReplaceJson() {
       if (this.file === '') {
         this.infoMessage = "BornList template file not selected"
-      } else if (this.file.name !== 'PandaTemplate.json') {
+      } else if (this.file.name !== 'BornListTemplate.json') {
         this.infoMessage = "Wrong file selected. check template Filename. must be BornListTemplate.json"
       } else {
         BornlistService.loadAndReplaceJson(this.file).then(
