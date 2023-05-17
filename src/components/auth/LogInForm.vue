@@ -81,6 +81,7 @@ export default {
     methods: {
       handleLogin(user) {
         this.loading = true;
+        user.username = user.username.toLowerCase();
         this.$store.dispatch("auth/login", user).then(
             () => {
               this.closeLoginDialog();
