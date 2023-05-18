@@ -35,7 +35,7 @@
                 v-show="loading"
                 class="spinner-border spinner-border-sm"
             ></span>
-              <span>Login</span>
+              <span>Register</span>
             </panda-button>
           </div>
         </div>
@@ -119,12 +119,11 @@ export default {
               this.closeRegisterDialog()
             },
             (error) => {
-              this.message =
-                  (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                  error.message ||
-                  error.toString();
+              if(error.response.data !== undefined){
+                this.message = error.response.data;
+              }else{
+                this.message = error.message;
+              }
               this.successful = false;
               this.loading = false;
             }
