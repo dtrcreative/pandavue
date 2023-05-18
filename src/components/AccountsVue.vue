@@ -108,13 +108,18 @@ export default {
       }
     },
     removeAccount(account) {
-      AccountsService.removeAccount(account.id).then(
-          (response) => {
-            if (response.status === 200) {
-              this.accounts = this.accounts.filter(p => p.id !== account.id)
-              this.setInfo("Remove successfully");
-            }
-          });
+      if(account.type !== "TRASH"){
+        account.type = "TRASH";
+        this.updateAccount(account);
+      }else{
+        AccountsService.removeAccount(account.id).then(
+            (response) => {
+              if (response.status === 200) {
+                this.accounts = this.accounts.filter(p => p.id !== account.id)
+                this.setInfo("Remove successfully");
+              }
+            });
+      }
     },
     async updateAccount(updatedAccount) {
       if (this.checkData(updatedAccount)) {
@@ -214,8 +219,15 @@ export default {
       //сортировка массива при измененнии значения в ячейке pSelect
       return this.sortedByName.filter((account) => account.type.match(this.selectedSort))
     },
+    sortedWithoutTrashAccounts() {
+      //сортировка массива при измененнии значения в ячейке pSelect
+      if(this.selectedSort!=="TRASH"){
+        return this.sortedAccounts.filter((account) => !account.type.match("TRASH"))
+      }
+      return this.sortedAccounts;
+    },
     sortedAndSearchedPosts() {
-      return this.sortedAccounts.filter(account => account.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+      return this.sortedWithoutTrashAccounts.filter(account => account.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
     }
   }
 }
