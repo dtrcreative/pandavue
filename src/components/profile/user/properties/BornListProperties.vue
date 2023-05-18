@@ -15,6 +15,11 @@
   <div class="register-button-wrapper">
     <panda-button @click.prevent="registerUserToTelBot">Register me for notification</panda-button>
   </div>
+  <div class="telegram-sheduling">
+      <panda-button @click.prevent="enableSheduling">Enable Sheduling</panda-button>
+      <panda-button @click.prevent="statusSheduling">Status</panda-button>
+      <panda-button @click.prevent="disableSheduling">Disable Sheduling</panda-button>
+  </div>
   <div class="clear-button-wrapper">
     <panda-button
         style="color: red"
@@ -97,6 +102,37 @@ export default {
           },
       );
     },
+    statusSheduling(){
+      const user = this.$store.state.auth.user;
+      BornlistService.statusSheduling(user.username).then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+              this.infoMessage = response.data
+            }
+          },
+      );
+    },
+    enableSheduling(){
+      const user = this.$store.state.auth.user;
+      BornlistService.enableSheduling(user.username).then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+              this.infoMessage = "Notification disaabled"
+            }
+          },
+      );
+    },
+    disableSheduling(){
+      const user = this.$store.state.auth.user;
+      BornlistService.disableSheduling(user.username).then(
+          (response) => {
+            if (response !== undefined && response.status===200) {
+              this.infoMessage = "Notification enabled"
+            }
+          },
+      );
+    },
+
     deleteAll(){
       BornlistService.deleteAll().then(
           (response) => {
@@ -117,6 +153,13 @@ export default {
   padding: 5px;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr;
+}
+
+.telegram-sheduling{
+  padding-right: 5px;
+  padding-left: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .register-button-wrapper {

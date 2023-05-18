@@ -2,8 +2,14 @@
   <div class="pTable">
     <adminka-table
         :users="users"
+        :statusList="statusList"
+        :roleList="roleList"
         @remove="removeUser"
+        @save="saveUser"
     ></adminka-table>
+  </div>
+  <div class="info">
+    <p-info>{{ this.infoMessage }}</p-info>
   </div>
 </template>
 
@@ -18,17 +24,45 @@ export default {
   data() {
     return {
       users: [],
+      statusList: [],
+      roleList: [],
+      infoMessage: '',
     }
   },
 
   methods: {
     async getAllUsers() {
-      this.isPostsLoading = true;
       AdminService.getAllUsers().then(
           (response) => {
             if (response !== undefined) {
-              console.log(response)
               this.users = response
+            }
+          },
+      );
+    },
+    async saveUser(user){
+      AdminService.updateUser(user).then(
+          (response) => {
+            if (response !== undefined) {
+              this.infoMessage = "Success"
+            }
+          },
+      );
+    },
+    async getStatusList() {
+      AdminService.getStatusList().then(
+          (response) => {
+            if (response !== undefined) {
+              this.statusList = response
+            }
+          },
+      );
+    },
+    async getRoleList() {
+      AdminService.getRoleList().then(
+          (response) => {
+            if (response !== undefined) {
+              this.roleList = response
             }
           },
       );
@@ -40,6 +74,8 @@ export default {
 
   mounted() {
     this.getAllUsers();
+    this.getStatusList();
+    this.getRoleList();
   },
 }
 </script>
@@ -49,5 +85,10 @@ export default {
   display: grid;
   align-content: center;
   grid-template-columns: 1fr;
+}
+.info {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 0px;
 }
 </style>

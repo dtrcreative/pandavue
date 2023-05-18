@@ -11,7 +11,11 @@
             v-for="user in users"
             :key="user.username"
             :user="user"
+            :statusList="statusList"
+            :roleList="roleList"
+            v-model="selectedSort"
             @remove="$emit('remove', user)"
+            @save="$emit('save', user)"
         ></adminka-row>
       </transition-group>
     </div>
@@ -24,7 +28,7 @@ import AdminkaRow from "@/components/profile/admin/AdminkaRow";
 export default {
   name: "AdminkaTable",
   components: {AdminkaRow},
-  emits: ["remove"],
+  emits: ["remove", "save"],
   data() {
     return {
       columNames: [
@@ -32,13 +36,22 @@ export default {
         {id: 2, body: 'Email'},
         {id: 3, body: 'Role'},
         {id: 4, body: 'Status'},
-        {id: 5, body: 'Del'},
+        {id: 5, body: 'Save'},
+        {id: 6, body: 'Del'},
       ],
       checked: true,
     }
   },
   props: {
     users: {
+      type: Array,
+      request: true
+    },
+    statusList:{
+      type: Array,
+      request: true
+    },
+    roleList:{
       type: Array,
       request: true
     }
@@ -64,7 +77,7 @@ export default {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 5fr 5fr 100px 100px 50px;
+  grid-template-columns: 5fr 5fr 150px 150px 50px 50px;
   grid-template-rows: repeat(1, 1fr);
 }
 .unit-list-item {

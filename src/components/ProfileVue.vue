@@ -21,7 +21,7 @@
       <p-nav-button @click="$router.push('/profile/panda')">Panda</p-nav-button>
       <p-nav-button @click="$router.push('/profile/bornlist')">BornList</p-nav-button>
       <p-nav-button @click="$router.push('/profile/properties')">Properties</p-nav-button>
-      <p-nav-button @click="$router.push('/profile/adminka')">Administration</p-nav-button>
+      <p-nav-button v-if="isAdmin" @click="$router.push('/profile/adminka')">Administration</p-nav-button>
       <img class = "panda-image" src="../assets/panda-bottom-cute.png">
     </div>
 
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       isAuthorized: false,
-      username: ''
+      username: '',
+      isAdmin: false,
     }
   },
   methods: {
@@ -48,6 +49,7 @@ export default {
       if (user != null) {
         this.isAuthorized = true;
         this.username = user.username;
+        this.isAdmin = user.user_role === "ADMIN";
       }
     }
   },

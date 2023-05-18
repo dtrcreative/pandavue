@@ -108,6 +108,33 @@ class BornlistService {
             this.errorHandler(e)
         }
     }
+    async enableSheduling(username){
+        try {
+            return await axios.post(API_URL + 'telegrambot/enableNotification', {
+                regUser: username,
+            })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+    async disableSheduling(username){
+        try {
+            return await axios.post(API_URL + 'telegrambot/disableNotification', {
+                regUser: username,
+            })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+    async statusSheduling(username){
+        try {
+            return await axios.post(API_URL + 'telegrambot/statusNotification', {
+                regUser: username,
+            })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
 
     deleteAll(){
         try {
