@@ -68,7 +68,16 @@ export default {
       );
     },
     removeUser(user){
-      console.log(user) //TODO
+      AdminService.removeUser(user.id).then(
+          (response) => {
+            if (response !== undefined) {
+              if(response.status === 200){
+                this.users = this.users.filter(p => p.id !== user.id)
+                this.infoMessage = "Success"
+              }
+            }
+          },
+      )
     }
   },
 

@@ -83,6 +83,7 @@ export default {
       BornlistService.getUnits().then(
           (response) => {
             if(response !== undefined){
+              console.log(response)
               this.units = response;
             }
           }

@@ -27,6 +27,14 @@ class AdminService {
         }
     }
 
+    async removeUser(id){
+        try {
+            return axios.delete(API_URL  + id, { headers: authHeader() })
+        } catch (e) {
+            this.errorHandler(e)
+        }
+    }
+
     async getStatusList(){
         try {
             const response = await axios.get(API_URL + 'data/status', { headers: authHeader() });
