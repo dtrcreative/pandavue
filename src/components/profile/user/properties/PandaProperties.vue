@@ -68,7 +68,7 @@ export default {
     },
     async loadAndReplaceJson() {
       if (this.file === '') {
-        this.infoMessage = "BornList template file not selected"
+        this.infoMessage = "PandaList template file not selected"
       } else if (this.file.name !== 'PandaTemplate.json') {
         this.infoMessage = "Wrong file selected. check templateFilename must be PandaTemplate.json"
       } else {
