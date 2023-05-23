@@ -1,16 +1,19 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div>
-      <img class = "hello-image" src="../assets/panda-hello-cute-contur.png">
+    <div v-if="!smallWindow">
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <router-link to="/" class="nav-link">
+            <font-awesome-icon icon="house"/>
+            Home
+          </router-link>
+        </li>
+      </div>
     </div>
-    <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <router-link to="/" class="nav-link">
-          <font-awesome-icon icon="house"/>
-          Home
-        </router-link>
-      </li>
+    <div v-else>
+      <sliding-panel-left><profile-vue></profile-vue></sliding-panel-left>
     </div>
+
     <div v-if="!currentUser" class="navbar-nav ml-auto" style="margin-left: auto">
       <li class="nav-item">
         <label @click="showRegisterDialog" class="nav-link">
@@ -61,21 +64,28 @@
 import PandaDialog from "@/components/UI/PDialog";
 import LoginForm from "@/components/auth/LogInForm";
 import RegisterForm from "@/components/auth/RegisterForm";
+import SlidingPanelLeft from "@/components/slides/SlidingPanelLeft";
+import ProfileVue from "@/components/ProfileVue";
 
 export default {
   name: "MainVue",
-  components: {RegisterForm, LogInForm: LoginForm, PandaDialog},
+  components: {ProfileVue, SlidingPanelLeft, RegisterForm, LogInForm: LoginForm, PandaDialog},
 
   data() {
     return {
       logInDialogVisible: false,
       registerDialogVisible: false,
+      smallWindow: false
     }
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
     },
+  },
+  created() {
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
   },
   methods: {
     showLoginDialog() {
@@ -88,7 +98,9 @@ export default {
       this.$store.dispatch('auth/logout');
       this.$router.push('/');
     },
-
+    onResize() {
+      this.smallWindow = window.innerWidth <= 800;
+    },
   }
 }
 </script>
@@ -99,6 +111,10 @@ export default {
 
 .hello-image{
   max-height: 40px;
+}
+
+nav-item-home{
+  margin-left: 100px;
 }
 
 .navbar {

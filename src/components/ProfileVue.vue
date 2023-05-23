@@ -74,7 +74,6 @@ export default {
 
 .left-profile-bar {
   background: #39464e;
-  height: 900px;
   width: 250px;
   padding: 0;
   border-radius: 0 5px 5px 0;

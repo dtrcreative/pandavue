@@ -3,23 +3,15 @@
   <label class="btn" for="top-box"></label>
   <div class="left-panel">
     <div class="panda-btn">
-      <img class = "panda-image" src="../../assets/panda-top-cute.png">
-      <slide-panel-button>Panda</slide-panel-button>
-      <slide-panel-button>Panda</slide-panel-button>
-      <slide-panel-button>Panda</slide-panel-button>
-      <slide-panel-button>Panda</slide-panel-button>
-      <slide-panel-button>Panda</slide-panel-button>
-      <slide-panel-button>Panda</slide-panel-button>
-      <img class = "panda-image" src="../../assets/panda-bottom-cute.png">
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-import SlidePanelButton from "@/components/slides/slideUI/SlidePanelButton";
 export default {
   name: "SlidingPanelLeft",
-  components: {SlidePanelButton}
+  components: {}
 }
 </script>
 
@@ -105,7 +97,7 @@ h2 {
   background: #39464e;
   position: absolute;
   left: -250px;
-  top: 60px;
+  top: 0px;
   /*height: 400px;*/
   width: 250px;
   padding: 0;
@@ -145,10 +137,12 @@ label.btn {
   display: block;
   position: absolute;
   left: 0px;
-  top: 100px;
+  top: 3px;
   cursor: pointer;
-  background: #2bbbad;
-  width: 50px;
+  background:url("../../assets/panda-hello-cute-contur.png");
+  background-size: 100px;
+  width: 100px;
+  height: 40px;
   border-radius: 0 5px 5px 0;
   padding: 8px 5px;
   color: #FFF;
