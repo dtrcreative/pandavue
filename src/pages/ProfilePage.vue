@@ -1,9 +1,18 @@
 <template>
 
-  <div class="wrapper" v-if="isAuthorized">
-    <profile-vue></profile-vue>
-    <div class="content-border">
-      <router-view></router-view>
+  <div v-if="isAuthorized">
+
+    <div class="wrapper-small" v-if="small">
+      <div class="content-border">
+        <router-view></router-view>
+      </div>
+    </div>
+
+    <div class="wrapper" v-else>
+      <profile-vue></profile-vue>
+      <div class="content-border">
+        <router-view></router-view>
+      </div>
     </div>
 
   </div>
@@ -33,12 +42,20 @@ export default {
   data() {
     return {
       isAuthorized: false,
+      small: false,
     }
   },
   methods: {
-    checkAuthorization(){
+    checkAuthorization() {
       this.isAuthorized = JSON.parse(localStorage.getItem('user')) !== null;
+    },
+    onResize() {
+      this.small = window.innerWidth <= 800;
     }
+  },
+  created() {
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
   },
   mounted() {
     this.checkAuthorization()
@@ -48,7 +65,7 @@ export default {
 
 <style scoped>
 
-.content-border{
+.content-border {
   margin: 5px;
   border-radius: 15px;
   background: #ffffff;
@@ -57,6 +74,10 @@ export default {
 .wrapper {
   display: grid;
   grid-template-columns: 250px 1fr;
+}
+.wrapper-small {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 /*@media screen and (max-width: 1370px) {*/
