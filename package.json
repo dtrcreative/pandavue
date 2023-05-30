@@ -17,11 +17,13 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
+    "oidc-client": "^1.11.5",
     "pinia": "^2.0.33",
     "vee-validate": "^4.8.6",
     "vue": "^3.2.47",
     "vue-router": "^4.0.3",
     "vue-yup-validation": "^0.0.3",
+    "vue3-oidc": "^0.1.10",
     "vuex": "^4.0.0",
     "yup": "^1.1.1"
   },
