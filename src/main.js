@@ -6,8 +6,8 @@ import directives from '@/directives';
 import router from "@/router/router";
 import store from "./store";
 
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from './plugins/font-awesome'

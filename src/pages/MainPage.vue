@@ -1,11 +1,11 @@
 <template>
   <div class="welcome">
-    <panda-button @click="">Login</panda-button>
-    <panda-button @click="test">Call</panda-button>
-    <panda-button @click="test">Logout</panda-button>
-    <router-link to="/profile" class="nav-link">
-      <img src="../assets/panda-cute-hello.png">
-    </router-link>
+    <panda-button @click="login">Login</panda-button>
+    <panda-button @click="call">Call</panda-button>
+    <panda-button @click="logout">Logout</panda-button>
+<!--    <router-link to="/profile" class="nav-link">-->
+<!--      <img src="../assets/panda-cute-hello.png">-->
+<!--    </router-link>-->
   </div>
 </template>
 
