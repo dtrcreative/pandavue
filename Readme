@@ -3,9 +3,11 @@ https://v3.ru.vuejs.org/ru/guide/introduction.html
 https://vuejs.org/examples/#counter
 https://v3.ru.vuejs.org/ru/examples/grid-component.html - table example
 
+https://developer.mozilla.org/ru/docs/Web/CSS/z-index - Z axis
+
 cource:
 https://www.youtube.com/watch?v=XzLuMtDelGk
-
+https://www.youtube.com/watch?v=kVAkqvoGc8A&ab_channel=CosyFrontend
 
 virtual dom - изменения накапливаются в нём, затем пачкой ставятся на оригинальное дерево
 модель - данные компонента (счётчик,переменная,count)
@@ -17,10 +19,17 @@ https://v3.ru.vuejs.org/
  npm i vee-validate --save
  npm install vue-yup-validation --save
  npm install vue bootstrap bootstrap-vue
+ npm install popper.js --save
  npm i --save @fortawesome/vue-fontawesome@latest-3
  npm i --save @fortawesome/fontawesome-svg-core
  npm i --save @fortawesome/free-solid-svg-icons
  npm i --save @fortawesome/free-brands-svg-icons
+
+ 
+ npm uninstall vue bootstrap bootstrap-vue
+
+IMAGES
+https://www.w3schools.com/css/css3_mediaqueries_ex.asp
  
 npm install -g @vue/cli
 
