@@ -1,19 +1,15 @@
 <template>
   <div class="welcome">
-    <panda-button @click="login">Login</panda-button>
-    <panda-button @click="call">Call</panda-button>
-    <panda-button @click="logout">Logout</panda-button>
-<!--    <router-link to="/profile" class="nav-link">-->
-<!--      <img src="../assets/panda-cute-hello.png">-->
-<!--    </router-link>-->
+    <router-link to="/profile" class="nav-link">
+      <img src="../assets/panda-cute-hello.png">
+    </router-link>
   </div>
 </template>
 
 <script>
 
-import PandaButton from "@/components/UI/PButton";
 export default {
-  components: {PandaButton},
+  components: {},
   methods: {
     async login(){
 
