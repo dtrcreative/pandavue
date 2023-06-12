@@ -27,6 +27,9 @@ https://v3.ru.vuejs.org/
 
  
  npm uninstall vue bootstrap bootstrap-vue
+ 
+ +============Keycloak
+ npm i keycloak-js --save
 
 IMAGES
 https://www.w3schools.com/css/css3_mediaqueries_ex.asp

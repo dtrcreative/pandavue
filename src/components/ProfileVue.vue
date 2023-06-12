@@ -22,7 +22,6 @@
       <p-nav-button @click="$router.push('/profile/bornlist')">BornList</p-nav-button>
       <p-nav-button @click="$router.push('/profile/properties')">Properties</p-nav-button>
       <p-nav-button v-if="isAdmin" @click="$router.push('/profile/adminka')">Administration</p-nav-button>
-      <p-nav-button v-if="isAdmin" @click="$router.push('/profile/adminka')">Administration</p-nav-button>
       <img class = "panda-image" src="../assets/panda-bottom-cute.png">
     </div>
 
