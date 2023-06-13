@@ -28,6 +28,16 @@
       </div>
     </div>
 
+    <div v-if="todayUnit.length>0" class="todaysUnits">
+      <p-cell><strong>Todays Birthdays</strong></p-cell>
+      <born-list-info-row
+          v-for="unit in todayUnit"
+          :key="unit.id"
+          :unit="unit"
+      >
+      </born-list-info-row>
+    </div>
+
     <div class="pTable">
 
       <born-list-table
@@ -52,11 +62,15 @@ import BornlistCreateForm from "@/components/bornlists/BornlistCreateForm";
 import BornlistUpdateForm from "@/components/bornlists/BornlistUpdateForm";
 import BornlistService from "@/services/bornlist.service";
 import AccountsService from "@/services/accounts.service";
+import PCell from "@/components/UI/PCell";
+import BornListInfoRow from "@/components/bornlists/BornListInfoRow";
 
 export default {
   name: "BornListVue",
   emits: ['remove', 'update', 'create', 'setNotify'],
   components: {
+    BornListInfoRow,
+    PCell,
     BornlistUpdateForm,
     BornlistCreateForm,
     PInfo,
@@ -67,6 +81,7 @@ export default {
   data() {
     return {
       units: [],
+      todayUnit: [],
       dialogVisible: false,
       isPostsLoading: false,
       searchQuery: '',
@@ -83,12 +98,16 @@ export default {
       BornlistService.getUnits().then(
           (response) => {
             if(response !== undefined){
-              console.log(response)
               this.units = response;
+              this.findToday(response)
             }
           }
       );
       this.isPostsLoading = false;
+    },
+    findToday(units){
+      this.todayUnit = units.filter(unit => unit.daysLeft === 'Today') //TODO change "Today" to zerro
+      console.log(this.todayUnit)
     },
     removeUnit(unit) {
       BornlistService.removeUnit(unit.id).then(
@@ -198,6 +217,10 @@ export default {
 </script>
 
 <style scoped>
+
+.todaysUnits{
+  background-color: #f2fdf2;
+}
 .app__btns {
   margin: 10px;
   padding-right: 10px;
