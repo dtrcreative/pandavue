@@ -81,14 +81,14 @@ export default {
 }
 .unit-list-enter-active,
 .unit-list-leave-active {
-  transition: all 0.4s ease;
+  transition: all 1s ease;
 }
 .unit-list-enter-from,
 .unit-list-leave-to {
   opacity: 0;
-  transform: translateX(130px);
+  transform: translateX(-130px);
 }
 .unit-list-move {
-  transition: transform 0.4s ease;
+  transition: transform 1s ease;
 }
 </style>

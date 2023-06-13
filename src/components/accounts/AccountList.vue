@@ -87,14 +87,14 @@ export default {
 }
 .account-list-enter-active,
 .account-list-leave-active {
-  transition: all 0.4s ease;
+  transition: all 1s ease;
 }
 .account-list-enter-from,
 .account-list-leave-to {
   opacity: 0;
-  transform: translateX(130px);
+  transform: translateX(-130px);
 }
 .account-list-move {
-  transition: transform 0.4s ease;
+  transition: transform 1s ease;
 }
 </style>
