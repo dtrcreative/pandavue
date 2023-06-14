@@ -9,18 +9,6 @@
 <script>
 
 export default {
-  components: {},
-  methods: {
-    async login(){
-
-    },
-    async call(){
-
-    },
-    async logout(){
-
-    },
-  }
 }
 
 </script>
