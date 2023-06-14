@@ -1,6 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import authService from "@/services/auth.service";
+import errorHandler from "@/services/error-handler";
 
 const API_URL = 'http://192.168.100.4:8080/api/panda/';
 
@@ -20,7 +21,7 @@ class AccountService {
                 description: account.description
             }, { headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -39,7 +40,7 @@ class AccountService {
                 description: updatedAccount.description,
             }, { headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -47,7 +48,7 @@ class AccountService {
         try {
             return axios.delete(API_URL + 'accounts/' + id, { headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -56,7 +57,7 @@ class AccountService {
             const response = await axios.get(API_URL + 'accounts/all', { headers: authHeader() });
             return response.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -65,7 +66,7 @@ class AccountService {
             const responce = await axios.get(API_URL + 'data/types', { headers: authHeader() });
             return responce.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -76,7 +77,7 @@ class AccountService {
             var username = authService.getUser().username
             return await axios.post(API_URL + 'data/loadJson?username=' + username,  formData,{ headers: authHeader() });
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
     async loadAndReplaceJson(file) {
@@ -86,7 +87,7 @@ class AccountService {
             var username = authService.getUser().username
             return await axios.post(API_URL + 'data/loadAndReplaceJson?username=' + username,  formData,{ headers: authHeader() });
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -107,7 +108,7 @@ class AccountService {
             document.body.removeChild(element);
 
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -120,7 +121,7 @@ class AccountService {
                 }
             });
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -128,7 +129,7 @@ class AccountService {
         try {
             return  await axios.get('http://192.168.100.4:8080/api/panda/data/passgen', { headers: authHeader() });
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -140,17 +141,11 @@ class AccountService {
         try {
             return axios.delete(API_URL + 'accounts/',{ headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
-    errorHandler(error){
-        if(error.response.status === 500){
-            console.log(error.message)
-        }else{
-            console.log(error.response.data)
-        }
-    }
+
 }
 
 export default new AccountService();

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import authHeader from "@/services/auth-header";
 import authService from "@/services/auth.service";
+import errorHandler from "@/services/error-handler";
 
 const API_URL = 'http://192.168.100.4:8080/api/i113/';
 
@@ -18,7 +19,7 @@ class BornlistService {
                 description: unit.description,
             }, {headers: authHeader()})
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -27,7 +28,7 @@ class BornlistService {
             const responce = await axios.get(API_URL + 'bornlist/all', {headers: authHeader()});
             return responce.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -44,7 +45,7 @@ class BornlistService {
                 description: unit.description,
             }, {headers: authHeader()})
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -52,7 +53,7 @@ class BornlistService {
         try {
             return axios.delete(API_URL + 'bornlist/' + id, {headers: authHeader()})
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -63,7 +64,7 @@ class BornlistService {
             var username = authService.getUser().username
             return await axios.post(API_URL + 'bornlist/data/loadJson?username=' + username, formData, {headers: authHeader()});
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -74,7 +75,7 @@ class BornlistService {
             var username = authService.getUser().username
             return await axios.post(API_URL + 'bornlist/data/loadAndReplaceJson?username=' + username, formData, {headers: authHeader()});
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -95,7 +96,7 @@ class BornlistService {
             document.body.removeChild(element);
 
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -105,7 +106,7 @@ class BornlistService {
                 regUser: username,
             })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
     async enableSheduling(username){
@@ -114,7 +115,7 @@ class BornlistService {
                 regUser: username,
             })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
     async disableSheduling(username){
@@ -123,7 +124,7 @@ class BornlistService {
                 regUser: username,
             })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
     async statusSheduling(username){
@@ -132,7 +133,7 @@ class BornlistService {
                 regUser: username,
             })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -140,17 +141,10 @@ class BornlistService {
         try {
             return axios.delete(API_URL + 'bornlist/',{ headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
-    errorHandler(error) {
-        if (error.response.status === 500) {
-            console.log(error.message)
-        } else {
-            console.log(error.response.data)
-        }
-    }
 
 }
 

@@ -32,6 +32,7 @@
 <script>
 
 import ProfileVue from "@/components/ProfileVue";
+import router from "@/router/router";
 
 export default {
   name: "ProfilePage",
@@ -47,7 +48,11 @@ export default {
   },
   methods: {
     checkAuthorization() {
-      this.isAuthorized = JSON.parse(localStorage.getItem('user')) !== null;
+      if(JSON.parse(localStorage.getItem('user')) == null){
+        router.push("/")
+      }else{
+        this.isAuthorized = true;
+      }
     },
     onResize() {
       this.small = window.innerWidth <= 800;

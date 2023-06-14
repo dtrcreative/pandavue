@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "@/services/auth-header";
+import errorHandler from "@/services/error-handler";
 
 const API_URL = 'http://192.168.100.4:8080/api/auth/admin/';
 
@@ -9,7 +10,7 @@ class AdminService {
             const response = await axios.get(API_URL + 'all', { headers: authHeader() });
             return response.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -23,7 +24,7 @@ class AdminService {
                 status: updatedUser.status,
             }, { headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -31,7 +32,7 @@ class AdminService {
         try {
             return axios.delete(API_URL  + id, { headers: authHeader() })
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
 
@@ -40,7 +41,7 @@ class AdminService {
             const response = await axios.get(API_URL + 'data/status', { headers: authHeader() });
             return response.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
     async getRoleList(){
@@ -48,18 +49,9 @@ class AdminService {
             const response = await axios.get(API_URL + 'data/roles', { headers: authHeader() });
             return response.data;
         } catch (e) {
-            this.errorHandler(e)
+            errorHandler.handle(e)
         }
     }
-
-    errorHandler(error){
-        if(error.response.status === 500){
-            console.log(error.message)
-        }else{
-            console.log(error.response.data)
-        }
-    }
-
 
 }
 
