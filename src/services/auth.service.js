@@ -1,11 +1,12 @@
 import axios from 'axios';
+import utilService from "@/services/util-service";
 
-const API_URL = 'http://192.168.100.4:8080/api/';
+const API_URL = '/api/';
 
 class AuthService {
     login(user) {
         return axios
-            .post(API_URL + 'auth/login', {
+            .post(utilService.getServerUrl() + API_URL + 'auth/login', {
                 username: user.username,
                 password: user.password
             })
@@ -22,7 +23,7 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + 'auth/signup', {
+        return axios.post(utilService.getServerUrl() + API_URL + 'auth/signup', {
             username: user.username,
             email: user.email,
             password: user.password

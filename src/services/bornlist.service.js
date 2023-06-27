@@ -2,15 +2,16 @@ import axios from 'axios';
 import authHeader from "@/services/auth-header";
 import authService from "@/services/auth.service";
 import errorHandler from "@/services/error-handler";
+import utilService from "@/services/util-service";
 
-const API_URL = 'http://192.168.100.4:8080/api/i113/';
+const API_URL = '/api/i113/';
 
 class BornlistService {
 
     async createUnit(unit) {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
-            return await axios.post(API_URL + 'bornlist/', {
+            return await axios.post(utilService.getServerUrl() + API_URL + 'bornlist/', {
                 userName: user.username,
                 firstName: unit.firstName,
                 lastName: unit.lastName,
@@ -25,7 +26,7 @@ class BornlistService {
 
     async getUnits() {
         try {
-            const responce = await axios.get(API_URL + 'bornlist/all', {headers: authHeader()});
+            const responce = await axios.get(utilService.getServerUrl() + API_URL + 'bornlist/all', {headers: authHeader()});
             return responce.data;
         } catch (e) {
             errorHandler.handle(e)
@@ -35,7 +36,7 @@ class BornlistService {
     async updateUnit(unit) {
         const user = JSON.parse(localStorage.getItem('user'));
         try {
-            return await axios.put(API_URL + 'bornlist/', {
+            return await axios.put(utilService.getServerUrl() + API_URL + 'bornlist/', {
                 id: unit.id,
                 userName: user.username,
                 firstName: unit.firstName,
@@ -51,7 +52,7 @@ class BornlistService {
 
     async removeUnit(id) {
         try {
-            return axios.delete(API_URL + 'bornlist/' + id, {headers: authHeader()})
+            return axios.delete(utilService.getServerUrl() + API_URL + 'bornlist/' + id, {headers: authHeader()})
         } catch (e) {
             errorHandler.handle(e)
         }
@@ -62,7 +63,7 @@ class BornlistService {
             var formData = new FormData();
             formData.append("file", file);
             var username = authService.getUser().username
-            return await axios.post(API_URL + 'bornlist/data/loadJson?username=' + username, formData, {headers: authHeader()});
+            return await axios.post(utilService.getServerUrl() + API_URL + 'bornlist/data/loadJson?username=' + username, formData, {headers: authHeader()});
         } catch (e) {
             errorHandler.handle(e)
         }
@@ -73,7 +74,7 @@ class BornlistService {
             var formData = new FormData();
             formData.append("file", file);
             var username = authService.getUser().username
-            return await axios.post(API_URL + 'bornlist/data/loadAndReplaceJson?username=' + username, formData, {headers: authHeader()});
+            return await axios.post(utilService.getServerUrl() + API_URL + 'bornlist/data/loadAndReplaceJson?username=' + username, formData, {headers: authHeader()});
         } catch (e) {
             errorHandler.handle(e)
         }
@@ -81,7 +82,7 @@ class BornlistService {
 
     async loadTemplate() {
         try {
-            const responce = await axios.get(API_URL + 'bornlist/data/template', {headers: authHeader()});
+            const responce = await axios.get(utilService.getServerUrl() + API_URL + 'bornlist/data/template', {headers: authHeader()});
 
             let text = JSON.stringify(responce.data);
             let filename = 'BornListTemplate.json';
@@ -102,7 +103,7 @@ class BornlistService {
 
     async telegramRegister(username) {
         try {
-            return await axios.post(API_URL + 'telegrambot/register', {
+            return await axios.post(utilService.getServerUrl() + API_URL + 'telegrambot/register', {
                 regUser: username,
             })
         } catch (e) {
@@ -111,7 +112,7 @@ class BornlistService {
     }
     async enableSheduling(username){
         try {
-            return await axios.post(API_URL + 'telegrambot/enableNotification', {
+            return await axios.post(utilService.getServerUrl() + API_URL + 'telegrambot/enableNotification', {
                 regUser: username,
             })
         } catch (e) {
@@ -120,7 +121,7 @@ class BornlistService {
     }
     async disableSheduling(username){
         try {
-            return await axios.post(API_URL + 'telegrambot/disableNotification', {
+            return await axios.post(utilService.getServerUrl() + API_URL + 'telegrambot/disableNotification', {
                 regUser: username,
             })
         } catch (e) {
@@ -129,7 +130,7 @@ class BornlistService {
     }
     async statusSheduling(username){
         try {
-            return await axios.post(API_URL + 'telegrambot/statusNotification', {
+            return await axios.post(utilService.getServerUrl() + API_URL + 'telegrambot/statusNotification', {
                 regUser: username,
             })
         } catch (e) {
@@ -139,7 +140,7 @@ class BornlistService {
 
     deleteAll(){
         try {
-            return axios.delete(API_URL + 'bornlist/',{ headers: authHeader() })
+            return axios.delete(utilService.getServerUrl() + API_URL + 'bornlist/',{ headers: authHeader() })
         } catch (e) {
             errorHandler.handle(e)
         }

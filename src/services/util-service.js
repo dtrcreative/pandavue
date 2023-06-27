@@ -1,3 +1,5 @@
+const SERV_URL = 'http://192.168.100.4:8080';
+
 class UtilService {
 
     async copyToClipboard(data) {
@@ -23,6 +25,10 @@ class UtilService {
                 textArea.remove();
             }
         }
+    }
+
+    getServerUrl(){
+        return SERV_URL;
     }
 }
 
