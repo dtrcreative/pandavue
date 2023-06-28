@@ -15,6 +15,13 @@
       <BornListProperties></BornListProperties>
     </div>
 
+    <div class="properties-head-text">
+      <strong>{{ telegramPropertiesHeader }}</strong>
+    </div>
+    <div class="properties-wrapper">
+      <TelegramProperties></TelegramProperties>
+    </div>
+
     <div>
       <p-info></p-info>
     </div>
@@ -26,10 +33,12 @@
 import PandaProperties from "@/components/profile/user/properties/PandaProperties";
 import BornListProperties from "@/components/profile/user/properties/BornListProperties";
 import PInfo from "@/components/UI/PInfo";
+import TelegramProperties from "@/components/profile/user/properties/TelegramProperties";
 
 export default {
   name: "UserProfile",
   components: {
+    TelegramProperties,
     BornListProperties,
     PandaProperties,
     PInfo,
@@ -37,7 +46,8 @@ export default {
   data() {
     return {
       pandaPropertiesHeader: "Panda",
-      bornListPropertiesHeader: "BornList"
+      bornListPropertiesHeader: "BornList",
+      telegramPropertiesHeader: "Telegram",
     }
   }
 }

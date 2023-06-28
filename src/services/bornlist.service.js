@@ -138,6 +138,14 @@ class BornlistService {
         }
     }
 
+    async sendTestMessage(){
+        try {
+            return axios.get(utilService.getServerUrl() + API_URL + 'bornlist/data/sendMessage', { headers: authHeader() })
+        } catch (e) {
+            errorHandler.handle(e)
+        }
+    }
+
     deleteAll(){
         try {
             return axios.delete(utilService.getServerUrl() + API_URL + 'bornlist/',{ headers: authHeader() })

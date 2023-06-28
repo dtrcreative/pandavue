@@ -1,4 +1,5 @@
 const SERV_URL = 'http://192.168.100.4:8080';
+// const SERV_URL = 'http://localhost:8080';
 
 class UtilService {
 
